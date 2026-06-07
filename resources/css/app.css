@@ -6,44 +6,21 @@
 @source '../**/*.js';
 
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
-        export default {
+  --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-instrument: 'Instrument Sans', sans-serif;
+  --font-plus-jakarta: 'Plus Jakarta Sans', sans-serif;
 
-  content: [
-    "./*.{html,js}",
-    "./src/**/*.{html,js}"],
-    darkMode: 'class',
-  // content: ["./index.html"],
-  theme: {
-    extend: {
-      screens: {
-        '1360': '1360px',
-      },
-       colors: {
-        // part1
-        boyred: '#6A6352', 
-        vanilla: '#D5CCAB', 
-        grullo: '#A3A289',
-        green: '#878568',
-        olive: '#505143',
-        // part2
-        chinese: '#OE141C',
-        policeblue: '#314B6E',
-        rackley: '#607EA2',
-        weldonblue: '#8197AC',
-        silverpink: '#BDB3A3',
-      },
-      fontFamily: {
-        'instrument': ['"Instrument Sans"'],
-        'plus-jakarta': ['"Plus Jakarta Sans"'], 
-      },
-      rotate: {
-        '-180': '-180deg',
-      }
-    },
-  },
-  plugins: []
-}
-}
+  --breakpoint-1360: 1360px;
 
+  --color-boyred: #6A6352;
+  --color-vanilla: #D5CCAB;
+  --color-grullo: #A3A289;
+  --color-green: #878568;
+  --color-olive: #505143;
+
+  --color-chinese: #0E141C;
+  --color-policeblue: #314B6E;
+  --color-rackley: #607EA2;
+  --color-weldonblue: #8197AC;
+  --color-silverpink: #BDB3A3;
+}
