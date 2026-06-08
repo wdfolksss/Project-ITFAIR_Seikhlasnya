@@ -5,25 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <title>Home User</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="overflow-x-hidden bg-white text-black dark:bg-black dark:text-white">
+<body class="overflow-x-hidden font-montserrat bg-white text-black dark:bg-black dark:text-white">
     @include('navbar')
     {{-- section 1 --}}
     <section
-        class="relative min-h-[360px] sm:min-h-[420px] lg:min-h-[45rem] py-[2rem] px-[1rem] sm:py-[2rem] sm:px-[1rem] md:py-[2rem] xl:py-[6rem] flex items-center bg-cover bg-center"
+        class="relative min-h-[360px] sm:min-h-[420px] lg:min-h-[40rem] py-[2rem] px-[1rem] sm:py-[2rem] sm:px-[1rem] md:py-[2rem] xl:py-[10rem] flex items-center bg-cover bg-center"
         style="background-image: url('{{ asset('img/hero.jpeg') }}');">
         <div class="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-slate-900/70 to-slate-900/30"></div>
         <div class="relative z-10 w-full max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
-            <div class="max-w-[45rem]">
+            <div class="max-w-[40rem] pb-[4rem]">
                 <span
                     class="inline-flex px-3 py-1 rounded-full bg-green-600 text-white text-[10px] sm:text-xs font-semibold">
                     SUKABUMI SMART CITY
                 </span>
 
-                <h1 class="mt-4 text-2xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight">
+                <h1 class="mt-4 text-2xl sm:text-4xl lg:text-4xl font-bold text-white leading-tight">
                     Bersama Warga,
                     <br class="hidden sm:block-0.5">
                     Bangun Infrastruktur yang Lebih Baik
@@ -36,16 +39,14 @@
                 </p>
 
                 <div class="mt-6 flex flex-col sm:flex-row gap-3 sm:gap-4">
-                    <a href="#"
+                    <a href="{{ route('formlaporan') }}"
                         class="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-md bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium transition">
-                        <span class="w-4 h-4 rounded-full bg-white/80"></span>
-                        Laporkan Sekarang
+                    <img src="img/report.svg" class="w-[20px] sm:w-[25px] lg:w-[20px] xl:w-[30px]" alt="icon">Laporkan Sekarang</a>
                     </a>
 
                     <a href="#"
                         class="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-md bg-white hover:bg-gray-100 text-gray-800 text-sm font-medium transition">
-                        <span class="w-4 h-4 rounded-full bg-gray-300"></span>
-                        Lihat Peta
+                    <img src="img/map.svg" class="w-[20px] sm:w-[25px] lg:w-[20px] xl:w-[30px]" alt="icon">Lihat Peta</a>
                     </a>
                 </div>
             </div>
@@ -53,9 +54,8 @@
     </section>
 
     {{-- section 2 --}}
-    <section class="bg-gray-50 px-5 py-6 sm:px-8 lg:px-12">
+    <section class="relative z-20 -mt-16 rounded-t-[40px] bg-white px-5 pt-10 pb-6 sm:px-8 lg:px-12">
     <div class="mx-auto max-w-7xl space-y-4">
-
         <div class="rounded-xl bg-white p-4 shadow-md">
             <div class="mb-4 flex items-center justify-between">
                 <h2 class="text-sm font-bold text-gray-900">Ringkasan Laporan</h2>

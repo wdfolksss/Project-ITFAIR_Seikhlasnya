@@ -10,8 +10,14 @@ class UserController extends Controller
     {
         return view('navbar');
     }
+
     public function homeuser()
     {
         return view('homeuser.homeuser');
+    }
+
+    public function formlaporan()
+    {
+        return view('homeuser.formlaporan');
     }
 }

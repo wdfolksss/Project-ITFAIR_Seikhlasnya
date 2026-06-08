@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <title>Form Laporan</title>
+</head>
+<body>
+    @include('navbar')
+    <section class="font-montserrat min-h-screen bg-gray-50 px-5 py-10 sm:px-8 lg:px-12">
+    <div class="mx-auto max-w-7xl">
+
+        <div class="mb-6">
+            <div class="flex items-center gap-2 text-xs text-gray-500">
+            <a href="{{ route('homeuser') }}"
+                class="text-blue-600 hover:text-blue-700 hover:underline">
+                Beranda
+            </a>
+            <span>›</span>
+            <span>Laporan Kerusakan</span>
+        </div>
+
+            <h1 class="mt-4 text-2xl font-bold text-gray-900 sm:text-3xl">
+                Laporkan Kerusakan Infrastruktur
+            </h1>
+
+            <p class="mt-2 text-sm text-gray-500">
+                Isi formulir berikut agar laporan dapat diverifikasi admin sebelum ditindaklanjuti.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 gap-6 lg:grid-cols-3">
+            <div class="rounded-2xl bg-white p-6 shadow-md lg:col-span-2">
+                <h2 class="mb-5 text-lg font-bold text-gray-900">Form Laporan</h2>
+                <form class="space-y-5">
+                    <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+                        <div>
+                            <label class="mb-2 block text-sm font-semibold text-gray-700">Nama Pelapor</label>
+                            <input type="text" placeholder="Masukkan nama lengkap Anda"
+                                class="w-full rounded-lg border border-gray-200 bg-gray-100 px-4 py-3 text-sm outline-none focus:border-blue-500 focus:bg-white">
+                        </div>
+
+                        <div>
+                            <label class="mb-2 block text-sm font-semibold text-gray-700">No. HP / Email</label>
+                            <input type="text" placeholder="Contoh: 0812 3456 7890 atau email@contoh.com"
+                                class="w-full rounded-lg border border-gray-200 bg-gray-100 px-4 py-3 text-sm outline-none focus:border-blue-500 focus:bg-white">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+                        <div>
+                            <label class="mb-2 block text-sm font-semibold text-gray-700">Kategori Kerusakan</label>
+                            <select
+                                class="w-full rounded-lg border border-gray-200 bg-gray-100 px-4 py-3 text-sm outline-none focus:border-blue-500 focus:bg-white">
+                                <option>Pilih kategori kerusakan</option>
+                                <option>Jalan Rusak</option>
+                                <option>Jembatan</option>
+                                <option>Lampu Jalan</option>
+                                <option>Drainase</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="mb-2 block text-sm font-semibold text-gray-700">Tingkat Kerusakan</label>
+                            <div class="grid grid-cols-3 gap-3">
+                                <label class="cursor-pointer rounded-lg bg-gray-100 px-4 py-3 text-center text-sm text-gray-600">
+                                    <input type="radio" name="tingkat" class="hidden">
+                                    Ringan
+                                </label>
+                                <label class="cursor-pointer rounded-lg bg-gray-100 px-4 py-3 text-center text-sm text-gray-600">
+                                    <input type="radio" name="tingkat" class="hidden">
+                                    Sedang
+                                </label>
+                                <label class="cursor-pointer rounded-lg bg-gray-100 px-4 py-3 text-center text-sm text-gray-600">
+                                    <input type="radio" name="tingkat" class="hidden">
+                                    Berat
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+                        <div>
+                            <label class="mb-2 block text-sm font-semibold text-gray-700">Lokasi / Kecamatan</label>
+                            <input type="text" placeholder="Contoh: Kecamatan Cisaat"
+                                class="w-full rounded-lg border border-gray-200 bg-gray-100 px-4 py-3 text-sm outline-none focus:border-blue-500 focus:bg-white">
+                        </div>
+
+                        <div>
+                            <label class="mb-2 block text-sm font-semibold text-gray-700">Alamat Detail</label>
+                            <input type="text" placeholder="Masukkan alamat detail atau titik acuan terdekat"
+                                class="w-full rounded-lg border border-gray-200 bg-gray-100 px-4 py-3 text-sm outline-none focus:border-blue-500 focus:bg-white">
+                        </div>
+                    </div>
+
+                    <div>
+                    <label class="mb-2 block text-sm font-semibold text-gray-700">
+                        Titik Lokasi pada Peta
+                    </label>
+
+                    <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
+                        <div id="map" class="h-64 rounded-lg bg-gray-200 md:col-span-2">
+                    </div>
+
+                        <div class="flex flex-col justify-between rounded-lg bg-gray-100 p-4">
+                            <p class="text-xs text-gray-600">
+                                Klik titik lokasi kerusakan pada peta. Koordinat akan terisi otomatis.
+                            </p>
+
+                            <div class="mt-4 space-y-3">
+                                <input type="text" id="latitude" name="latitude" placeholder="Latitude"
+                                    class="w-full rounded-lg border border-gray-200 px-3 py-2 text-xs">
+
+                                <input type="text" id="longitude" name="longitude" placeholder="Longitude"
+                                    class="w-full rounded-lg border border-gray-200 px-3 py-2 text-xs">
+
+                                <button type="button" id="pilihLokasi"
+                                    class="w-full rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700">
+                                    Pilih Lokasi
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                    <div>
+                        <label class="mb-2 block text-sm font-semibold text-gray-700">Deskripsi Laporan</label>
+                        <textarea rows="4" placeholder="Jelaskan kondisi kerusakan, penyebab jika diketahui, dan dampaknya."
+                            class="w-full resize-none rounded-lg border border-gray-200 bg-gray-100 px-4 py-3 text-sm outline-none focus:border-blue-500 focus:bg-white"></textarea>
+                    </div>
+
+                    <div>
+                        <label class="mb-1 block text-sm font-semibold text-gray-700">
+                            Unggah Foto
+                        </label>
+
+                        <p class="mb-3 text-xs text-gray-500">
+                            Maksimal 6 foto (JPG, PNG, JPEG)
+                        </p>
+                        
+                        <div id="notifFoto"
+                            class="hidden mb-3 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-xs font-medium text-red-600">
+                        </div>
+                        <div id="preview-container" class="mb-3 grid grid-cols-2 gap-3 sm:grid-cols-3"></div>
+
+                        <label
+                            class="flex h-28 cursor-pointer flex-col items-center justify-center rounded-lg border border-dashed border-gray-300 bg-white text-sm text-gray-600 hover:bg-gray-50">
+                            <span class="text-2xl text-blue-600">＋</span>
+                            Tambah Foto
+
+                            <input type="file" id="fotoInput" class="hidden" multiple accept="image/*">
+                        </label>
+                    </div>
+
+                    <label class="flex items-start gap-3 text-xs text-gray-600">
+                        <input type="checkbox" class="mt-1 h-4 w-4 rounded border-gray-300">
+                        Saya menyatakan laporan yang saya kirim sesuai kondisi sebenarnya.
+                    </label>
+
+                    <button type="submit"
+                        class="w-full rounded-lg bg-blue-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-blue-700">
+                        Kirim Laporan
+                    </button>
+                </form>
+            </div>
+
+            <div class="space-y-5">
+                <div class="rounded-2xl bg-white p-6 shadow-md">
+                    <h2 class="text-lg font-bold text-gray-900">Panduan Laporan</h2>
+
+                    <div class="mt-5 space-y-4">
+                        <div class="flex gap-3">
+                            <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-blue-100 text-sm font-bold text-blue-600">1</span>
+                            <p class="text-sm text-gray-600">Isi data pelapor dengan benar agar admin dapat melakukan verifikasi.</p>
+                        </div>
+
+                        <div class="flex gap-3">
+                            <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-blue-100 text-sm font-bold text-blue-600">2</span>
+                            <p class="text-sm text-gray-600">Pilih kategori dan tingkat kerusakan sesuai kondisi di lapangan.</p>
+                        </div>
+
+                        <div class="flex gap-3">
+                            <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-blue-100 text-sm font-bold text-blue-600">3</span>
+                            <p class="text-sm text-gray-600">Tambahkan titik lokasi dan foto agar laporan lebih mudah ditindaklanjuti.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="rounded-2xl bg-blue-600 p-6 text-white shadow-md">
+                    <h2 class="text-lg font-bold">Status Laporan</h2>
+                    <p class="mt-2 text-sm text-blue-100">
+                        Setelah dikirim, laporan akan masuk ke tahap verifikasi admin sebelum tampil di peta publik.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+    document.getElementById('pilihLokasi').addEventListener('click', function () {
+        alert('Silakan klik titik kerusakan pada peta.');
+    });
+    const map = L.map('map').setView([-6.9277, 106.9299], 13);
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap'
+    }).addTo(map);
+
+    let marker;
+    map.on('click', function(e) {
+        const lat = e.latlng.lat;
+        const lng = e.latlng.lng;
+        document.getElementById('latitude').value = lat;
+        document.getElementById('longitude').value = lng;
+        if (marker) {
+            map.removeLayer(marker);
+        }
+        marker = L.marker([lat, lng]).addTo(map)
+            .bindPopup('Lokasi kerusakan dipilih')
+            .openPopup();
+    });
+</script>
+
+<script>
+    const fotoInput = document.getElementById('fotoInput');
+    const previewContainer = document.getElementById('preview-container');
+    const notifFoto = document.getElementById('notifFoto');
+    let selectedFiles = [];
+    fotoInput.addEventListener('change', function () {
+        const newFiles = Array.from(this.files);
+
+        if (selectedFiles.length + newFiles.length > 6) {
+            showNotif('Maksimal hanya 6 foto yang dapat diunggah.');
+            fotoInput.value = '';
+            return;
+        }
+
+        selectedFiles = selectedFiles.concat(newFiles);
+        renderPreview();
+        fotoInput.value = '';
+    });
+
+    function renderPreview() {
+        previewContainer.innerHTML = '';
+        selectedFiles.forEach((file, index) => {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                const wrapper = document.createElement('div');
+                wrapper.className = 'relative group';
+                wrapper.innerHTML = `
+                    <a href="${e.target.result}" target="_blank">
+                        <img
+                            src="${e.target.result}"
+                            class="h-28 w-full rounded-lg border border-gray-200 object-cover hover:opacity-80"
+                            alt="Preview Foto">
+                    </a>
+
+                    <button
+                        type="button"
+                        onclick="hapusFoto(${index})"
+                        class="absolute right-2 top-2 flex h-6 w-6 items-center justify-center rounded-full bg-red-600 text-xs font-bold text-white shadow hover:bg-red-700">
+                        ×
+                    </button>
+                `;
+                previewContainer.appendChild(wrapper);
+            };
+            reader.readAsDataURL(file);
+        });
+    }
+
+    function hapusFoto(index) {
+        selectedFiles.splice(index, 1);
+        renderPreview();
+    }
+
+    function showNotif(message) {
+        notifFoto.textContent = message;
+        notifFoto.classList.remove('hidden');
+
+        setTimeout(() => {
+            notifFoto.classList.add('hidden');
+        }, 2500);
+    }
+</script>
+</body>
+</html>
