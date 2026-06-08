@@ -63,19 +63,33 @@
                         </div>
 
                         <div>
-                            <label class="mb-2 block text-sm font-semibold text-gray-700">Tingkat Kerusakan</label>
+                            <label class="mb-2 block text-sm font-semibold text-gray-700">
+                                Tingkat Kerusakan
+                            </label>
+                            
                             <div class="grid grid-cols-3 gap-3">
-                                <label class="cursor-pointer rounded-lg bg-gray-100 px-4 py-3 text-center text-sm text-gray-600">
-                                    <input type="radio" name="tingkat" class="hidden">
-                                    Ringan
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="tingkat" value="ringan" class="peer hidden">
+
+                                    <div class="rounded-lg bg-gray-100 px-4 py-3 text-center text-sm text-gray-600 peer-checked:bg-blue-600 peer-checked:text-white">
+                                        Ringan
+                                    </div>
                                 </label>
-                                <label class="cursor-pointer rounded-lg bg-gray-100 px-4 py-3 text-center text-sm text-gray-600">
-                                    <input type="radio" name="tingkat" class="hidden">
-                                    Sedang
+
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="tingkat" value="sedang" class="peer hidden">
+
+                                    <div class="rounded-lg bg-gray-100 px-4 py-3 text-center text-sm text-gray-600 peer-checked:bg-blue-600 peer-checked:text-white">
+                                        Sedang
+                                    </div>
                                 </label>
-                                <label class="cursor-pointer rounded-lg bg-gray-100 px-4 py-3 text-center text-sm text-gray-600">
-                                    <input type="radio" name="tingkat" class="hidden">
-                                    Berat
+
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="tingkat" value="berat" class="peer hidden">
+
+                                    <div class="rounded-lg bg-gray-100 px-4 py-3 text-center text-sm text-gray-600 peer-checked:bg-blue-600 peer-checked:text-white">
+                                        Berat
+                                    </div>
                                 </label>
                             </div>
                         </div>
@@ -101,8 +115,9 @@
                     </label>
 
                     <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
-                        <div id="map" class="h-64 rounded-lg bg-gray-200 md:col-span-2">
-                    </div>
+                        <div class="relative z-0 h-64 overflow-hidden rounded-xl bg-gray-200 md:col-span-2">
+                            <div id="map" class="z-0 h-full w-full"></div>
+                        </div>
 
                         <div class="flex flex-col justify-between rounded-lg bg-gray-100 p-4">
                             <p class="text-xs text-gray-600">
