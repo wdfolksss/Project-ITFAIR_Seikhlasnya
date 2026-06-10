@@ -106,7 +106,7 @@
     }
 </style>
 <body>
-    <header class="w-full p-4 sticky top-0 z-50 bg-white font-popins backdrop-blur-md">
+    <header class="w-full p-4 sticky top-0 z-50 bg-white font-montserrat backdrop-blur-md">
     <div class="container mx-auto flex items-center justify-between px-[10px] sm:px-[10px] md:px-[30px] lg:px-[30px] xl:px-[12px]  ">
       <div class="flex items-center space-x-3">
         <img src="img/bridge.svg" alt="Logo" class="w-[38px] h-[38px] sm:w-[30px] sm:h-[35px] md:w-[45px] md:h-[50px] lg:w-[63px] lg:h-[58px] xl:w-[63px] xl:h-[48px] object-contain">
