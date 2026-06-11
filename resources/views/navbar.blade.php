@@ -116,7 +116,7 @@
       <!-- Dekstop Navbar  -->
       <nav class=" navbar-menu hidden sm:flex">
         <ul class="flex font-medium gap-[20px] sm:gap-[55px] md:gap-[40px] lg:gap-[55px] xl:gap-[60px]">
-          <li><a href="{{ route('homeuser') }}"
+          <li><a href="{{ route('homeUser') }}"
               class="text-black text-[10px] sm:text-[12px] md:text-[14px] lg:text-[10px] xl:text-[15px] font-medium">
               Beranda</a>
           </li>
@@ -145,7 +145,7 @@
 
         <!--Mobile Menu -->
         <ul id="dropdownMenu" data-aos="fade-right" class="hidden flex flex-col absolute gap-6 right-0 z-10 w-full h-[100vh] pb-36 mt-auto bg-[#ffffff] shadow-md">
-          <li><a href="{{ route('homeuser') }}" class="block px-5 py-2 text-[#070707] mt-4 text-sm leading-normal hover:font-semibold hover:text-black duration-300">
+          <li><a href="{{ route('homeUser') }}" class="block px-5 py-2 text-[#070707] mt-4 text-sm leading-normal hover:font-semibold hover:text-black duration-300">
             Beranda
               <div class="w-full h-[0.5px] bg-[#000000]">
               </div>

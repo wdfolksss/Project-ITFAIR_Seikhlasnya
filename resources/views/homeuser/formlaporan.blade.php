@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <title>Form Laporan</title>
 </head>
 <body>
@@ -14,7 +15,7 @@
 
         <div class="mb-6">
             <div class="flex items-center gap-2 text-xs text-gray-500">
-            <a href="{{ route('homeuser') }}"
+            <a href="{{ route('homeUser') }}"
                 class="text-blue-600 hover:text-blue-700 hover:underline">
                 Beranda
             </a>
@@ -168,53 +169,145 @@
                             <input type="file" id="fotoInput" class="hidden" multiple accept="image/*">
                         </label>
                     </div>
+                     
+                    <div class="pt-4">
+                        <label class="flex items-start gap-3 text-sm text-gray-600">
+                            <input type="checkbox" class="mt-1 h-4 w-4 rounded border-gray-300">
+                            Saya menyatakan laporan yang saya kirim sesuai kondisi sebenarnya.
+                        </label>
 
-                    <label class="flex items-start gap-3 text-xs text-gray-600">
-                        <input type="checkbox" class="mt-1 h-4 w-4 rounded border-gray-300">
-                        Saya menyatakan laporan yang saya kirim sesuai kondisi sebenarnya.
-                    </label>
+                        <div class="mt-5 flex gap-3">
+                            <button type="submit" class="rounded-lg bg-blue-600 px-5 py-3 text-sm font-semibold text-white hover:bg-blue-700">
+                                Kirim Laporan
+                            </button>
 
-                    <button type="submit"
-                        class="w-full rounded-lg bg-blue-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-blue-700">
-                        Kirim Laporan
-                    </button>
+                            <button type="reset" class="rounded-lg border border-gray-300 bg-white px-5 py-3 text-sm font-semibold text-gray-700 hover:bg-gray-100">
+                                Reset Form
+                            </button>
+                        </div>
+                    </div>
                 </form>
             </div>
 
             <div class="space-y-5">
                 <div class="rounded-2xl bg-white p-6 shadow-md">
-                    <h2 class="text-lg font-bold text-gray-900">Panduan Laporan</h2>
+                    <h2 class="text-lg font-bold text-black">Panduan Laporan</h2>
 
                     <div class="mt-5 space-y-4">
                         <div class="flex gap-3">
-                            <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-blue-100 text-sm font-bold text-blue-600">1</span>
-                            <p class="text-sm text-gray-600">Isi data pelapor dengan benar agar admin dapat melakukan verifikasi.</p>
-                        </div>
+                            <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-blue-600">
+                                <i class="fa-solid fa-circle-check text-lg"></i>
+                            </span>
+                            <p class="text-sm text-gray-600"><span class="font-bold text-gray-900">Berikan informasi yang jelas dan lengkap</span>
+                                <br>Isii seluruh data dengan benar agar mudah diverifikasi.</p>
+                            </div>
 
                         <div class="flex gap-3">
-                            <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-blue-100 text-sm font-bold text-blue-600">2</span>
-                            <p class="text-sm text-gray-600">Pilih kategori dan tingkat kerusakan sesuai kondisi di lapangan.</p>
-                        </div>
+                            <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-blue-600">
+                                <i class="fa-solid fa-circle-check text-lg"></i>
+                            </span>
+                            <p class="text-sm text-gray-600"><span class="font-bold text-gray-900">Pilih lokasi yang tepat pada peta</span>
+                                <br>Pastikan titik lokasi sesuai dengan lokasi kerusakan.</p>
+                            </div>
 
                         <div class="flex gap-3">
-                            <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-blue-100 text-sm font-bold text-blue-600">3</span>
-                            <p class="text-sm text-gray-600">Tambahkan titik lokasi dan foto agar laporan lebih mudah ditindaklanjuti.</p>
+                            <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-blue-600">
+                                <i class="fa-solid fa-circle-check text-lg"></i>
+                            </span>
+                            <p class="text-sm text-gray-600"><span class="font-bold text-gray-900">Unggah foto yang jelas</span>
+                                <br>Foto membantu admin memahami kondisi kerusakan dengan lebih akurat.</p>
+                            </div>
+
+                        <div class="flex gap-3">
+                            <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-blue-600">
+                                <i class="fa-solid fa-circle-check text-lg"></i>
+                            </span>
+                            <p class="text-sm text-gray-600"><span class="font-bold text-gray-900">Gunakan bahasa yang sopan</span>
+                                <br>Laporan yang baik mempercepat proses tindak lanjut.</p>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="rounded-2xl bg-blue-600 p-6 text-white shadow-md">
-                    <h2 class="text-lg font-bold">Status Laporan</h2>
-                    <p class="mt-2 text-sm text-blue-100">
-                        Setelah dikirim, laporan akan masuk ke tahap verifikasi admin sebelum tampil di peta publik.
-                    </p>
+                    <div class="rounded-2xl bg-white p-6 shadow-md">
+                    <h2 class="text-lg font-bold text-black">Alur Laporan</h2>
+
+                    <div class="mt-5 space-y-4">
+                        <div class="flex gap-3">
+                            <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-blue-600">
+                                <i class="fa-solid fa-paper-plane text-lg"></i>
+                            </span>
+                            <p class="text-sm text-gray-600"><span class="font-bold text-gray-900">Laporan Dikirim</span>
+                                <br>Laporan Anda berhasil dikirim dan masuk ke sistem.</p>
+                            </div>
+
+                        <div class="flex gap-3">
+                            <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-blue-600">
+                                <i class="fa-solid fa-magnifying-glass text-lg"></i>
+                            </span>
+                            <p class="text-sm text-gray-600"><span class="font-bold text-gray-900">Verifikasi Admin</span>
+                                <br>Admin memeriksa kelengkapan dan kebenaran laporan.</p>
+                            </div>
+
+                        <div class="flex gap-3">
+                            <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-blue-600">
+                                <i class="fa-solid fa-globe text-lg"></i>
+                            </span>
+                            <p class="text-sm text-gray-600"><span class="font-bold text-gray-900">Masuk ke Laporan Publik</span>
+                                <br>Laporan yang valid akan tampil di halaman Laporan Publik.</p>
+                            </div>
+
+                        <div class="flex gap-3">
+                            <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-blue-600">
+                                <i class="fa-solid fa-screwdriver-wrench text-lg"></i>
+                            </span>
+                            <p class="text-sm text-gray-600"><span class="font-bold text-gray-900">Proses Penanganan</span>
+                                <br>Laporan diteruskan ke instansi terkait untuk ditindaklanjuti.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                <div class="rounded-2xl bg-white p-6 text-white shadow-md">
+                    <div>
+                        <h2 class="text-lg font-bold text-black">Kategori Kerusakan</h2>
+                        
+                        <div class="mt-5 space-y-4">
+                        <div class="grid grid-cols-3 gap-3">
+                            <div class="flex items-center gap-2 rounded-lg bg-blue-50 px-3 py-2 text-xs text-blue-600">
+                                <i class="fa-solid fa-road"></i>
+                                <span>Jalan</span>
+                            </div>
+
+                            <div class="flex items-center gap-2 rounded-lg bg-cyan-50 px-3 py-2 text-xs text-cyan-600">
+                                <i class="fa-solid fa-bridge"></i>
+                                <span>Jembatan</span>
+                            </div>
+
+                            <div class="flex items-center gap-2 rounded-lg bg-yellow-50 px-3 py-2 text-xs text-yellow-600">
+                                <i class="fa-regular fa-lightbulb"></i>
+                                <span>Lampu Jalan</span>
+                            </div>
+
+                            <div class="flex items-center gap-2 rounded-lg bg-green-50 px-4 py-3 text-xs text-green-600">
+                                <i class="fa-solid fa-droplet"></i>
+                                <span>Drainase</span>
+                            </div>
+
+                            <div class="flex items-center gap-2 rounded-lg bg-purple-50 px-4 py-3 text-xs text-purple-600">
+                                <i class="fa-solid fa-person-walking"></i>
+                                <span>Trotoar</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </section>
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
+    @include('footer')
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
     document.getElementById('pilihLokasi').addEventListener('click', function () {
         alert('Silakan klik titik kerusakan pada peta.');
