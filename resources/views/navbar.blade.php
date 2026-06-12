@@ -124,7 +124,7 @@
               class="text-black text-[10px] sm:text-[12px] md:text-[14px] lg:text-[10px] xl:text-[15px] font-medium">
               Peta Infrastruktur</a>
             </li>
-          <li><a href="#myskill"
+          <li><a href="{{ route('laporanPublik') }}"
               class="text-black text-[10px] sm:text-[12px] md:text-[14px] lg:text-[10px] xl:text-[15px] font-medium">
               Laporan Publik</a>
           </li>
@@ -157,7 +157,7 @@
               </div>
             </a>
           </li>
-          <li><a href="#myskill" class="block px-5 py-2 text-[#070707] text-sm leading-normal hover:font-semibold hover:text-black duration-300">
+          <li><a href="#{{ route('laporanPublik') }}" class="block px-5 py-2 text-[#070707] text-sm leading-normal hover:font-semibold hover:text-black duration-300">
             Laporan Publik
               <div class="w-full h-[0.5px] bg-[#000000]">
               </div>

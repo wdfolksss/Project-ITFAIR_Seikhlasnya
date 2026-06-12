@@ -20,4 +20,14 @@ class UserController extends Controller
     {
         return view('homeuser.formLaporan');
     }
+
+    public function laporanPublik()
+    {
+        return view('homeuser.laporanPublik');
+    }
+
+    public function detailLaporan()
+    {
+        return view('homeuser.detailLaporan');
+    }
 }
