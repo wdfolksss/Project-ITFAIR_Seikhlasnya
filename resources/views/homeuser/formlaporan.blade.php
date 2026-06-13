@@ -45,7 +45,7 @@
 
                         <div>
                             <label class="mb-2 block text-sm font-semibold text-gray-700">No. HP / Email</label>
-                            <input type="text" placeholder="Contoh: 0812 3456 7890 atau email@contoh.com"
+                            <input type="text" placeholder="Contoh: 0812XXXXX atau nama@email.com"
                                 class="w-full rounded-lg border border-gray-200 bg-gray-100 px-4 py-3 text-sm outline-none focus:border-blue-500 focus:bg-white">
                         </div>
                     </div>

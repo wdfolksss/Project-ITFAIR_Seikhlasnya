@@ -30,4 +30,8 @@ class UserController extends Controller
     {
         return view('homeuser.detailLaporan');
     }
+    public function showLogin()
+    {
+        return view('admin.login');
+    }
 }

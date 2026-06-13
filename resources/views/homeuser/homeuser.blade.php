@@ -45,7 +45,7 @@
                     <img src="img/report.svg" class="w-[20px] sm:w-[25px] lg:w-[20px] xl:w-[30px]" alt="icon">Laporkan Sekarang</a>
                     </a>
 
-                    <a href="#"
+                    <a href="#petaInfrastruktur"
                         class="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-md bg-white hover:bg-gray-100 text-gray-800 text-sm font-medium transition">
                     <img src="img/map.svg" class="w-[20px] sm:w-[25px] lg:w-[20px] xl:w-[30px]" alt="icon">Lihat Peta</a>
                     </a>
@@ -55,7 +55,7 @@
     </section>
 
     {{-- section 2 --}}
-    <section class="relative z-20 -mt-16 rounded-t-[40px] bg-white px-5 pt-10 pb-6 sm:px-8 lg:px-12">
+    <section id="petaInfrastruktur" class="relative z-20 -mt-16 rounded-t-[40px] bg-white px-5 pt-10 pb-6 sm:px-8 lg:px-12">
     <div class="mx-auto max-w-7xl space-y-4">
         <div class="rounded-xl bg-white p-4 shadow-md">
             <div class="mb-4 flex items-center justify-between">

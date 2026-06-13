@@ -28,11 +28,11 @@
                     <span>Detail Laporan</span>
                 </div>
 
-                <a href="{{ route('laporanPublik') }}"
+                {{-- <a href="{{ route('laporanPublik') }}"
                     class="mt-4 inline-flex items-center gap-2 text-sm font-medium text-blue-600 hover:underline">
                     <i class="fa-solid fa-arrow-left"></i>
                     Kembali ke Daftar Laporan
-                </a>
+                </a> --}}
             </div>
 
             <div class="grid grid-cols-1 gap-6 lg:grid-cols-3">
