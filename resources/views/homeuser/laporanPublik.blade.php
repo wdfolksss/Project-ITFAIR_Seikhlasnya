@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laporan Publik</title>
+
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body class="bg-white text-gray-900">
+
+    @include('navbar')
+
+    <section class="px-5 py-8 sm:px-8 lg:px-12">
+        <div class="mx-auto max-w-7xl">
+
+            <div class="mb-6">
+                <div class="flex items-center gap-2 text-xs text-gray-500">
+                    <a href="{{ route('homeUser') }}" class="text-blue-600 hover:underline">Beranda</a>
+                    <span>›</span>
+                    <span>Laporan Publik</span>
+                </div>
+
+                <h1 class="mt-4 text-2xl font-bold sm:text-3xl">
+                    Laporan Publik Infrastruktur
+                </h1>
+
+                <p class="mt-2 text-sm text-gray-500">
+                    Lihat dan pantau laporan kerusakan infrastruktur yang telah diverifikasi secara terbuka oleh admin.
+                </p>
+            </div>
+
+            <div class="mb-6 rounded-xl border border-gray-200 bg-white p-5 shadow-md">
+                <h2 class="mb-4 text-sm font-bold">Statistik Laporan Publik</h2>
+
+                <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                    <div class="flex items-center gap-4 rounded-lg border border-gray-200 p-4">
+                        <span class="flex h-11 w-11 items-center justify-center rounded-lg bg-red-700 text-white">
+                            <i class="fa-solid fa-bullseye"></i>
+                        </span>
+                        <div>
+                            <h3 class="text-2xl font-bold">3.241</h3>
+                            <p class="text-xs text-gray-500">Total Laporan</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-4 rounded-lg border border-gray-200 p-4">
+                        <span class="flex h-11 w-11 items-center justify-center rounded-lg bg-orange-500 text-white">
+                            <i class="fa-regular fa-clock"></i>
+                        </span>
+                        <div>
+                            <h3 class="text-2xl font-bold">876</h3>
+                            <p class="text-xs text-gray-500">Dalam Proses</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-4 rounded-lg border border-gray-200 p-4">
+                        <span class="flex h-11 w-11 items-center justify-center rounded-lg bg-green-700 text-white">
+                            <i class="fa-regular fa-circle-check"></i>
+                        </span>
+                        <div>
+                            <h3 class="text-2xl font-bold">2.134</h3>
+                            <p class="text-xs text-gray-500">Selesai</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-4 rounded-lg border border-gray-200 p-4">
+                        <span class="flex h-11 w-11 items-center justify-center rounded-lg bg-purple-700 text-white">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </span>
+                        <div>
+                            <h3 class="text-2xl font-bold">231</h3>
+                            <p class="text-xs text-gray-500">Belum Diverifikasi</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 gap-6 lg:grid-cols-3">
+
+                <div class="rounded-xl border border-gray-200 bg-white p-5 shadow-md lg:col-span-2">
+                    <div class="grid grid-cols-1 gap-3 md:grid-cols-3">
+                        <div class="relative md:col-span-1">
+                            <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                            <input type="text" placeholder="Cari lokasi, kategori, atau kata kunci..."
+                                class="w-full rounded-lg border border-gray-200 py-3 pl-10 pr-4 text-sm outline-none focus:border-blue-500">
+                        </div>
+
+                        <select class="rounded-lg border border-gray-200 px-4 py-3 text-sm outline-none focus:border-blue-500">
+                            <option>Kategori</option>
+                            <option>Jalan</option>
+                            <option>Drainase</option>
+                            <option>Lampu Jalan</option>
+                        </select>
+
+                        <select class="rounded-lg border border-gray-200 px-4 py-3 text-sm outline-none focus:border-blue-500">
+                            <option>Status</option>
+                            <option>Selesai</option>
+                            <option>Dalam Proses</option>
+                            <option>Belum Diverifikasi</option>
+                        </select>
+                    </div>
+
+                    <h2 class="mt-5 text-sm font-bold">Daftar Laporan</h2>
+
+                    <div class="mt-4 space-y-3">
+                        @foreach ([
+                            ['Jalan Rusak di Cibadak', 'Aspal jalan berlubang dan bergelombang di beberapa titik.', 'Cibadak, Sukabumi', '12 Mei 2025', 'Selesai', 'Prioritas Tinggi'],
+                            ['Drainase Tersumbat di Warudoyong', 'Saluran drainase penuh sampah sehingga air meluap saat hujan.', 'Warudoyong, Sukabumi', '10 Mei 2025', 'Dalam Proses', 'Prioritas Sedang'],
+                            ['Lampu Jalan Mati di Cikole', 'Lampu jalan tidak berfungsi sudah lebih dari 1 minggu.', 'Cikole, Sukabumi', '9 Mei 2025', 'Selesai', 'Prioritas Sedang'],
+                            ['Trotoar Rusak di Gunungpuyuh', 'Trotoar retak dan tidak rata, membahayakan pejalan kaki.', 'Gunungpuyuh, Sukabumi', '7 Mei 2025', 'Selesai', 'Prioritas Rendah']
+                        ] as $item)
+                            <div class="grid grid-cols-1 gap-4 rounded-lg border border-gray-200 p-4 md:grid-cols-[150px_1fr_auto] md:items-center">
+                                <div class="h-28 rounded-lg bg-gray-200"></div>
+
+                                <div>
+                                    <h3 class="font-bold text-gray-900">{{ $item[0] }}</h3>
+                                    <p class="mt-1 text-sm text-gray-500">{{ $item[1] }}</p>
+
+                                    <div class="mt-3 flex flex-wrap gap-4 text-xs text-gray-500">
+                                        <span><i class="fa-solid fa-location-dot mr-1"></i>{{ $item[2] }}</span>
+                                        <span><i class="fa-regular fa-calendar mr-1"></i>{{ $item[3] }}</span>
+                                    </div>
+                                </div>
+
+                                <div class="flex flex-col gap-2 md:items-end">
+                                    <span class="rounded-full bg-green-100 px-3 py-1 text-xs font-semibold text-green-700">
+                                        <i class="fa-solid fa-check mr-1"></i>{{ $item[4] }}
+                                    </span>
+
+                                    <span class="rounded-full bg-orange-100 px-3 py-1 text-xs font-semibold text-orange-600">
+                                        <i class="fa-solid fa-arrow-up mr-1"></i>{{ $item[5] }}
+                                    </span>
+
+                                    <a href="{{ route('detailLaporan') }}"
+                                        class="mt-2 rounded-lg border border-blue-500 px-4 py-2 text-center text-xs font-semibold text-blue-600 hover:bg-blue-50">
+                                        Lihat Detail
+                                    </a>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+
+                <div class="space-y-5">
+                    <div class="rounded-xl border border-gray-200 bg-white p-5 shadow-md">
+                        <h2 class="mb-4 text-sm font-bold">Peta Sebaran Laporan</h2>
+
+                        <div class="relative z-0 h-72 overflow-hidden rounded-lg bg-gray-200">
+                            <div id="mapPublik" class="h-full w-full"></div>
+                        </div>
+
+                        <button class="mt-4 w-full rounded-lg bg-white px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-50">
+                            <i class="fa-solid fa-location-dot mr-2 text-blue-600"></i>
+                            Buka Peta
+                        </button>
+                    </div>
+
+                    <div class="rounded-xl border border-gray-200 bg-white p-5 shadow-md">
+                        <div class="mb-5 flex items-center gap-3">
+                            <span class="flex h-10 w-10 items-center justify-center rounded-full bg-blue-600 text-white">
+                                <i class="fa-solid fa-info"></i>
+                            </span>
+                            <h2 class="font-bold">Informasi untuk Warga</h2>
+                        </div>
+
+                        <div class="space-y-4 text-sm text-gray-600">
+                            <p><i class="fa-regular fa-user mr-3 text-blue-600"></i>Data Pelapor disamarkan</p>
+                            <p><i class="fa-solid fa-shield-halved mr-3 text-blue-600"></i>Hanya laporan valid yang ditampilkan</p>
+                            <p><i class="fa-solid fa-arrows-rotate mr-3 text-blue-600"></i>Status diperbarui oleh admin</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    @include('footer')
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <script>
+        const mapPublik = L.map('mapPublik').setView([-6.9277, 106.9299], 12);
+
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap'
+        }).addTo(mapPublik);
+
+        const laporanMarkers = [
+            [-6.9175, 106.9270, 'Jalan Rusak di Cibadak'],
+            [-6.9192, 106.9345, 'Drainase Tersumbat di Warudoyong'],
+            [-6.9250, 106.9305, 'Lampu Jalan Mati di Cikole'],
+            [-6.9098, 106.9188, 'Trotoar Rusak di Gunungpuyuh']
+        ];
+
+        laporanMarkers.forEach(item => {
+            L.marker([item[0], item[1]])
+                .addTo(mapPublik)
+                .bindPopup(item[2]);
+        });
+    </script>
+
+</body>
+
+</html>

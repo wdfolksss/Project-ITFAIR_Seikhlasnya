@@ -52,14 +52,15 @@
     #home {
       scroll-margin-top: 100px;
     }
-    #about {
+
+    #beranda {
       scroll-margin-top: 100px;
     }
-    #project {
+    #petaInfrastruktur {
       scroll-margin-top: 100px;
     }
 
-    #myskill {
+    #laporanPublik {
       scroll-margin-top: 100px;
     }
 
@@ -85,7 +86,7 @@
       color: black;
       font-weight: bold;
     }
-
+    
     html {
       scroll-behavior: smooth;
     }
@@ -106,31 +107,32 @@
     }
 </style>
 <body>
-    <header class="w-full p-4 sticky top-0 z-50 bg-white backdrop-blur-md">
+    <header class="w-full p-4 sticky top-0 z-50 bg-white font-montserrat backdrop-blur-md">
     <div class="container mx-auto flex items-center justify-between px-[10px] sm:px-[10px] md:px-[30px] lg:px-[30px] xl:px-[12px]  ">
       <div class="flex items-center space-x-3">
-        <img src="img/code.svg" alt="Logo" class="w-[38px] h-[38px] sm:w-[30px] sm:h-[35px] md:w-[45px] md:h-[50px] lg:w-[63px] lg:h-[58px] xl:w-[63px] xl:h-[48px] object-contain">
-        <span class="text-[15px] sm:text-[15px] md:text-[18px] lg:text-[25px] xl:text-[25px] text-black font-medium">Kelawar</span>
+        <img src="img/bridge.svg" alt="Logo" class="w-[38px] h-[38px] sm:w-[30px] sm:h-[35px] md:w-[45px] md:h-[50px] lg:w-[63px] lg:h-[58px] xl:w-[63px] xl:h-[48px] object-contain">
+        <span class="text-[15px] sm:text-[15px] md:text-[18px] lg:text-[20px] xl:text-[20px] text-[#212124] font-montserrat font-semibold">Kelawar</span>
       </div>
 
       <!-- Dekstop Navbar  -->
-      <nav class="navbar-menu hidden sm:flex">
-        <ul class="flex font-medium gap-[20px] sm:gap-[55px] md:gap-[40px] lg:gap-[63px] xl:gap-[73px]">
-          <li><a href="{{ route('homeuser') }}"
-              class="text-black text-[10px] sm:text-[12px] md:text-[14px] lg:text-[15px] xl:text-[20px]">Home</a>
+      <nav class=" navbar-menu hidden sm:flex">
+        <ul class="flex font-medium gap-[20px] sm:gap-[55px] md:gap-[40px] lg:gap-[55px] xl:gap-[60px]">
+          <li><a href="{{ route('homeUser') }}"
+              class="text-black text-[10px] sm:text-[12px] md:text-[14px] lg:text-[10px] xl:text-[15px] font-medium {{ request()->routeIs('homeUser') ? 'active' : '' }}">
+              Beranda</a>
           </li>
-          <li><a href="#about"
-              class="text-black text-[10px] sm:text-[12px] md:text-[14px] lg:text-[15px] xl:text-[20px]">About</a>
+          <li><a href="#petaInfrastruktur"
+              class="text-black text-[10px] sm:text-[12px] md:text-[14px] lg:text-[10px] xl:text-[15px] font-medium">
+              Peta Infrastruktur</a>
             </li>
-          <li><a href="#myskill"
-              class="text-black text-[10px] sm:text-[12px] md:text-[14px] lg:text-[15px] xl:text-[20px]">My Skill</a>
+          <li><a href="{{ route('laporanPublik') }}"
+              class="text-black text-[10px] sm:text-[12px] md:text-[14px] lg:text-[10px] xl:text-[15px] font-medium {{ request()->routeIs('laporanPublik') ? 'active' : '' }}">
+              Laporan Publik</a>
           </li>
-          <li><a href="#project"
-              class="text-black text-[10px] sm:text-[12px] md:text-[14px] lg:text-[15px] xl:text-[20px]">Project</a>
+          <li><a href="#tentangKami"
+              class="text-black text-[10px] sm:text-[12px] md:text-[14px] lg:text-[10px] xl:text-[15px] font-medium">
+             Tentang Kami</a>
           </li>
-          <!-- <li>
-            <button onclick="document.documentElement.classList.toggle('dark')">Toggle Dark Mode</button>
-          </li> -->
         </ul>
       </nav>
       <div class="sm:hidden">
@@ -143,23 +145,26 @@
         </button>
 
         <!--Mobile Menu -->
-        <ul id="dropdownMenu" data-aos="fade-right" class="hidden flex flex-col absolute gap-6 right-0 z-10 w-full h-[100vh] pb-36 mt-auto bg-[#C4E1E6] shadow-md">
-          <li><a href="#home" class="block px-5 py-2 text-[#070707] mt-4 text-sm leading-normal hover:font-semibold hover:text-black duration-300">Home
+        <ul id="dropdownMenu" data-aos="fade-right" class="hidden flex flex-col absolute gap-6 right-0 z-10 w-full h-[100vh] pb-36 mt-auto bg-[#ffffff] shadow-md">
+          <li><a href="{{ route('homeUser') }}" class="block px-5 py-2 text-[#070707] mt-4 text-sm leading-normal hover:font-semibold hover:text-black duration-300">
+            Beranda
               <div class="w-full h-[0.5px] bg-[#000000]">
               </div>
             </a>
           </li>
-          <li><a href="#about" class="block px-5 py-2 text-[#070707] text-sm leading-normal hover:font-semibold hover:text-black duration-300">About
+          <li><a href="#petaInfrastruktur" class="block px-5 py-2 text-[#070707] text-sm leading-normal hover:font-semibold hover:text-black duration-300">
+            Peta Insfrastruktur
               <div class="w-full h-[0.5px] bg-[#000000]">
               </div>
             </a>
           </li>
-          <li><a href="#myskill" class="block px-5 py-2 text-[#070707] text-sm leading-normal hover:font-semibold hover:text-black duration-300">My Skill
+          <li><a href="{{ route('laporanPublik') }}" class="block px-5 py-2 text-[#070707] text-sm leading-normal hover:font-semibold hover:text-black duration-300">
+            Laporan Publik
               <div class="w-full h-[0.5px] bg-[#000000]">
               </div>
             </a>
           </li>
-          <li><a href="#project" class="block px-5 py-2 text-[#070707] text-sm leading-normal hover:font-semibold hover:text-black duration-300">Project
+          <li><a href="#tentangKami" class="block px-5 py-2 text-[#070707] text-sm leading-normal hover:font-semibold hover:text-black duration-300">Tebtang Kami
               <div class="w-full h-[0.5px] bg-[#000000]">
               </div>
             </a>
@@ -172,80 +177,51 @@
   <script type="module" src="/main.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script>
-
-    // img
-    function changeMainImage(imageName, cardElement) {
-      let mainContent = document.querySelectorAll("#mainImage");
-      mainContent.forEach(item => {
-        if (item.classList.contains(imageName)) {
-          mainContent.forEach(element => {
-            element.classList.remove('imageActive');
-          });
-          item.classList.add('imageActive');
-        }
-      })
-
-      document.querySelectorAll(".card-content").forEach(card => {
-        card.classList.remove("bg-active");
-      });
-      cardElement.querySelector(".card-content").classList.add("bg-active");
-    }
-
     // dropdown
     const menuButton = document.getElementById("menuButton");
     const dropdownMenu = document.getElementById("dropdownMenu");
-    const dropdownLinks = dropdownMenu.querySelectorAll("a");
 
-    window.addEventListener("load", () => {
-      setTimeout(() => {
-        dropdownMenu.classList.remove("hidden");
-      }, 0);
+    if (dropdownMenu) {
+        const dropdownLinks = dropdownMenu.querySelectorAll("a");
+
+        window.addEventListener("load", () => {
+            dropdownMenu.classList.remove("hidden");
+        });
+
+        dropdownLinks.forEach(link => {
+            link.addEventListener("click", () => {
+                menuButton.classList.remove("open");
+            });
+        });
+    }
+
+    const navLinks = document.querySelectorAll('nav ul li a[href^="#"]');
+    navLinks.forEach(link => {
+        link.addEventListener('click', function () {
+
+            navLinks.forEach(item => {
+                item.classList.remove('active');
+            });
+
+            this.classList.add('active');
+        });
     });
 
+if (menuButton) {
     menuButton.addEventListener("click", () => {
-      menuButton.classList.toggle("open");
+        menuButton.classList.toggle("open");
     });
+}
 
-    dropdownLinks.forEach(link => {
-      link.addEventListener("click", () => {
-        menuButton.classList.remove("open");
-      });
-    });
-
-    // Cek apakah menu item bisa diklik
-    document.querySelectorAll("nav ul li a").forEach(navItem => {
-      navItem.addEventListener("click", function (event) {
-        event.preventDefault();
-        console.log("Navbar item clicked:", this.textContent);
-        const targetSection = document.querySelector(this.getAttribute("href"));
-        targetSection.scrollIntoView({ behavior: "smooth" });
-
-        document.querySelectorAll("nav ul li a").forEach(link => {
-          link.classList.remove("active");
-        });
-        this.classList.add("active");
-      });
-    });
-
-    // Navbar 1 
-    document.querySelectorAll("nav ul li a").forEach(navItem => {
-      navItem.addEventListener("click", function (event) {
-        event.preventDefault();
-
-        const targetSection = document.querySelector(this.getAttribute("href"));
-        targetSection.scrollIntoView({ behavior: "smooth" });
-
-        document.querySelectorAll("nav ul li a").forEach(link => {
-          link.classList.remove("active");
+document.querySelectorAll("nav ul li a").forEach(link => {
+    link.addEventListener("click", function () {
+        document.querySelectorAll("nav ul li a").forEach(item => {
+            item.classList.remove("active");
         });
 
         this.classList.add("active");
-
-        if (this.getAttribute('href') === '#product') {
-          document.querySelector('a[href="#all"]').classList.add('active');
-        }
-      });
     });
+});
   </script>
 
   <!-- aos -->

@@ -6,7 +6,7 @@ use App\Models\Report;
 use App\Models\Status;
 use Illuminate\Http\Request;
 
-class ReportController extends Controller
+class LaporanController extends Controller
 {
     public function store(Request $request)
     {

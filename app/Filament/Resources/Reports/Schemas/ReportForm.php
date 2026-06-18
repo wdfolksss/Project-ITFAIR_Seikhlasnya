@@ -10,6 +10,7 @@ use Filament\Schemas\Schema;
 use Filament\Forms\Components\Placeholder;
 use Illuminate\Support\HtmlString;
 
+
 class ReportForm
 {
     public static function configure(Schema $schema): Schema
@@ -60,10 +61,32 @@ class ReportForm
                         ");
                     })
                     ->columnSpanFull(),
-                FileUpload::make('image')
-                    ->label('Gambar')
-                    ->image()
-                    ->required(),
+                Placeholder::make('image_preview')
+                    ->label('Foto Laporan')
+                    ->content(function ($record) {
+                        if (! $record || ! $record->image) {
+                            return 'Belum ada foto.';
+                        }
+
+                        $url = route('foto.laporan', ['path' => $record->image]);
+
+                        return new HtmlString("
+                            <a href='{$url}' target='_blank'>
+                                <img
+                                    src='{$url}'
+                                    style='
+                                        max-width:500px;
+                                        max-height:200px;
+                                        object-fit:cover;
+                                        border-radius:12px;
+                                        border:1px solid #ddd;
+                                        box-shadow:0 2px 8px rgba(0,0,0,.1);
+                                        cursor:pointer;
+                                    '>
+                            </a>
+                        ");
+                    })
+                    ->columnSpanFull(),
                 Select::make('severity')
                     ->label('Prioritas')
                     ->options(['ringan' => 'Ringan', 'sedang' => 'Sedang', 'berat' => 'Berat'])

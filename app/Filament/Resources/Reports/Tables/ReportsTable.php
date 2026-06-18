@@ -9,6 +9,7 @@ use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
+
 class ReportsTable
 {
     public static function configure(Table $table): Table
@@ -27,9 +28,14 @@ class ReportsTable
                         'berat' => 'danger',
                         default => 'gray',
                         }),
-                    ImageColumn::make('image')
-                    ->label('Gambar'),
-                    TextColumn::make('status.name')
+                ImageColumn::make('image')
+                    ->label('Foto')
+                    ->getStateUsing(fn ($record) => $record->image)
+                    ->disk('public')
+                    ->visibility('public')
+                    ->square()
+                    ->size(80),
+                TextColumn::make('status.name')
                     ->label('Status')
                     ->badge()
                     ->color(fn ($state) => match ($state) {
