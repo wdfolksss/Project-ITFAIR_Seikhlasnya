@@ -35,17 +35,18 @@
         <div class="grid grid-cols-1 gap-6 lg:grid-cols-3">
             <div class="rounded-2xl bg-white p-6 shadow-md lg:col-span-2">
                 <h2 class="mb-5 text-lg font-bold text-gray-900">Form Laporan</h2>
-                <form class="space-y-5">
+                <form action="" method="POST" enctype="multipart/form-data" class="space-y-5">
+                    @csrf
                     <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
                         <div>
                             <label class="mb-2 block text-sm font-semibold text-gray-700">Nama Pelapor</label>
-                            <input type="text" placeholder="Masukkan nama lengkap Anda"
+                            <input type="text" name="reporter_name" placeholder="Masukkan nama lengkap Anda"
                                 class="w-full rounded-lg border border-gray-200 bg-gray-100 px-4 py-3 text-sm outline-none focus:border-blue-500 focus:bg-white">
                         </div>
 
                         <div>
                             <label class="mb-2 block text-sm font-semibold text-gray-700">No. HP / Email</label>
-                            <input type="text" placeholder="Contoh: 0812XXXXX atau nama@email.com"
+                            <input type="text" name="contact" placeholder="Contoh: 0812XXXXX atau nama@email.com"
                                 class="w-full rounded-lg border border-gray-200 bg-gray-100 px-4 py-3 text-sm outline-none focus:border-blue-500 focus:bg-white">
                         </div>
                     </div>
@@ -53,13 +54,13 @@
                     <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
                         <div>
                             <label class="mb-2 block text-sm font-semibold text-gray-700">Kategori Kerusakan</label>
-                            <select
+                            <select name="category_id"
                                 class="w-full rounded-lg border border-gray-200 bg-gray-100 px-4 py-3 text-sm outline-none focus:border-blue-500 focus:bg-white">
-                                <option>Pilih kategori kerusakan</option>
-                                <option>Jalan Rusak</option>
-                                <option>Jembatan</option>
-                                <option>Lampu Jalan</option>
-                                <option>Drainase</option>
+                                <option value="">Pilih kategori kerusakan</option>
+                                <option value="1">Jalan Rusak</option>
+                                <option value="2">Jembatan</option>
+                                <option value="3">Lampu Jalan</option>
+                                <option value="4">Drainase</option>
                             </select>
                         </div>
 
@@ -70,7 +71,7 @@
                             
                             <div class="grid grid-cols-3 gap-3">
                                 <label class="cursor-pointer">
-                                    <input type="radio" name="tingkat" value="ringan" class="peer hidden">
+                                    <input type="radio" name="severity" value="ringan" class="peer hidden">
 
                                     <div class="rounded-lg bg-gray-100 px-4 py-3 text-center text-sm text-gray-600 peer-checked:bg-blue-600 peer-checked:text-white">
                                         Ringan
@@ -78,7 +79,7 @@
                                 </label>
 
                                 <label class="cursor-pointer">
-                                    <input type="radio" name="tingkat" value="sedang" class="peer hidden">
+                                    <input type="radio" name="severity" value="sedang" class="peer hidden">
 
                                     <div class="rounded-lg bg-gray-100 px-4 py-3 text-center text-sm text-gray-600 peer-checked:bg-blue-600 peer-checked:text-white">
                                         Sedang
@@ -86,7 +87,7 @@
                                 </label>
 
                                 <label class="cursor-pointer">
-                                    <input type="radio" name="tingkat" value="berat" class="peer hidden">
+                                    <input type="radio" name="severity" value="berat" class="peer hidden">
 
                                     <div class="rounded-lg bg-gray-100 px-4 py-3 text-center text-sm text-gray-600 peer-checked:bg-blue-600 peer-checked:text-white">
                                         Berat
@@ -98,14 +99,12 @@
 
                     <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
                         <div>
-                            <label class="mb-2 block text-sm font-semibold text-gray-700">Lokasi / Kecamatan</label>
-                            <input type="text" placeholder="Contoh: Kecamatan Cisaat"
-                                class="w-full rounded-lg border border-gray-200 bg-gray-100 px-4 py-3 text-sm outline-none focus:border-blue-500 focus:bg-white">
+                            
                         </div>
 
                         <div>
                             <label class="mb-2 block text-sm font-semibold text-gray-700">Alamat Detail</label>
-                            <input type="text" placeholder="Masukkan alamat detail atau titik acuan terdekat"
+                            <input type="text" name="address" placeholder="Masukkan alamat detail atau titik acuan terdekat"
                                 class="w-full rounded-lg border border-gray-200 bg-gray-100 px-4 py-3 text-sm outline-none focus:border-blue-500 focus:bg-white">
                         </div>
                     </div>
@@ -143,7 +142,7 @@
 
                     <div>
                         <label class="mb-2 block text-sm font-semibold text-gray-700">Deskripsi Laporan</label>
-                        <textarea rows="4" placeholder="Jelaskan kondisi kerusakan, penyebab jika diketahui, dan dampaknya."
+                        <textarea rows="4" name="description" placeholder="Jelaskan kondisi kerusakan, penyebab jika diketahui, dan dampaknya."
                             class="w-full resize-none rounded-lg border border-gray-200 bg-gray-100 px-4 py-3 text-sm outline-none focus:border-blue-500 focus:bg-white"></textarea>
                     </div>
 
@@ -153,20 +152,21 @@
                         </label>
 
                         <p class="mb-3 text-xs text-gray-500">
-                            Maksimal 6 foto (JPG, PNG, JPEG)
+                            Maksimal 1 Foto (JPG, PNG, JPEG)
                         </p>
                         
                         <div id="notifFoto"
                             class="hidden mb-3 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-xs font-medium text-red-600">
                         </div>
-                        <div id="preview-container" class="mb-3 grid grid-cols-2 gap-3 sm:grid-cols-3"></div>
 
-                        <label
+                        <div id="preview-container" class="mb-3"></div>
+
+                        <label id="uploadBox"
                             class="flex h-28 cursor-pointer flex-col items-center justify-center rounded-lg border border-dashed border-gray-300 bg-white text-sm text-gray-600 hover:bg-gray-50">
                             <span class="text-2xl text-blue-600">＋</span>
                             Tambah Foto
 
-                            <input type="file" id="fotoInput" class="hidden" multiple accept="image/*">
+                            <input type="file" id="fotoInput" name="image" class="hidden" accept="image/*">
                         </label>
                     </div>
                      
@@ -177,11 +177,11 @@
                         </label>
 
                         <div class="mt-5 flex gap-3">
-                            <button type="submit" class="rounded-lg bg-blue-600 px-5 py-3 text-sm font-semibold text-white hover:bg-blue-700">
+                            <button type="submit" class="cursor-pointer rounded-lg bg-blue-600 px-5 py-3 text-sm font-semibold text-white hover:bg-blue-700">
                                 Kirim Laporan
                             </button>
 
-                            <button type="reset" class="rounded-lg border border-gray-300 bg-white px-5 py-3 text-sm font-semibold text-gray-700 hover:bg-gray-100">
+                            <button type="reset" class="cursor-pointer rounded-lg border border-gray-300 bg-white px-5 py-3 text-sm font-semibold text-gray-700 hover:bg-gray-100">
                                 Reset Form
                             </button>
                         </div>
@@ -336,53 +336,57 @@
     const fotoInput = document.getElementById('fotoInput');
     const previewContainer = document.getElementById('preview-container');
     const notifFoto = document.getElementById('notifFoto');
-    let selectedFiles = [];
-    fotoInput.addEventListener('change', function () {
-        const newFiles = Array.from(this.files);
+    const uploadBox = document.getElementById('uploadBox');
 
-        if (selectedFiles.length + newFiles.length > 6) {
-            showNotif('Maksimal hanya 6 foto yang dapat diunggah.');
-            fotoInput.value = '';
+    fotoInput.addEventListener('change', function () {
+        const file = this.files[0];
+
+        if (!file) return;
+
+        if (!file.type.startsWith('image/')) {
+            showNotif('File harus berupa gambar.');
+            this.value = '';
             return;
         }
 
-        selectedFiles = selectedFiles.concat(newFiles);
-        renderPreview();
-        fotoInput.value = '';
-    });
+        if (file.size > 2 * 1024 * 1024) {
+            showNotif('Ukuran foto maksimal 2MB.');
+            this.value = '';
+            return;
+        }
 
-    function renderPreview() {
-        previewContainer.innerHTML = '';
-        selectedFiles.forEach((file, index) => {
-            const reader = new FileReader();
-            reader.onload = function (e) {
-                const wrapper = document.createElement('div');
-                wrapper.className = 'relative group';
-                wrapper.innerHTML = `
+        const reader = new FileReader();
+
+        reader.onload = function (e) {
+            uploadBox.classList.add('hidden');
+
+            previewContainer.innerHTML = `
+                <div class="relative">
                     <a href="${e.target.result}" target="_blank">
                         <img
                             src="${e.target.result}"
-                            class="h-28 w-full rounded-lg border border-gray-200 object-cover hover:opacity-80"
+                            class="h-40 w-full rounded-lg border border-gray-200 object-cover hover:opacity-80"
                             alt="Preview Foto">
                     </a>
 
                     <button
                         type="button"
-                        onclick="hapusFoto(${index})"
-                        class="absolute right-2 top-2 flex h-6 w-6 items-center justify-center rounded-full bg-red-600 text-xs font-bold text-white shadow hover:bg-red-700">
+                        id="hapusFoto"
+                        class="absolute right-2 top-2 flex h-7 w-7 items-center justify-center rounded-full bg-red-600 text-sm font-bold text-white shadow hover:bg-red-700">
                         ×
                     </button>
-                `;
-                previewContainer.appendChild(wrapper);
-            };
-            reader.readAsDataURL(file);
-        });
-    }
+                </div>
+            `;
 
-    function hapusFoto(index) {
-        selectedFiles.splice(index, 1);
-        renderPreview();
-    }
+            document.getElementById('hapusFoto').addEventListener('click', function () {
+                fotoInput.value = '';
+                previewContainer.innerHTML = '';
+                uploadBox.classList.remove('hidden');
+            });
+        };
+
+        reader.readAsDataURL(file);
+    });
 
     function showNotif(message) {
         notifFoto.textContent = message;
