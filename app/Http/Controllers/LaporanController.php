@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Report;
-use App\Models\Status;
 use Illuminate\Http\Request;
 
 class LaporanController extends Controller
@@ -22,14 +21,24 @@ class LaporanController extends Controller
             'image' => 'required|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
+        // upload image
         $validated['image'] = $request->file('image')->store('reports', 'public');
 
-        $status = Status::where('name', 'Pending')->first();
-
-        $validated['status_id'] = $status->id;
+        // langsung publish (atau bisa Pending kalau mau admin approve)
+        $validated['status_id'] = 2;
 
         Report::create($validated);
 
-        return redirect()->back()->with('success', 'Laporan berhasil dikirim.');
+        return redirect()->route('homeuser')
+            ->with('success', 'Laporan berhasil dikirim!');
+    }
+
+    public function index()
+    {
+        $laporan = Report::with(['category', 'status'])
+            ->latest()
+            ->get();
+
+        return view('homeuser.laporanPublik', compact('laporan'));
     }
 }

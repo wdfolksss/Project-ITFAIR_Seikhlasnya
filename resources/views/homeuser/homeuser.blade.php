@@ -13,24 +13,61 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
+<<<<<<< HEAD
 <body class="overflow-x-hidden font-montserrat bg-white text-black dark:bg-black dark:text-white">
+=======
+<body class="overflow-x-hidden font-montserrat bg-white dark:bg-slate-950 text-black dark:bg-black dark:text-white">
+>>>>>>> e446b84 (update laporan publik, store report, and image upload)
     @include('navbar')
+
+    @if(session('success'))
+    <div class="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm">
+        <div class="w-[90%] max-w-md rounded-3xl bg-white p-8 text-center shadow-2xl">
+            <div class="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-blue-100">
+            <i class="fa-solid fa-circle-check text-4xl text-blue-600"></i>
+        </div>
+
+        <h2 class="mt-5 text-2xl font-bold text-gray-900">
+            Laporan Berhasil Dikirim!
+        </h2>
+        <p class="mt-3 text-sm text-gray-600">
+            Terima kasih sudah melaporkan kerusakan infrastruktur.
+            Laporan kamu akan diverifikasi oleh admin.
+        </p>
+
+        <button onclick="this.closest('.fixed').remove()"class="mt-6 w-full rounded-xl bg-blue-600 px-5 py-3 font-semibold text-white transition hover:bg-blue-700">
+            Kembali
+        </button>
+    </div>
+</div>
+@endif
     {{-- section 1 --}}
     <section
         class="relative min-h-[360px] sm:min-h-[420px] lg:min-h-[40rem] py-[2rem] px-[1rem] sm:py-[2rem] sm:px-[1rem] md:py-[2rem] xl:py-[10rem] flex items-center bg-cover bg-center"
         style="background-image: url('{{ asset('img/hero.jpeg') }}');">
         <div class="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-slate-900/70 to-slate-900/30"></div>
         <div class="relative z-10 w-full max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
+<<<<<<< HEAD
             <div class="max-w-[40rem] pb-[4rem]">
+=======
+            <div class="max-w-[55rem] pb-[4rem]">
+>>>>>>> e446b84 (update laporan publik, store report, and image upload)
                 <span
                     class="inline-flex px-3 py-1 rounded-full bg-green-600 text-white text-[10px] sm:text-xs font-semibold">
                     SUKABUMI SMART CITY
                 </span>
 
+<<<<<<< HEAD
                 <h1 class="mt-4 text-2xl sm:text-4xl lg:text-4xl font-bold text-white leading-tight">
                     Bersama Warga,
                     <br class="hidden sm:block-0.5">
                     Bangun Infrastruktur yang Lebih Baik
+=======
+                <h1 class="mt-4 text-2xl sm:text-4xl lg:text-5xl font-Plus Jakarta Sans font-bold text-white leading-tight">
+                    Bersama Warga, 
+                    <span class="text-blue-400"> Bangun Infrastruktur </span> 
+                    yang Lebih Baik
+>>>>>>> e446b84 (update laporan publik, store report, and image upload)
                 </h1>
 
                 <p class="mt-3 text-xs sm:text-sm lg:text-base text-gray-200 leading-relaxed max-w-md">
@@ -39,6 +76,7 @@
                     lebih nyaman.
                 </p>
 
+<<<<<<< HEAD
                 <div class="mt-6 flex flex-col sm:flex-row gap-3 sm:gap-4">
                     <a href="{{ route('formLaporan') }}"
                         class="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-md bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium transition">
@@ -50,6 +88,26 @@
                     <img src="img/map.svg" class="w-[20px] sm:w-[25px] lg:w-[20px] xl:w-[30px]" alt="icon">Lihat Peta</a>
                     </a>
                 </div>
+=======
+                 <!-- BUTTON -->
+            <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+
+                <a href="{{ route('formLaporan') }}"
+                    class="inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-6 py-3 text-sm font-semibold text-white transition hover:bg-blue-700">
+
+                    <i class="fa-solid fa-paper-plane"></i>
+                    Laporkan Sekarang
+                </a>
+
+                <a href="#petaInfrastruktur"
+                    class="inline-flex items-center justify-center gap-2 rounded-xl border border-white/20 bg-white/10 px-6 py-3 text-sm font-semibold text-white backdrop-blur transition hover:bg-white/20">
+
+                    <i class="fa-solid fa-map-location-dot"></i>
+                    Lihat Peta
+                </a>
+
+            </div>
+>>>>>>> e446b84 (update laporan publik, store report, and image upload)
             </div>
         </div>
     </section>
@@ -64,37 +122,56 @@
             </div>
 
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+
+                <!-- Total Laporan -->
                 <div class="flex items-center gap-4 rounded-md border border-gray-200 p-4">
-                    <div class="h-10 w-10 rounded-md bg-red-600"></div>
+                    <div class="flex h-12 w-12 items-center justify-center rounded-md bg-red-100">
+                        <i class="fa-solid fa-file-lines text-xl text-red-600"></i>
+                    </div>
                     <div>
                         <h3 class="text-2xl font-bold text-gray-900">{{ $totalReports }}</h3>
                         <p class="text-xs text-gray-500">Total Laporan</p>
                     </div>
                 </div>
 
+                <!-- Dalam Proses -->
                 <div class="flex items-center gap-4 rounded-md border border-gray-200 p-4">
-                    <div class="h-10 w-10 rounded-md bg-yellow-400"></div>
+                    <div class="flex h-12 w-12 items-center justify-center rounded-md bg-yellow-100">
+                        <i class="fa-solid fa-clock text-xl text-yellow-500"></i>
+                    </div>
                     <div>
+<<<<<<< HEAD
                         <h3 class="text-2xl font-bold text-gray-900">{{ $processReports }}</h3>
                         <p class="text-xs text-gray-500">Dalam proses</p>
+=======
+                        <h3 class="text-2xl font-bold text-gray-900">876</h3>
+                        <p class="text-xs text-gray-500">Dalam Proses</p>
+>>>>>>> e446b84 (update laporan publik, store report, and image upload)
                     </div>
                 </div>
 
+                <!-- Selesai -->
                 <div class="flex items-center gap-4 rounded-md border border-gray-200 p-4">
-                    <div class="h-10 w-10 rounded-md bg-green-600"></div>
+                    <div class="flex h-12 w-12 items-center justify-center rounded-md bg-green-100">
+                        <i class="fa-solid fa-circle-check text-xl text-green-600"></i>
+                    </div>
                     <div>
                         <h3 class="text-2xl font-bold text-gray-900">{{ $doneReports }}</h3>
                         <p class="text-xs text-gray-500">Selesai</p>
                     </div>
                 </div>
 
+                <!-- Belum Diverifikasi -->
                 <div class="flex items-center gap-4 rounded-md border border-gray-200 p-4">
-                    <div class="h-10 w-10 rounded-md bg-purple-700"></div>
+                    <div class="flex h-12 w-12 items-center justify-center rounded-md bg-purple-100">
+                        <i class="fa-solid fa-user-check text-xl text-purple-700"></i>
+                    </div>
                     <div>
                         <h3 class="text-2xl font-bold text-gray-900">{{ $pendingReports }}</h3>
                         <p class="text-xs text-gray-500">Belum Diverifikasi</p>
                     </div>
                 </div>
+
             </div>
         </div>
 
@@ -117,13 +194,6 @@
 
                 <div class="relative h-[260px] overflow-hidden rounded-lg bg-green-100">
                   <div id="map" class="h-[350px] w-full rounded-2xl"></div>
-                    <div class="absolute left-[20%] top-[18%] rounded-full bg-red-600 px-3 py-1 text-xs font-bold text-white">12</div>
-                    <div class="absolute left-[50%] top-[22%] rounded-full bg-yellow-500 px-3 py-1 text-xs font-bold text-white">8</div>
-                    <div class="absolute left-[63%] top-[35%] rounded-full bg-red-600 px-3 py-1 text-xs font-bold text-white">8</div>
-                    <div class="absolute left-[30%] top-[58%] rounded-full bg-red-500 px-3 py-1 text-xs font-bold text-white">3</div>
-                    <div class="absolute left-[42%] top-[48%] rounded-full bg-yellow-500 px-3 py-1 text-xs font-bold text-white">14</div>
-                    <div class="absolute right-[14%] top-[38%] rounded-full bg-green-600 px-3 py-1 text-xs font-bold text-white">25</div>
-
                     <button class="absolute bottom-4 left-4 rounded-md bg-white px-3 py-2 text-xs font-medium text-gray-700 shadow">
                         Filter Peta
                     </button>
@@ -138,11 +208,11 @@
 
                 <div class="space-y-4">
                     @foreach ([
-                        ['1', 'Jalan Raya Cibadak', 'Cibadak, Sukabumi', '127 laporan • Risiko Tinggi', 'Skor 95', 'bg-red-600'],
-                        ['2', 'Jalan Cisaat', 'Cisaat, Sukabumi', '94 laporan • Risiko Tinggi', 'Skor 91', 'bg-orange-500'],
-                        ['3', 'Jalan ParungKuda', 'Parungkuda, Sukabumi', '72 laporan • Risiko Sedang', 'Skor 88', 'bg-yellow-500'],
-                        ['4', 'Jalan Sukaraja', 'Sukaraja, Sukabumi', '56 laporan • Risiko Sedang', 'Skor 75', 'bg-green-600'],
-                        ['5', 'Jalan Warudoyong', 'Warudoyong, Sukabumi', '42 laporan • Risiko Rendah', 'Skor 65', 'bg-blue-600']
+                        ['1', 'Jalan Raya Cibadak', 'Cibadak, Sukabumi', '127 laporan • Risiko Tinggi', '90%', 'bg-red-600'],
+                        ['2', 'Jalan Cisaat', 'Cisaat, Sukabumi', '94 laporan • Risiko Tinggi', '90%', 'bg-orange-500'],
+                        ['3', 'Jalan ParungKuda', 'Parungkuda, Sukabumi', '72 laporan • Risiko Sedang', '90%', 'bg-yellow-500'],
+                        ['4', 'Jalan Sukaraja', 'Sukaraja, Sukabumi', '56 laporan • Risiko Sedang', '90%', 'bg-green-600'],
+                        ['5', 'Jalan Warudoyong', 'Warudoyong, Sukabumi', '42 laporan • Risiko Rendah', '90%', 'bg-blue-600']
                     ] as $item)
                         <div class="flex items-center justify-between gap-3">
                             <div class="flex items-start gap-3">
@@ -170,39 +240,69 @@
 <section class="bg-white px-5 py-10 sm:px-8 lg:px-12">
     <div class="mx-auto max-w-7xl">
         <div class="grid grid-cols-1 items-center gap-8 rounded-3xl bg-slate-900 p-6 text-white shadow-lg lg:grid-cols-2 lg:p-10">
+<<<<<<< HEAD
+=======
+
+            <!-- LEFT -->
+>>>>>>> e446b84 (update laporan publik, store report, and image upload)
             <div>
                 <span class="rounded-full bg-blue-600 px-4 py-1 text-xs font-semibold">
                     Blockchain Transparency
                 </span>
 
                 <h2 class="mt-4 text-2xl font-bold sm:text-3xl">
+<<<<<<< HEAD
                     Data Laporan Tercatat Aman dan Transparan
                 </h2>
 
                 <p class="mt-3 text-sm leading-relaxed text-slate-300">
                     Setiap laporan infrastruktur dapat dicatat secara transparan agar riwayat laporan,
                     status penanganan, dan perubahan data lebih mudah dipantau.
+=======
+                    Data Laporan Infrastruktur
+                    Lebih Aman dan Transparan
+                </h2>
+
+                <p class="mt-3 text-sm leading-relaxed text-slate-300">
+                    Setiap laporan kerusakan jalan memiliki riwayat digital
+                    yang tercatat sehingga perubahan status dapat dipantau
+                    secara transparan.
+>>>>>>> e446b84 (update laporan publik, store report, and image upload)
                 </p>
 
                 <div class="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
                     <div class="rounded-2xl bg-white/10 p-4">
+<<<<<<< HEAD
                         <i class="fa-solid fa-shield-halved text-2xl text-blue-400"></i>
                         <h3 class="mt-3 font-semibold">Data Aman</h3>
                         <p class="mt-1 text-xs text-slate-300">
                             Riwayat laporan tersimpan dan sulit dimanipulasi.
+=======
+                        <i class="fa-solid fa-fingerprint text-2xl text-blue-400"></i>
+                        <h3 class="mt-3 font-semibold">Identitas Laporan</h3>
+                        <p class="mt-1 text-xs text-slate-300">
+                            Setiap laporan memiliki kode unik untuk menjaga keaslian data.
+>>>>>>> e446b84 (update laporan publik, store report, and image upload)
                         </p>
                     </div>
 
                     <div class="rounded-2xl bg-white/10 p-4">
+<<<<<<< HEAD
                         <i class="fa-solid fa-link text-2xl text-green-400"></i>
                         <h3 class="mt-3 font-semibold">Jejak Transparan</h3>
                         <p class="mt-1 text-xs text-slate-300">
                             Status laporan dapat dipantau dari proses sampai selesai.
                         </p>
+=======
+                        <i class="fa-solid fa-clock-rotate-left text-2xl text-green-400"></i>
+                        <h3 class="mt-3 font-semibold">Riwayat Status</h3>
+                        <p class="mt-1 text-xs text-slate-300">Perubahan laporan tersimpan dari awal hingga selesai.</p>
+>>>>>>> e446b84 (update laporan publik, store report, and image upload)
                     </div>
                 </div>
             </div>
 
+<<<<<<< HEAD
             <div class="relative">
                 <div class="rounded-3xl bg-white p-5 text-slate-900">
                     <div class="space-y-4">
@@ -243,6 +343,52 @@
                                 <h3 class="font-bold">Status Terverifikasi</h3>
                                 <p class="text-xs text-gray-500">Laporan siap dipantau masyarakat.</p>
                             </div>
+=======
+            <!-- RIGHT -->
+            <div class="rounded-3xl bg-white p-5 text-slate-900">
+                <div class="space-y-4">
+                    <div class="flex items-center gap-4 rounded-2xl border p-4">
+                        <span class="flex h-12 w-12 items-center justify-center rounded-full bg-blue-100 text-blue-600">
+                            <i class="fa-solid fa-file-circle-plus text-xl"></i>
+                        </span>
+
+                        <div>
+                            <h3 class="font-bold">Laporan Dibuat</h3>
+                            <p class="text-xs text-gray-500">Data laporan masuk ke sistem.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-4 rounded-2xl border p-4">
+                        <span class="flex h-12 w-12 items-center justify-center rounded-full bg-purple-100 text-purple-600">
+                            <i class="fa-solid fa-fingerprint text-xl"></i>
+                        </span>
+
+                        <div>
+                            <h3 class="font-bold"> Hash Data Terbentuk</h3>
+                            <p class="text-xs text-gray-500"> Data memiliki identitas digital yang unik.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-4 rounded-2xl border p-4">
+                        <span class="flex h-12 w-12 items-center justify-center rounded-full bg-yellow-100 text-yellow-600">
+                            <i class="fa-solid fa-clock text-xl"></i>
+                        </span>
+
+                        <div>
+                            <h3 class="font-bold">Tracking Proses</h3>
+                            <p class="text-xs text-gray-500">Status laporan tercatat setiap perubahan.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-4 rounded-2xl border p-4">
+                        <span class="flex h-12 w-12 items-center justify-center rounded-full bg-green-100 text-green-600">
+                            <i class="fa-solid fa-circle-check text-xl"></i>
+                        </span>
+
+                        <div>
+                            <h3 class="font-bold">Laporan Selesai</h3>
+                            <p class="text-xs text-gray-500"> Masyarakat dapat melihat hasil penanganan.</p>
+>>>>>>> e446b84 (update laporan publik, store report, and image upload)
                         </div>
                     </div>
                 </div>
@@ -308,6 +454,10 @@
     </div>
 </section>
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> e446b84 (update laporan publik, store report, and image upload)
     @include('footer')
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>

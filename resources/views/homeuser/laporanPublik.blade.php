@@ -21,7 +21,11 @@
 
             <div class="mb-6">
                 <div class="flex items-center gap-2 text-xs text-gray-500">
+<<<<<<< HEAD
                     <a href="{{ route('homeUser') }}" class="text-blue-600 hover:underline">Beranda</a>
+=======
+                    <a href="{{ route('homeuser') }}" class="text-blue-600 hover:underline">Beranda</a>
+>>>>>>> e446b84 (update laporan publik, store report, and image upload)
                     <span>›</span>
                     <span>Laporan Publik</span>
                 </div>
@@ -109,6 +113,7 @@
                     <h2 class="mt-5 text-sm font-bold">Daftar Laporan</h2>
 
                     <div class="mt-4 space-y-3">
+<<<<<<< HEAD
                         @foreach ([
                             ['Jalan Rusak di Cibadak', 'Aspal jalan berlubang dan bergelombang di beberapa titik.', 'Cibadak, Sukabumi', '12 Mei 2025', 'Selesai', 'Prioritas Tinggi'],
                             ['Drainase Tersumbat di Warudoyong', 'Saluran drainase penuh sampah sehingga air meluap saat hujan.', 'Warudoyong, Sukabumi', '10 Mei 2025', 'Dalam Proses', 'Prioritas Sedang'],
@@ -116,6 +121,49 @@
                             ['Trotoar Rusak di Gunungpuyuh', 'Trotoar retak dan tidak rata, membahayakan pejalan kaki.', 'Gunungpuyuh, Sukabumi', '7 Mei 2025', 'Selesai', 'Prioritas Rendah']
                         ] as $item)
                             <div class="grid grid-cols-1 gap-4 rounded-lg border border-gray-200 p-4 md:grid-cols-[150px_1fr_auto] md:items-center">
+=======
+                       @foreach ($laporan as $item)
+
+                            <div class="grid grid-cols-1 gap-4 rounded-lg border border-gray-200 p-4 md:grid-cols-[150px_1fr_auto] md:items-center">
+                                <div class="h-28 rounded-lg bg-gray-200 overflow-hidden">
+                                    @if($item->image)
+                                    <img src="{{ asset('storage/'.$item->image) }}" class="h-full w-full object-cover">
+                                    @endif
+                                </div>
+                                <div>
+
+                                    <h3 class="font-bold text-gray-900"> 
+                                        {{ $item->category->name ?? 'Kategori' }}
+                                    </h3>
+                                    <p class="mt-1 text-sm text-gray-500">
+                                        {{ $item->description }}
+                                    </p>
+
+                                    <div class="mt-3 flex gap-4 text-xs text-gray-500">
+                                        <span>
+                                        <i class="fa-solid fa-location-dot"></i>
+                                        {{ $item->address }}
+                                        </span>
+
+                                        <span>
+                                        <i class="fa-regular fa-calendar"></i>
+                                        {{ $item->created_at->format('d M Y') }}
+                                        </span>
+                                    </div>
+                                </div>
+                            <div>
+                                <span class="rounded-full bg-green-100 px-3 py-1 text-xs text-green-700">
+                                    {{ $item->status->name }}
+                                    </span>
+
+                                    <a href="{{ route('detailLaporan') }}" class="mt-3 block rounded-lg border border-blue-500 px-4 py-2 text-center text-xs text-blue-600">
+                                    Lihat Detail
+                                    </a>
+                                </div>
+                            </div>
+                            @endforeach
+                            {{-- <div class="grid grid-cols-1 gap-4 rounded-lg border border-gray-200 p-4 md:grid-cols-[150px_1fr_auto] md:items-center">
+>>>>>>> e446b84 (update laporan publik, store report, and image upload)
                                 <div class="h-28 rounded-lg bg-gray-200"></div>
 
                                 <div>
@@ -142,8 +190,12 @@
                                         Lihat Detail
                                     </a>
                                 </div>
+<<<<<<< HEAD
                             </div>
                         @endforeach
+=======
+                            </div> --}}
+>>>>>>> e446b84 (update laporan publik, store report, and image upload)
                     </div>
                 </div>
 

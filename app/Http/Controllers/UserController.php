@@ -55,6 +55,9 @@ class UserController extends Controller
     {
         return view('admin.login');
     }
+<<<<<<< HEAD
 
     
+=======
+>>>>>>> e446b84 (update laporan publik, store report, and image upload)
 }
