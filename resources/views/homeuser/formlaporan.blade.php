@@ -15,11 +15,8 @@
 
         <div class="mb-6">
             <div class="flex items-center gap-2 text-xs text-gray-500">
-<<<<<<< HEAD
-            <a href="{{ route('homeUser') }}"
-=======
+
             <a href="{{ route('homeuser') }}"
->>>>>>> e446b84 (update laporan publik, store report, and image upload)
                 class="text-blue-600 hover:text-blue-700 hover:underline">
                 Beranda
             </a>
@@ -39,12 +36,8 @@
         <div class="grid grid-cols-1 gap-6 lg:grid-cols-3">
             <div class="rounded-2xl bg-white p-6 shadow-md lg:col-span-2">
                 <h2 class="mb-5 text-lg font-bold text-gray-900">Form Laporan</h2>
-<<<<<<< HEAD
-                <form action="{{ route('reports.store') }}" method="POST" enctype="multipart/form-data" class="space-y-5">
-                    @csrf
-=======
-                    <form action="{{ route('laporan.store') }}" method="POST" enctype="multipart/form-data" class="space-y-5">                    @csrf
->>>>>>> e446b84 (update laporan publik, store report, and image upload)
+                    <form action="{{ route('laporan.store') }}" method="POST" enctype="multipart/form-data" class="space-y-5">     
+                        @csrf               
                     <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
                         <div>
                             <label class="mb-2 block text-sm font-semibold text-gray-700">Nama Pelapor</label>
@@ -184,20 +177,12 @@
                             Saya menyatakan laporan yang saya kirim sesuai kondisi sebenarnya.
                         </label>
 
-                        <div class="mt-5 flex gap-3">
-<<<<<<< HEAD
-                            <button type="submit" class="rounded-lg bg-blue-600 px-5 py-3 text-sm font-semibold text-white hover:bg-blue-700">
-                                Kirim Laporan
-                            </button>
-
-                            <button type="reset" class="rounded-lg border border-gray-300 bg-white px-5 py-3 text-sm font-semibold text-gray-700 hover:bg-gray-100">
-=======
-                            <button type="submit" class="cursor-pointer rounded-lg bg-blue-600 px-5 py-3 text-sm font-semibold text-white hover:bg-blue-700">
+                        <div class="mt-5 flex gap-3">                           
+                             <button type="submit" class="cursor-pointer rounded-lg bg-blue-600 px-5 py-3 text-sm font-semibold text-white hover:bg-blue-700">
                                 Kirim Laporan
                             </button>
 
                             <button type="reset" class="cursor-pointer rounded-lg border border-gray-300 bg-white px-5 py-3 text-sm font-semibold text-gray-700 hover:bg-gray-100">
->>>>>>> e446b84 (update laporan publik, store report, and image upload)
                                 Reset Form
                             </button>
                         </div>

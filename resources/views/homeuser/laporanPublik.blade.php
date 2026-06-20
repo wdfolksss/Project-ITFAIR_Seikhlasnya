@@ -21,11 +21,7 @@
 
             <div class="mb-6">
                 <div class="flex items-center gap-2 text-xs text-gray-500">
-<<<<<<< HEAD
-                    <a href="{{ route('homeUser') }}" class="text-blue-600 hover:underline">Beranda</a>
-=======
                     <a href="{{ route('homeuser') }}" class="text-blue-600 hover:underline">Beranda</a>
->>>>>>> e446b84 (update laporan publik, store report, and image upload)
                     <span>›</span>
                     <span>Laporan Publik</span>
                 </div>
@@ -113,15 +109,6 @@
                     <h2 class="mt-5 text-sm font-bold">Daftar Laporan</h2>
 
                     <div class="mt-4 space-y-3">
-<<<<<<< HEAD
-                        @foreach ([
-                            ['Jalan Rusak di Cibadak', 'Aspal jalan berlubang dan bergelombang di beberapa titik.', 'Cibadak, Sukabumi', '12 Mei 2025', 'Selesai', 'Prioritas Tinggi'],
-                            ['Drainase Tersumbat di Warudoyong', 'Saluran drainase penuh sampah sehingga air meluap saat hujan.', 'Warudoyong, Sukabumi', '10 Mei 2025', 'Dalam Proses', 'Prioritas Sedang'],
-                            ['Lampu Jalan Mati di Cikole', 'Lampu jalan tidak berfungsi sudah lebih dari 1 minggu.', 'Cikole, Sukabumi', '9 Mei 2025', 'Selesai', 'Prioritas Sedang'],
-                            ['Trotoar Rusak di Gunungpuyuh', 'Trotoar retak dan tidak rata, membahayakan pejalan kaki.', 'Gunungpuyuh, Sukabumi', '7 Mei 2025', 'Selesai', 'Prioritas Rendah']
-                        ] as $item)
-                            <div class="grid grid-cols-1 gap-4 rounded-lg border border-gray-200 p-4 md:grid-cols-[150px_1fr_auto] md:items-center">
-=======
                        @foreach ($laporan as $item)
 
                             <div class="grid grid-cols-1 gap-4 rounded-lg border border-gray-200 p-4 md:grid-cols-[150px_1fr_auto] md:items-center">
@@ -163,7 +150,6 @@
                             </div>
                             @endforeach
                             {{-- <div class="grid grid-cols-1 gap-4 rounded-lg border border-gray-200 p-4 md:grid-cols-[150px_1fr_auto] md:items-center">
->>>>>>> e446b84 (update laporan publik, store report, and image upload)
                                 <div class="h-28 rounded-lg bg-gray-200"></div>
 
                                 <div>
@@ -190,12 +176,9 @@
                                         Lihat Detail
                                     </a>
                                 </div>
-<<<<<<< HEAD
                             </div>
                         @endforeach
-=======
                             </div> --}}
->>>>>>> e446b84 (update laporan publik, store report, and image upload)
                     </div>
                 </div>
 

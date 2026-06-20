@@ -81,13 +81,12 @@
       transition: background-color 0.3s ease, transform 0.3s ease;
     }
 
-<<<<<<< HEAD
     nav ul li a:hover,
     nav ul li a.active {
       color: black;
       font-weight: bold;
     }
-=======
+
       .nav-link {
       position: relative;
       transition: .3s;
@@ -122,7 +121,6 @@
   .nav-link.active::after {
       width: 100%;
   }
->>>>>>> e446b84 (update laporan publik, store report, and image upload)
     
     html {
       scroll-behavior: smooth;
@@ -144,7 +142,6 @@
     }
 </style>
 <body>
-<<<<<<< HEAD
     <header class="w-full p-4 sticky top-0 z-50 bg-white font-montserrat backdrop-blur-md">
     <div class="container mx-auto flex items-center justify-between px-[10px] sm:px-[10px] md:px-[30px] lg:px-[30px] xl:px-[12px]  ">
       <div class="flex items-center space-x-3">
@@ -152,32 +149,7 @@
         <span class="text-[15px] sm:text-[15px] md:text-[18px] lg:text-[20px] xl:text-[20px] text-[#212124] font-montserrat font-semibold">Kelawar</span>
       </div>
 
-      <!-- Dekstop Navbar  -->
-      <nav class=" navbar-menu hidden sm:flex">
-        <ul class="flex font-medium gap-[20px] sm:gap-[55px] md:gap-[40px] lg:gap-[55px] xl:gap-[60px]">
-          <li><a href="{{ route('homeUser') }}"
-              class="text-black text-[10px] sm:text-[12px] md:text-[14px] lg:text-[10px] xl:text-[15px] font-medium {{ request()->routeIs('homeUser') ? 'active' : '' }}">
-              Beranda</a>
-          </li>
-          <li><a href="#petaInfrastruktur"
-              class="text-black text-[10px] sm:text-[12px] md:text-[14px] lg:text-[10px] xl:text-[15px] font-medium">
-              Peta Infrastruktur</a>
-            </li>
-          <li><a href="{{ route('laporanPublik') }}"
-              class="text-black text-[10px] sm:text-[12px] md:text-[14px] lg:text-[10px] xl:text-[15px] font-medium {{ request()->routeIs('laporanPublik') ? 'active' : '' }}">
-              Laporan Publik</a>
-          </li>
-          <li><a href="#tentangKami"
-              class="text-black text-[10px] sm:text-[12px] md:text-[14px] lg:text-[10px] xl:text-[15px] font-medium">
-             Tentang Kami</a>
-          </li>
-=======
-  <header class="w-full p-4 sticky top-0 z-50 bg-white/80 backdrop-blur-md font-montserrat">
-    <div class="container mx-auto flex items-center justify-between px-[10px] sm:px-[10px] md:px-[30px] lg:px-[30px] xl:px-[12px] relative">
-      <div class="flex items-center space-x-3">
-        <img src="img/bridge.svg" alt="Logo" class="w-[38px] h-[38px] sm:w-[30px] sm:h-[35px] md:w-[45px] md:h-[50px] lg:w-[63px] lg:h-[58px] xl:w-[63px] xl:h-[48px] object-contain">
-        <span class="text-[15px] sm:text-[15px] md:text-[18px] lg:text-[25px] xl:text-[25px] text-[#212124] font-montserrat font-semibold">Kelawar</span>
-      </div>
+     
 
       <!-- Dekstop Navbar  -->
       <nav class="navbar-menu hidden sm:flex">
@@ -201,7 +173,6 @@
           <button id="themeToggle" class="w-10 h-10 rounded-full border flex items-center justify-center hover:bg-gray-100">
           <i id="themeIcon" class="fa-solid fa-moon"></i>
           </button>
->>>>>>> e446b84 (update laporan publik, store report, and image upload)
         </ul>
       </nav>
       <div class="sm:hidden">
@@ -215,36 +186,16 @@
 
         <!--Mobile Menu -->
         <ul id="dropdownMenu" data-aos="fade-right" class="hidden flex flex-col absolute gap-6 right-0 z-10 w-full h-[100vh] pb-36 mt-auto bg-[#ffffff] shadow-md">
-<<<<<<< HEAD
-          <li><a href="{{ route('homeUser') }}" class="block px-5 py-2 text-[#070707] mt-4 text-sm leading-normal hover:font-semibold hover:text-black duration-300">
-=======
           <li><a href="{{ route('homeuser') }}" class="block px-5 py-2 text-[#070707] mt-4 text-sm leading-normal hover:font-semibold hover:text-black duration-300">
->>>>>>> e446b84 (update laporan publik, store report, and image upload)
-            Beranda
               <div class="w-full h-[0.5px] bg-[#000000]">
               </div>
             </a>
-          </li>
-<<<<<<< HEAD
-          <li><a href="#petaInfrastruktur" class="block px-5 py-2 text-[#070707] text-sm leading-normal hover:font-semibold hover:text-black duration-300">
-            Peta Insfrastruktur
-=======
-          <li><a href="{{ route('laporanPublik') }}" class="block px-5 py-2 text-[#070707] text-sm leading-normal hover:font-semibold hover:text-black duration-300">
-            Laporan Publik
->>>>>>> e446b84 (update laporan publik, store report, and image upload)
-              <div class="w-full h-[0.5px] bg-[#000000]">
-              </div>
-            </a>
-          </li>
-<<<<<<< HEAD
           <li><a href="{{ route('laporanPublik') }}" class="block px-5 py-2 text-[#070707] text-sm leading-normal hover:font-semibold hover:text-black duration-300">
             Laporan Publik
               <div class="w-full h-[0.5px] bg-[#000000]">
               </div>
             </a>
           </li>
-=======
->>>>>>> e446b84 (update laporan publik, store report, and image upload)
           <li><a href="#tentangKami" class="block px-5 py-2 text-[#070707] text-sm leading-normal hover:font-semibold hover:text-black duration-300">Tebtang Kami
               <div class="w-full h-[0.5px] bg-[#000000]">
               </div>

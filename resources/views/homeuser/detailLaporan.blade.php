@@ -21,11 +21,7 @@
 
             <div class="mb-5">
                 <div class="flex items-center gap-2 text-xs text-gray-500">
-<<<<<<< HEAD
-                    <a href="{{ route('homeUser') }}" class="text-blue-600 hover:underline">Beranda</a>
-=======
                     <a href="{{ route('homeuser') }}" class="text-blue-600 hover:underline">Beranda</a>
->>>>>>> e446b84 (update laporan publik, store report, and image upload)
                     <span>›</span>
                     <a href="{{ route('laporanPublik') }}" class="text-blue-600 hover:underline">Laporan Publik</a>
                     <span>›</span>
