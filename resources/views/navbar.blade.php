@@ -149,8 +149,6 @@
         <span class="text-[15px] sm:text-[15px] md:text-[18px] lg:text-[20px] xl:text-[20px] text-[#212124] font-montserrat font-semibold">Kelawar</span>
       </div>
 
-     
-
       <!-- Dekstop Navbar  -->
       <nav class="navbar-menu hidden sm:flex">
             <ul class="flex items-center gap-10 font-medium">

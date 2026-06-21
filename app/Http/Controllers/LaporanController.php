@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class LaporanController extends Controller
 {
-    public function store(Request $request)
+   public function store(Request $request)
     {
         $validated = $request->validate([
             'reporter_name' => 'required|string|max:255',
@@ -24,8 +24,8 @@ class LaporanController extends Controller
         // upload image
         $validated['image'] = $request->file('image')->store('reports', 'public');
 
-        // langsung publish (atau bisa Pending kalau mau admin approve)
-        $validated['status_id'] = 2;
+        // STATUS DEFAULT (PENDING = 1)
+        $validated['status_id'] = 1;
 
         Report::create($validated);
 
@@ -35,10 +35,19 @@ class LaporanController extends Controller
 
     public function index()
     {
-        $laporan = Report::with(['category', 'status'])
-            ->latest()
-            ->get();
+        $laporan = Report::with(['category', 'status'])->latest()->get();
 
-        return view('homeuser.laporanPublik', compact('laporan'));
+        $totalReports = Report::count();
+        $doneReports = Report::where('status_id', 3)->count();
+        $pendingReports = Report::where('status_id', 1)->count();
+        $processReports = Report::where('status_id', 2)->count();
+
+        return view('homeuser.laporanPublik', compact(
+            'laporan',
+            'totalReports',
+            'doneReports',
+            'pendingReports',
+            'processReports'
+        ));
     }
 }

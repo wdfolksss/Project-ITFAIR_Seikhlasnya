@@ -38,12 +38,12 @@ class ReportsTable
                 TextColumn::make('status.name')
                     ->label('Status')
                     ->badge()
-                    ->color(fn ($state) => match ($state) {
-                        'Pending' => 'warning',
-                        'Diverifikasi' => 'info',
-                        'Diproses' => 'primary',
-                        'Selesai' => 'success',
-                        'Ditolak' => 'danger',
+                    ->color(fn ($state) => match (strtolower($state)) {
+                        'pending' => 'warning',
+                        'diverifikasi' => 'info',
+                        'diproses' => 'primary',
+                        'selesai' => 'success',
+                        'ditolak' => 'danger',
                         default => 'gray',
                     }),
                 TextColumn::make('created_at')

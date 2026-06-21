@@ -89,7 +89,7 @@
         <div class="rounded-xl bg-white p-4 shadow-md">
             <div class="mb-4 flex items-center justify-between">
                 <h2 class="text-sm font-bold text-gray-900">Ringkasan Laporan</h2>
-                <a href="#" class="text-xs font-medium text-blue-600">Lihat Semua Statistik ›</a>
+                {{-- <a href="#" class="text-xs font-medium text-blue-600">Lihat Semua Statistik ›</a> --}}
             </div>
 
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">

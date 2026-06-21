@@ -44,7 +44,7 @@
                             <i class="fa-solid fa-bullseye"></i>
                         </span>
                         <div>
-                            <h3 class="text-2xl font-bold">3.241</h3>
+                            <h3 class="text-2xl font-bold">{{ $totalReports }}</h3>
                             <p class="text-xs text-gray-500">Total Laporan</p>
                         </div>
                     </div>
@@ -54,7 +54,7 @@
                             <i class="fa-regular fa-clock"></i>
                         </span>
                         <div>
-                            <h3 class="text-2xl font-bold">876</h3>
+                            <h3 class="text-2xl font-bold">{{$processReports}}</h3>
                             <p class="text-xs text-gray-500">Dalam Proses</p>
                         </div>
                     </div>
@@ -64,7 +64,7 @@
                             <i class="fa-regular fa-circle-check"></i>
                         </span>
                         <div>
-                            <h3 class="text-2xl font-bold">2.134</h3>
+                            <h3 class="text-2xl font-bold">{{ $doneReports }}</h3>
                             <p class="text-xs text-gray-500">Selesai</p>
                         </div>
                     </div>
@@ -74,7 +74,7 @@
                             <i class="fa-solid fa-shield-halved"></i>
                         </span>
                         <div>
-                            <h3 class="text-2xl font-bold">231</h3>
+                            <h3 class="text-2xl font-bold">{{ $pendingReports }}</h3>
                             <p class="text-xs text-gray-500">Belum Diverifikasi</p>
                         </div>
                     </div>
@@ -93,7 +93,7 @@
 
                         <select class="rounded-lg border border-gray-200 px-4 py-3 text-sm outline-none focus:border-blue-500">
                             <option>Kategori</option>
-                            <option>Jalan</option>
+                            <option>Jalan Rusak</option>
                             <option>Drainase</option>
                             <option>Lampu Jalan</option>
                         </select>
@@ -221,25 +221,50 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
     <script>
-        const mapPublik = L.map('mapPublik').setView([-6.9277, 106.9299], 12);
+    const mapPublik = L.map('mapPublik').setView([-6.9277, 106.9299], 12);
 
-        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; OpenStreetMap'
-        }).addTo(mapPublik);
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap'
+    }).addTo(mapPublik);
 
-        const laporanMarkers = [
-            [-6.9175, 106.9270, 'Jalan Rusak di Cibadak'],
-            [-6.9192, 106.9345, 'Drainase Tersumbat di Warudoyong'],
-            [-6.9250, 106.9305, 'Lampu Jalan Mati di Cikole'],
-            [-6.9098, 106.9188, 'Trotoar Rusak di Gunungpuyuh']
-        ];
+    const laporanMarkers = @json($laporan);
 
-        laporanMarkers.forEach(item => {
-            L.marker([item[0], item[1]])
-                .addTo(mapPublik)
-                .bindPopup(item[2]);
+    function getColor(status) {
+    if (status == "selesai") return "#22c55e";
+    if (status == "diproses") return "#f59e0b";
+    return "#ef4444"; // pending
+    }
+
+    laporanMarkers.forEach(item => {
+    if (item.latitude && item.longitude) {
+
+        const status = item.status?.name ?? "pending";
+        const color = getColor(status);
+
+        const icon = L.divIcon({
+            className: "",
+            html: `
+                <div style="text-align:center">
+                    <i class="fa-solid fa-location-dot"
+                        style="font-size:28px;color:${color};
+                        text-shadow:0 2px 6px rgba(0,0,0,0.4);"></i>
+                </div>
+            `,
+            iconSize: [28, 28],
+            iconAnchor: [14, 28]
         });
-    </script>
+
+        L.marker([item.latitude, item.longitude], { icon })
+            .addTo(mapPublik)
+            .bindPopup(`
+                <b>${item.reporter_name}</b><br>
+                ${item.description}
+            `);
+    }
+});
+
+    setTimeout(() => mapPublik.invalidateSize(), 300);
+</script>
 
 </body>
 

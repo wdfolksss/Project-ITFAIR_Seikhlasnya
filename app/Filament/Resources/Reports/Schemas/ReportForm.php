@@ -68,8 +68,7 @@ class ReportForm
                             return 'Belum ada foto.';
                         }
 
-                        $url = route('foto.laporan', ['path' => $record->image]);
-
+                    $url = asset('storage/' . $record->image);
                         return new HtmlString("
                             <a href='{$url}' target='_blank'>
                                 <img

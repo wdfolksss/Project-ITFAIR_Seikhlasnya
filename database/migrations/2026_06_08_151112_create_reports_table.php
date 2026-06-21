@@ -28,18 +28,14 @@ return new class extends Migration
             ]);
             
             $table->text('address');
-
             $table->decimal('latitude', 10, 7);
             $table->decimal('longitude', 10, 7);
-
             $table->text('description');
-
             $table->string('image');
-
             $table->foreignId('status_id')
+                ->default(1)
                 ->constrained()
                 ->cascadeOnDelete();
-
             $table->timestamps();
         });
     }
