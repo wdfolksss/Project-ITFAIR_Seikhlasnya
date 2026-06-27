@@ -111,7 +111,7 @@
                         <i class="fa-solid fa-clock text-xl text-yellow-500"></i>
                     </div>
                     <div>
-                        <h3 class="text-2xl font-bold text-gray-900">876</h3>
+                        <h3 class="text-2xl font-bold text-gray-900">{{$processReports}}</h3>
                         <p class="text-xs text-gray-500">Dalam Proses</p>
                     </div>
                 </div>

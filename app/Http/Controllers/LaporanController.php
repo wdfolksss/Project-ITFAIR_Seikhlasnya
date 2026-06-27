@@ -38,9 +38,9 @@ class LaporanController extends Controller
         $laporan = Report::with(['category', 'status'])->latest()->get();
 
         $totalReports = Report::count();
-        $doneReports = Report::where('status_id', 3)->count();
         $pendingReports = Report::where('status_id', 1)->count();
-        $processReports = Report::where('status_id', 2)->count();
+        $doneReports = Report::where('status_id', 2)->count();
+        $processReports = Report::where('status_id', 3)->count();
 
         return view('homeuser.laporanPublik', compact(
             'laporan',
@@ -50,4 +50,13 @@ class LaporanController extends Controller
             'processReports'
         ));
     }
+
+    public function detailLaporan(Report $report)
+    {
+        $report->load(['category', 'status']);
+
+        return view('homeuser.detailLaporan', compact('report'));
+    }
+
 }
+

@@ -1,3 +1,7 @@
+@php
+use Illuminate\Support\Facades\Storage;
+@endphp
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -112,13 +116,16 @@
                        @foreach ($laporan as $item)
 
                             <div class="grid grid-cols-1 gap-4 rounded-lg border border-gray-200 p-4 md:grid-cols-[150px_1fr_auto] md:items-center">
-                                <div class="h-28 rounded-lg bg-gray-200 overflow-hidden">
+                                <div class="rounded-lg bg-gray-200 overflow-hidden">
                                     @if($item->image)
-                                    <img src="{{ asset('storage/'.$item->image) }}" class="h-full w-full object-cover">
+                                        <img
+                                            src="{{ url('storage/' . $item->image) }}"
+                                            alt="Foto Laporan"
+                                        >
                                     @endif
                                 </div>
-                                <div>
 
+                                <div>
                                     <h3 class="font-bold text-gray-900"> 
                                         {{ $item->category->name ?? 'Kategori' }}
                                     </h3>
@@ -143,7 +150,7 @@
                                     {{ $item->status->name }}
                                     </span>
 
-                                    <a href="{{ route('detailLaporan') }}" class="mt-3 block rounded-lg border border-blue-500 px-4 py-2 text-center text-xs text-blue-600">
+                                    <a href="{{ route('detailLaporan', $item->id) }}" class="mt-3 block rounded-lg border border-blue-500 px-4 py-2 text-center text-xs text-blue-600">
                                     Lihat Detail
                                     </a>
                                 </div>
