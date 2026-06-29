@@ -226,10 +226,6 @@
 
                 <div class="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
                     <div class="rounded-2xl bg-white/10 p-4">
-<<<<<<< HEAD
-=======
-
->>>>>>> backend
                         <i class="fa-solid fa-fingerprint text-2xl text-blue-400"></i>
                         <h3 class="mt-3 font-semibold">Identitas Laporan</h3>
                         <p class="mt-1 text-xs text-slate-300">
@@ -296,64 +292,6 @@
         </div>
     </div>
 </section>
-
-<section class="bg-white px-5 py-6 sm:px-8 lg:px-12">
-    <div class="mx-auto grid max-w-7xl grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-
-        <div class="flex items-center gap-4 rounded-lg border border-gray-200 bg-white p-4 shadow-md">
-            <span class="flex h-10 w-10 items-center justify-center rounded-full bg-blue-600 text-white">
-                <i class="fa-solid fa-pen-to-square"></i>
-            </span>
-
-            <div>
-                <h3 class="text-sm font-bold text-gray-900">Laporkan Kerusakan</h3>
-                <p class="mt-1 text-xs text-gray-500">
-                    Laporkan kerusakan infrastruktur di sekitar Anda dengan mudah.
-                </p>
-            </div>
-        </div>
-
-        <div class="flex items-center gap-4 rounded-lg border border-gray-200 bg-white p-4 shadow-md">
-            <span class="flex h-10 w-10 items-center justify-center rounded-full bg-green-600 text-white">
-                <i class="fa-solid fa-magnifying-glass"></i>
-            </span>
-
-            <div>
-                <h3 class="text-sm font-bold text-gray-900">Pantau Status</h3>
-                <p class="mt-1 text-xs text-gray-500">
-                    Pantau perkembangan laporan yang telah Anda kirimkan.
-                </p>
-            </div>
-        </div>
-
-        <div class="flex items-center gap-4 rounded-lg border border-gray-200 bg-white p-4 shadow-md">
-            <span class="flex h-10 w-10 items-center justify-center rounded-full bg-orange-500 text-white">
-                <i class="fa-solid fa-chart-simple"></i>
-            </span>
-
-            <div>
-                <h3 class="text-sm font-bold text-gray-900">Data Transparan</h3>
-                <p class="mt-1 text-xs text-gray-500">
-                    Semua data laporan dapat dilihat secara transparan oleh publik.
-                </p>
-            </div>
-        </div>
-
-        <div class="flex items-center gap-4 rounded-lg border border-gray-200 bg-white p-4 shadow-md">
-            <span class="flex h-10 w-10 items-center justify-center rounded-full bg-purple-600 text-white">
-                <i class="fa-solid fa-shield-halved"></i>
-            </span>
-
-            <div>
-                <h3 class="text-sm font-bold text-gray-900">Keamanan Terjamin</h3>
-                <p class="mt-1 text-xs text-gray-500">
-                    Sistem kami aman dan data Anda terlindungi dengan baik.
-                </p>
-            </div>
-        </div>
-    </div>
-</section>
-
 
     @include('footer')
 
