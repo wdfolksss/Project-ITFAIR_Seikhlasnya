@@ -2,6 +2,7 @@
 
 namespace App\Filament\Widgets;
 
+use App\Models\Category;
 use Filament\Widgets\ChartWidget;
 
 class CategoryChart extends ChartWidget
@@ -10,20 +11,17 @@ class CategoryChart extends ChartWidget
 
     protected function getData(): array
     {
+        $categories = Category::withCount('reports')->get();
+
         return [
             'datasets' => [
                 [
                     'label' => 'Jumlah Laporan',
-                    'data' => [45, 28, 17, 35, 22],
+                    'data' => $categories->pluck('reports_count')->toArray(),
                 ],
             ],
-            'labels' => [
-                'Jalan Berlubang',
-                'Aspal Rusak',
-                'Drainase',
-                'Jembatan',
-                'Lampu Jalan',
-            ],
+
+            'labels' => $categories->pluck('name')->toArray(),
         ];
     }
 

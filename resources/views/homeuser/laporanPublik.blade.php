@@ -88,27 +88,66 @@ use Illuminate\Support\Facades\Storage;
             <div class="grid grid-cols-1 gap-6 lg:grid-cols-3">
 
                 <div class="rounded-xl border border-gray-200 bg-white p-5 shadow-md lg:col-span-2">
-                    <div class="grid grid-cols-1 gap-3 md:grid-cols-3">
-                        <div class="relative md:col-span-1">
-                            <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
-                            <input type="text" placeholder="Cari lokasi, kategori, atau kata kunci..."
-                                class="w-full rounded-lg border border-gray-200 py-3 pl-10 pr-4 text-sm outline-none focus:border-blue-500">
+                    <form action="{{ route('laporanPublik') }}" method="GET">
+                        <div class="grid grid-cols-1 gap-3 md:grid-cols-3">
+
+                            {{-- Search --}}
+                            <div class="relative">
+                                <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+
+                                <input
+                                    type="text"
+                                    name="search"
+                                    value="{{ request('search') }}"
+                                    placeholder="Cari lokasi, kategori, atau kata kunci..."
+                                    class="w-full rounded-lg border border-gray-200 py-3 pl-10 pr-4 text-sm outline-none focus:border-blue-500">
+                            </div>
+
+                            {{-- Filter Kategori --}}
+                            <select
+                                name="category"
+                                onchange="this.form.submit()"
+                                class="rounded-lg border border-gray-200 px-4 py-3 text-sm outline-none focus:border-blue-500">
+
+                                <option value="">Semua Kategori</option>
+
+                                @foreach($categories as $category)
+                                    <option
+                                        value="{{ $category->id }}"
+                                        {{ request('category') == $category->id ? 'selected' : '' }}>
+                                        {{ $category->name }}
+                                    </option>
+                                @endforeach
+
+                            </select>
+
+                            {{-- Filter Status --}}
+                            <select
+                                name="status"
+                                onchange="this.form.submit()"
+                                onchange="this.form.submit()"
+                                class="rounded-lg border border-gray-200 px-4 py-3 text-sm outline-none focus:border-blue-500">
+
+                                <option value="">Semua Status</option>
+
+                                @foreach($statuses as $status)
+                                    <option
+                                        value="{{ $status->id }}"
+                                        {{ request('status') == $status->id ? 'selected' : '' }}>
+                                        {{ $status->name }}
+                                    </option>
+                                @endforeach
+
+                            </select>
+
                         </div>
 
-                        <select class="rounded-lg border border-gray-200 px-4 py-3 text-sm outline-none focus:border-blue-500">
-                            <option>Kategori</option>
-                            <option>Jalan Rusak</option>
-                            <option>Drainase</option>
-                            <option>Lampu Jalan</option>
-                        </select>
-
-                        <select class="rounded-lg border border-gray-200 px-4 py-3 text-sm outline-none focus:border-blue-500">
-                            <option>Status</option>
-                            <option>Selesai</option>
-                            <option>Dalam Proses</option>
-                            <option>Belum Diverifikasi</option>
-                        </select>
-                    </div>
+                        <button
+                            type="submit"
+                            class="mt-3 rounded-lg bg-blue-600 px-4 py-2 text-white">
+                            Cari
+                        </button>
+                    </form>
 
                     <h2 class="mt-5 text-sm font-bold">Daftar Laporan</h2>
 

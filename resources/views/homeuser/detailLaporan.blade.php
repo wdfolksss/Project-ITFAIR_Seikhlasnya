@@ -205,7 +205,7 @@
                         </div>
 
                         <div class="mt-4 text-sm text-gray-600">
-                            <p>Jalan Raya Cibadak, Cibadak, Sukabumi</p>
+                            <p>{{ $report->address }}</p>
                             <p class="mt-1 text-xs text-gray-500">Jawa Barat 43351</p>
 
                             <a href="#" class="mt-2 inline-block text-xs font-semibold text-blue-600 hover:underline">
