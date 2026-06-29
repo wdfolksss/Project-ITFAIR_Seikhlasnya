@@ -15,6 +15,28 @@
 
 <body class="overflow-x-hidden font-montserrat bg-white dark:bg-slate-950 text-black dark:bg-black dark:text-white">
     @include('navbar')
+
+    @if(session('success'))
+    <div class="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm">
+        <div class="w-[90%] max-w-md rounded-3xl bg-white p-8 text-center shadow-2xl">
+            <div class="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-blue-100">
+            <i class="fa-solid fa-circle-check text-4xl text-blue-600"></i>
+        </div>
+
+        <h2 class="mt-5 text-2xl font-bold text-gray-900">
+            Laporan Berhasil Dikirim!
+        </h2>
+        <p class="mt-3 text-sm text-gray-600">
+            Terima kasih sudah melaporkan kerusakan infrastruktur.
+            Laporan kamu akan diverifikasi oleh admin.
+        </p>
+
+        <button onclick="this.closest('.fixed').remove()"class="mt-6 w-full rounded-xl bg-blue-600 px-5 py-3 font-semibold text-white transition hover:bg-blue-700">
+            Kembali
+        </button>
+    </div>
+</div>
+@endif
     {{-- section 1 --}}
     <section
         class="relative min-h-[360px] sm:min-h-[420px] lg:min-h-[40rem] py-[2rem] px-[1rem] sm:py-[2rem] sm:px-[1rem] md:py-[2rem] xl:py-[10rem] flex items-center bg-cover bg-center"
@@ -67,7 +89,7 @@
         <div class="rounded-xl bg-white p-4 shadow-md">
             <div class="mb-4 flex items-center justify-between">
                 <h2 class="text-sm font-bold text-gray-900">Ringkasan Laporan</h2>
-                <a href="#" class="text-xs font-medium text-blue-600">Lihat Semua Statistik ›</a>
+                {{-- <a href="#" class="text-xs font-medium text-blue-600">Lihat Semua Statistik ›</a> --}}
             </div>
 
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -78,7 +100,7 @@
                         <i class="fa-solid fa-file-lines text-xl text-red-600"></i>
                     </div>
                     <div>
-                        <h3 class="text-2xl font-bold text-gray-900">3.241</h3>
+                        <h3 class="text-2xl font-bold text-gray-900">{{ $totalReports }}</h3>
                         <p class="text-xs text-gray-500">Total Laporan</p>
                     </div>
                 </div>
@@ -100,7 +122,7 @@
                         <i class="fa-solid fa-circle-check text-xl text-green-600"></i>
                     </div>
                     <div>
-                        <h3 class="text-2xl font-bold text-gray-900">2.134</h3>
+                        <h3 class="text-2xl font-bold text-gray-900">{{ $doneReports }}</h3>
                         <p class="text-xs text-gray-500">Selesai</p>
                     </div>
                 </div>
@@ -111,7 +133,7 @@
                         <i class="fa-solid fa-user-check text-xl text-purple-700"></i>
                     </div>
                     <div>
-                        <h3 class="text-2xl font-bold text-gray-900">231</h3>
+                        <h3 class="text-2xl font-bold text-gray-900">{{ $pendingReports }}</h3>
                         <p class="text-xs text-gray-500">Belum Diverifikasi</p>
                     </div>
                 </div>
@@ -204,6 +226,10 @@
 
                 <div class="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
                     <div class="rounded-2xl bg-white/10 p-4">
+<<<<<<< HEAD
+=======
+
+>>>>>>> backend
                         <i class="fa-solid fa-fingerprint text-2xl text-blue-400"></i>
                         <h3 class="mt-3 font-semibold">Identitas Laporan</h3>
                         <p class="mt-1 text-xs text-slate-300">

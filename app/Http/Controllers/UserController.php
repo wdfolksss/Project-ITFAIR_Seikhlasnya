@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Report;
 
 class UserController extends Controller
 {
@@ -13,7 +14,27 @@ class UserController extends Controller
 
     public function homeUser()
     {
-        return view('homeuser.homeUser');
+
+         $totalReports = Report::count();
+
+        $processReports = Report::whereHas('status', function ($query) {
+            $query->where('name', 'Diproses');
+        })->count();
+
+        $doneReports = Report::whereHas('status', function ($query) {
+            $query->where('name', 'Selesai');
+        })->count();
+
+        $pendingReports = Report::whereHas('status', function ($query) {
+            $query->where('name', 'Pending');
+        })->count();
+
+        return view('homeuser.homeUser', compact(
+            'totalReports',
+            'processReports',
+            'doneReports',
+            'pendingReports'
+        ));
     }
 
     public function formLaporan()

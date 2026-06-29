@@ -21,7 +21,7 @@
 
             <div class="mb-6">
                 <div class="flex items-center gap-2 text-xs text-gray-500">
-                    <a href="{{ route('homeUser') }}" class="text-blue-600 hover:underline">Beranda</a>
+                    <a href="{{ route('homeuser') }}" class="text-blue-600 hover:underline">Beranda</a>
                     <span>›</span>
                     <span>Laporan Publik</span>
                 </div>
@@ -44,7 +44,7 @@
                             <i class="fa-solid fa-bullseye"></i>
                         </span>
                         <div>
-                            <h3 class="text-2xl font-bold">3.241</h3>
+                            <h3 class="text-2xl font-bold">{{ $totalReports }}</h3>
                             <p class="text-xs text-gray-500">Total Laporan</p>
                         </div>
                     </div>
@@ -54,7 +54,7 @@
                             <i class="fa-regular fa-clock"></i>
                         </span>
                         <div>
-                            <h3 class="text-2xl font-bold">876</h3>
+                            <h3 class="text-2xl font-bold">{{$processReports}}</h3>
                             <p class="text-xs text-gray-500">Dalam Proses</p>
                         </div>
                     </div>
@@ -64,7 +64,7 @@
                             <i class="fa-regular fa-circle-check"></i>
                         </span>
                         <div>
-                            <h3 class="text-2xl font-bold">2.134</h3>
+                            <h3 class="text-2xl font-bold">{{ $doneReports }}</h3>
                             <p class="text-xs text-gray-500">Selesai</p>
                         </div>
                     </div>
@@ -74,7 +74,7 @@
                             <i class="fa-solid fa-shield-halved"></i>
                         </span>
                         <div>
-                            <h3 class="text-2xl font-bold">231</h3>
+                            <h3 class="text-2xl font-bold">{{ $pendingReports }}</h3>
                             <p class="text-xs text-gray-500">Belum Diverifikasi</p>
                         </div>
                     </div>
@@ -93,7 +93,7 @@
 
                         <select class="rounded-lg border border-gray-200 px-4 py-3 text-sm outline-none focus:border-blue-500">
                             <option>Kategori</option>
-                            <option>Jalan</option>
+                            <option>Jalan Rusak</option>
                             <option>Drainase</option>
                             <option>Lampu Jalan</option>
                         </select>
@@ -109,13 +109,47 @@
                     <h2 class="mt-5 text-sm font-bold">Daftar Laporan</h2>
 
                     <div class="mt-4 space-y-3">
-                        @foreach ([
-                            ['Jalan Rusak di Cibadak', 'Aspal jalan berlubang dan bergelombang di beberapa titik.', 'Cibadak, Sukabumi', '12 Mei 2025', 'Selesai', 'Prioritas Tinggi'],
-                            ['Drainase Tersumbat di Warudoyong', 'Saluran drainase penuh sampah sehingga air meluap saat hujan.', 'Warudoyong, Sukabumi', '10 Mei 2025', 'Dalam Proses', 'Prioritas Sedang'],
-                            ['Lampu Jalan Mati di Cikole', 'Lampu jalan tidak berfungsi sudah lebih dari 1 minggu.', 'Cikole, Sukabumi', '9 Mei 2025', 'Selesai', 'Prioritas Sedang'],
-                            ['Trotoar Rusak di Gunungpuyuh', 'Trotoar retak dan tidak rata, membahayakan pejalan kaki.', 'Gunungpuyuh, Sukabumi', '7 Mei 2025', 'Selesai', 'Prioritas Rendah']
-                        ] as $item)
+                       @foreach ($laporan as $item)
+
                             <div class="grid grid-cols-1 gap-4 rounded-lg border border-gray-200 p-4 md:grid-cols-[150px_1fr_auto] md:items-center">
+                                <div class="h-28 rounded-lg bg-gray-200 overflow-hidden">
+                                    @if($item->image)
+                                    <img src="{{ asset('storage/'.$item->image) }}" class="h-full w-full object-cover">
+                                    @endif
+                                </div>
+                                <div>
+
+                                    <h3 class="font-bold text-gray-900"> 
+                                        {{ $item->category->name ?? 'Kategori' }}
+                                    </h3>
+                                    <p class="mt-1 text-sm text-gray-500">
+                                        {{ $item->description }}
+                                    </p>
+
+                                    <div class="mt-3 flex gap-4 text-xs text-gray-500">
+                                        <span>
+                                        <i class="fa-solid fa-location-dot"></i>
+                                        {{ $item->address }}
+                                        </span>
+
+                                        <span>
+                                        <i class="fa-regular fa-calendar"></i>
+                                        {{ $item->created_at->format('d M Y') }}
+                                        </span>
+                                    </div>
+                                </div>
+                            <div>
+                                <span class="rounded-full bg-green-100 px-3 py-1 text-xs text-green-700">
+                                    {{ $item->status->name }}
+                                    </span>
+
+                                    <a href="{{ route('detailLaporan') }}" class="mt-3 block rounded-lg border border-blue-500 px-4 py-2 text-center text-xs text-blue-600">
+                                    Lihat Detail
+                                    </a>
+                                </div>
+                            </div>
+                            @endforeach
+                            {{-- <div class="grid grid-cols-1 gap-4 rounded-lg border border-gray-200 p-4 md:grid-cols-[150px_1fr_auto] md:items-center">
                                 <div class="h-28 rounded-lg bg-gray-200"></div>
 
                                 <div>
@@ -144,6 +178,7 @@
                                 </div>
                             </div>
                         @endforeach
+                            </div> --}}
                     </div>
                 </div>
 
@@ -186,25 +221,50 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
     <script>
-        const mapPublik = L.map('mapPublik').setView([-6.9277, 106.9299], 12);
+    const mapPublik = L.map('mapPublik').setView([-6.9277, 106.9299], 12);
 
-        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; OpenStreetMap'
-        }).addTo(mapPublik);
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap'
+    }).addTo(mapPublik);
 
-        const laporanMarkers = [
-            [-6.9175, 106.9270, 'Jalan Rusak di Cibadak'],
-            [-6.9192, 106.9345, 'Drainase Tersumbat di Warudoyong'],
-            [-6.9250, 106.9305, 'Lampu Jalan Mati di Cikole'],
-            [-6.9098, 106.9188, 'Trotoar Rusak di Gunungpuyuh']
-        ];
+    const laporanMarkers = @json($laporan);
 
-        laporanMarkers.forEach(item => {
-            L.marker([item[0], item[1]])
-                .addTo(mapPublik)
-                .bindPopup(item[2]);
+    function getColor(status) {
+    if (status == "selesai") return "#22c55e";
+    if (status == "diproses") return "#f59e0b";
+    return "#ef4444"; // pending
+    }
+
+    laporanMarkers.forEach(item => {
+    if (item.latitude && item.longitude) {
+
+        const status = item.status?.name ?? "pending";
+        const color = getColor(status);
+
+        const icon = L.divIcon({
+            className: "",
+            html: `
+                <div style="text-align:center">
+                    <i class="fa-solid fa-location-dot"
+                        style="font-size:28px;color:${color};
+                        text-shadow:0 2px 6px rgba(0,0,0,0.4);"></i>
+                </div>
+            `,
+            iconSize: [28, 28],
+            iconAnchor: [14, 28]
         });
-    </script>
+
+        L.marker([item.latitude, item.longitude], { icon })
+            .addTo(mapPublik)
+            .bindPopup(`
+                <b>${item.reporter_name}</b><br>
+                ${item.description}
+            `);
+    }
+});
+
+    setTimeout(() => mapPublik.invalidateSize(), 300);
+</script>
 
 </body>
 

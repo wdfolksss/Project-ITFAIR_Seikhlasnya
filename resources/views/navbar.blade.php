@@ -80,7 +80,6 @@
     .card-content {
       transition: background-color 0.3s ease, transform 0.3s ease;
     }
-
       .nav-link {
       position: relative;
       transition: .3s;
@@ -146,8 +145,8 @@
       <!-- Dekstop Navbar  -->
       <nav class="navbar-menu hidden sm:flex">
             <ul class="flex items-center gap-10 font-medium">
-                <li><a href="{{ route('homeUser') }}"
-              class="nav-link relative text-black text-md font-medium transition duration-300 hover:text-[#081f85] after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-[#081f85] after:transition-all hover:after:w-full {{ request()->routeIs('homeUser') ? 'active' : '' }}">
+                <li><a href="{{ route('homeuser') }}"
+                class="nav-link relative text-black text-md font-medium transition duration-300 hover:text-[#081f85] after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-[#081f85] after:transition-all hover:after:w-full {{ request()->routeIs('homeuser') ? 'active' : '' }}">
               Beranda</a>
           </li>
           {{-- <li><a href="#petaInfrastruktur"
@@ -162,9 +161,6 @@
               class="nav-link relative text-black text-md font-medium transition duration-300 hover:text-[#081f85] after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-[#081f85] after:transition-all hover:after:w-full">
              Tentang Kami</a>
           </li>
-          <button id="themeToggle" class="w-10 h-10 rounded-full border flex items-center justify-center hover:bg-gray-100">
-          <i id="themeIcon" class="fa-solid fa-moon"></i>
-          </button>
         </ul>
       </nav>
       <div class="sm:hidden">
@@ -178,7 +174,7 @@
 
         <!--Mobile Menu -->
         <ul id="dropdownMenu" data-aos="fade-right" class="hidden flex flex-col absolute gap-6 right-0 z-10 w-full h-[100vh] pb-36 mt-auto bg-[#ffffff] shadow-md">
-          <li><a href="{{ route('homeUser') }}" class="block px-5 py-2 text-[#070707] mt-4 text-sm leading-normal hover:font-semibold hover:text-black duration-300">
+          <li><a href="{{ route('homeuser') }}" class="block px-5 py-2 text-[#070707] mt-4 text-sm leading-normal hover:font-semibold hover:text-black duration-300">
             Beranda
               <div class="w-full h-[0.5px] bg-[#000000]">
               </div>
@@ -190,7 +186,8 @@
               </div>
             </a>
           </li>
-          <li><a href="#tentangKami" class="block px-5 py-2 text-[#070707] text-sm leading-normal hover:font-semibold hover:text-black duration-300">Tebtang Kami
+          <li><a href="#tentangKami" class="block px-5 py-2 text-[#070707] text-sm leading-normal hover:font-semibold hover:text-black duration-300">
+            Tentang Kami
               <div class="w-full h-[0.5px] bg-[#000000]">
               </div>
             </a>
