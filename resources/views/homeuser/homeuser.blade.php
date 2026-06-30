@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <title>Home User</title>
+    <title>Beranda  |   Kelawar</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
@@ -91,9 +91,9 @@
                 <h2 class="text-sm font-bold text-gray-900">Ringkasan Laporan</h2>
                 {{-- <a href="#" class="text-xs font-medium text-blue-600">Lihat Semua Statistik ›</a> --}}
             </div>
-
-            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-
+            
+            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
+                
                 <!-- Total Laporan -->
                 <div class="flex items-center gap-4 rounded-md border border-gray-200 p-4">
                     <div class="flex h-12 w-12 items-center justify-center rounded-md bg-red-100">
@@ -104,6 +104,28 @@
                         <p class="text-xs text-gray-500">Total Laporan</p>
                     </div>
                 </div>
+                
+                <!-- Belum Diverifikasi -->
+                <div class="flex items-center gap-4 rounded-md border border-gray-200 p-4">
+                    <div class="flex h-12 w-12 items-center justify-center rounded-md bg-purple-100">
+                        <i class="fa-solid fa-user-check text-xl text-purple-700"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold text-gray-900">{{ $pendingReports }}</h3>
+                        <p class="text-xs text-gray-500">Belum Diverifikasi</p>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-4 rounded-lg border border-gray-200 p-4">
+                        <span class="flex h-11 w-11 items-center justify-center rounded-lg bg-blue-600 text-white">
+                            <i class="fa-solid fa-circle-check"></i>
+                        </span>
+
+                        <div>
+                            <h3 class="text-2xl font-bold text-gray-900">{{ $verifiedReports }}</h3>
+                            <p class="text-xs text-gray-500">Diverifikasi</p>
+                        </div>
+                    </div>
 
                 <!-- Dalam Proses -->
                 <div class="flex items-center gap-4 rounded-md border border-gray-200 p-4">
@@ -127,16 +149,6 @@
                     </div>
                 </div>
 
-                <!-- Belum Diverifikasi -->
-                <div class="flex items-center gap-4 rounded-md border border-gray-200 p-4">
-                    <div class="flex h-12 w-12 items-center justify-center rounded-md bg-purple-100">
-                        <i class="fa-solid fa-user-check text-xl text-purple-700"></i>
-                    </div>
-                    <div>
-                        <h3 class="text-2xl font-bold text-gray-900">{{ $pendingReports }}</h3>
-                        <p class="text-xs text-gray-500">Belum Diverifikasi</p>
-                    </div>
-                </div>
 
             </div>
         </div>

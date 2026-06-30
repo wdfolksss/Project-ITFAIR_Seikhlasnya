@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <title>Form Laporan</title>
+    <title>Form Laporan | Kelawar</title>
 </head>
 <body>
     @include('navbar')
@@ -98,16 +98,10 @@
                         </div>
                     </div>
 
-                    <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-                        <div>
-                            
-                        </div>
-
-                        <div>
-                            <label class="mb-2 block text-sm font-semibold text-gray-700">Alamat Detail</label>
-                            <input type="text" name="address" placeholder="Masukkan alamat detail atau titik acuan terdekat"
-                                class="w-full rounded-lg border border-gray-200 bg-gray-100 px-4 py-3 text-sm outline-none focus:border-blue-500 focus:bg-white">
-                        </div>
+                    <div class="w-full">
+                        <label class="mb-2 block text-sm font-semibold text-gray-700">Alamat Detail</label>
+                        <input type="text" name="address" placeholder="Masukkan alamat detail atau titik acuan terdekat"
+                            class="w-full rounded-lg border border-gray-200 bg-gray-100 px-4 py-3 text-sm outline-none focus:border-blue-500 focus:bg-white">
                     </div>
 
                     <div>

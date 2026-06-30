@@ -65,14 +65,26 @@ public function index(Request $request)
         ->latest()
         ->get();
 
-    // Tambahkan ini
+    
     $categories = Category::all();
     $statuses = Status::all();
 
     $totalReports = Report::count();
-    $doneReports = Report::where('status_id', 2)->count();
-    $pendingReports = Report::where('status_id', 1)->count();
-    $processReports = Report::where('status_id', 3)->count();
+    $doneReports = Report::whereHas('status', function ($q) {
+        $q->where('name', 'Selesai');
+    })->count();
+
+    $processReports = Report::whereHas('status', function ($q) {
+        $q->where('name', 'Diproses');
+    })->count();
+
+    $pendingReports = Report::whereHas('status', function ($q) {
+        $q->where('name', 'Pending');
+    })->count();
+
+    $verifiedReports = Report::whereHas('status', function ($q) {
+        $q->where('name', 'Diverifikasi');
+    })->count();
 
     return view('homeuser.laporanPublik', compact(
         'laporan',
@@ -81,7 +93,8 @@ public function index(Request $request)
         'totalReports',
         'doneReports',
         'pendingReports',
-        'processReports'
+        'processReports',
+        'verifiedReports'
     ));
 }
 

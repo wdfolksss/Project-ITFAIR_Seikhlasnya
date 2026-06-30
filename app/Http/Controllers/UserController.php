@@ -30,11 +30,16 @@ class UserController extends Controller
             $query->where('name', 'Pending');
         })->count();
 
+        $verifiedReports = Report::whereHas('status', function ($query) {
+            $query->where('name', 'Diverifikasi');
+        })->count();
+
         return view('homeuser.homeUser', compact(
             'totalReports',
             'processReports',
             'doneReports',
-            'pendingReports'
+            'pendingReports',
+            'verifiedReports'
         ));
     }
 

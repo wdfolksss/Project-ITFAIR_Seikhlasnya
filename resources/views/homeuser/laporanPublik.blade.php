@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Storage;
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Laporan Publik</title>
+    <title>Laporan Publik   |   Kelawar</title>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
@@ -42,14 +42,36 @@ use Illuminate\Support\Facades\Storage;
             <div class="mb-6 rounded-xl border border-gray-200 bg-white p-5 shadow-md">
                 <h2 class="mb-4 text-sm font-bold">Statistik Laporan Publik</h2>
 
-                <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
                     <div class="flex items-center gap-4 rounded-lg border border-gray-200 p-4">
                         <span class="flex h-11 w-11 items-center justify-center rounded-lg bg-red-700 text-white">
                             <i class="fa-solid fa-bullseye"></i>
                         </span>
+                   
                         <div>
                             <h3 class="text-2xl font-bold">{{ $totalReports }}</h3>
                             <p class="text-xs text-gray-500">Total Laporan</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-4 rounded-lg border border-gray-200 p-4">
+                        <span class="flex h-11 w-11 items-center justify-center rounded-lg bg-purple-700 text-white">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </span>
+                        <div>
+                            <h3 class="text-2xl font-bold">{{ $pendingReports }}</h3>
+                            <p class="text-xs text-gray-500">Belum Diverifikasi</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-4 rounded-lg border border-gray-200 p-4">
+                        <span class="flex h-11 w-11 items-center justify-center rounded-lg bg-blue-600 text-white">
+                            <i class="fa-solid fa-circle-check"></i>
+                        </span>
+
+                        <div>
+                            <h3 class="text-2xl font-bold">{{ $verifiedReports }}</h3>
+                            <p class="text-xs text-gray-500">Diverifikasi</p>
                         </div>
                     </div>
 
@@ -73,15 +95,6 @@ use Illuminate\Support\Facades\Storage;
                         </div>
                     </div>
 
-                    <div class="flex items-center gap-4 rounded-lg border border-gray-200 p-4">
-                        <span class="flex h-11 w-11 items-center justify-center rounded-lg bg-purple-700 text-white">
-                            <i class="fa-solid fa-shield-halved"></i>
-                        </span>
-                        <div>
-                            <h3 class="text-2xl font-bold">{{ $pendingReports }}</h3>
-                            <p class="text-xs text-gray-500">Belum Diverifikasi</p>
-                        </div>
-                    </div>
                 </div>
             </div>
 
