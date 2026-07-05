@@ -129,7 +129,6 @@
                         </div>
                     </div>
 
-                <!-- Dalam Proses -->
                 <div class="flex items-center gap-4 rounded-md border border-gray-200 p-4">
                     <div class="flex h-12 w-12 items-center justify-center rounded-md bg-yellow-100">
                         <i class="fa-solid fa-clock text-xl text-yellow-500"></i>
@@ -140,7 +139,6 @@
                     </div>
                 </div>
 
-                <!-- Selesai -->
                 <div class="flex items-center gap-4 rounded-md border border-gray-200 p-4">
                     <div class="flex h-12 w-12 items-center justify-center rounded-md bg-green-100">
                         <i class="fa-solid fa-circle-check text-xl text-green-600"></i>

@@ -112,5 +112,20 @@ class UserController extends Controller
     return view('homeuser.detailLaporan', compact('report'));
     }
 
-    
+    public function tentang()
+    {
+        return view('homeuser.tentangkami');
+    }
+
+    public function aiPriority()
+    {
+        return view('homeuser.ai-priority');
+    }
+
+    // public function aiPriority()
+    // {
+    //     $roads = Report::all();
+
+    //     return view('homeuser.ai-priority', compact('roads'));
+    // }
 }

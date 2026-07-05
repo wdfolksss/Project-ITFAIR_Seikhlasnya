@@ -80,13 +80,6 @@
     .card-content {
       transition: background-color 0.3s ease, transform 0.3s ease;
     }
-
-    nav ul li a:hover,
-    nav ul li a.active {
-      color: black;
-      font-weight: bold;
-    }
-
       .nav-link {
       position: relative;
       transition: .3s;
@@ -142,8 +135,8 @@
     }
 </style>
 <body>
-    <header class="w-full p-4 sticky top-0 z-50 bg-white font-montserrat backdrop-blur-md">
-    <div class="container mx-auto flex items-center justify-between px-[10px] sm:px-[10px] md:px-[30px] lg:px-[30px] xl:px-[12px]  ">
+  <header class="w-full p-4 sticky top-0 z-50 bg-white/80 backdrop-blur-md font-montserrat">
+    <div class="container mx-auto flex items-center justify-between px-[10px] sm:px-[10px] md:px-[30px] lg:px-[30px] xl:px-[12px] relative">
       <div class="flex items-center space-x-3">
         <img src="{{ asset('img/bridge.svg') }}" alt="Logo" class="w-[38px] h-[38px] sm:w-[30px] sm:h-[35px] md:w-[45px] md:h-[50px] lg:w-[63px] lg:h-[58px] xl:w-[63px] xl:h-[48px] object-contain">
         <span class="text-[15px] sm:text-[15px] md:text-[18px] lg:text-[20px] xl:text-[20px] text-[#212124] font-montserrat font-semibold">Kelawar</span>
@@ -153,7 +146,7 @@
       <nav class="navbar-menu hidden sm:flex">
             <ul class="flex items-center gap-10 font-medium">
                 <li><a href="{{ route('homeuser') }}"
-              class="nav-link relative text-black text-md font-medium transition duration-300 hover:text-[#081f85] after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-[#081f85] after:transition-all hover:after:w-full {{ request()->routeIs('homeuser') ? 'active' : '' }}">
+                class="nav-link relative text-black text-md font-medium transition duration-300 hover:text-[#081f85] after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-[#081f85] after:transition-all hover:after:w-full {{ request()->routeIs('homeuser') ? 'active' : '' }}">
               Beranda</a>
           </li>
           {{-- <li><a href="#petaInfrastruktur"
@@ -164,8 +157,8 @@
               class="nav-link relative text-black text-md font-medium transition duration-300 hover:text-[#081f85] after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-[#081f85] after:transition-all hover:after:w-full {{ request()->routeIs('laporanPublik') ? 'active' : '' }}">
               Laporan Publik</a>
           </li>
-          <li><a href="#tentangKami"
-              class="nav-link relative text-black text-md font-medium transition duration-300 hover:text-[#081f85] after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-[#081f85] after:transition-all hover:after:w-full">
+          <li><a href="{{ route('tentangkami') }}"
+              class="nav-link relative text-black text-md font-medium transition duration-300 hover:text-[#081f85] after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-[#081f85] after:transition-all hover:after:w-full {{ request()->routeIs('tentangkami') ? 'active' : '' }}">
              Tentang Kami</a>
           </li>
         </ul>
@@ -182,16 +175,19 @@
         <!--Mobile Menu -->
         <ul id="dropdownMenu" data-aos="fade-right" class="hidden flex flex-col absolute gap-6 right-0 z-10 w-full h-[100vh] pb-36 mt-auto bg-[#ffffff] shadow-md">
           <li><a href="{{ route('homeuser') }}" class="block px-5 py-2 text-[#070707] mt-4 text-sm leading-normal hover:font-semibold hover:text-black duration-300">
+            Beranda
               <div class="w-full h-[0.5px] bg-[#000000]">
               </div>
             </a>
+          </li>
           <li><a href="{{ route('laporanPublik') }}" class="block px-5 py-2 text-[#070707] text-sm leading-normal hover:font-semibold hover:text-black duration-300">
             Laporan Publik
               <div class="w-full h-[0.5px] bg-[#000000]">
               </div>
             </a>
           </li>
-          <li><a href="#tentangKami" class="block px-5 py-2 text-[#070707] text-sm leading-normal hover:font-semibold hover:text-black duration-300">Tebtang Kami
+          <li><a href="{{ route('tentangkami') }}" class="block px-5 py-2 text-[#070707] text-sm leading-normal hover:font-semibold hover:text-black duration-300">
+            Tentang Kami
               <div class="w-full h-[0.5px] bg-[#000000]">
               </div>
             </a>

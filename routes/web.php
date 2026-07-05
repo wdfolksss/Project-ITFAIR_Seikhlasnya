@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [UserController::class, 'homeuser'])->name('home');
 Route::get('/homeuser', [UserController::class, 'homeuser'])->name('homeuser');
+Route::get('/tentangkami', [UserController::class, 'tentang'])->name('tentangkami');
 Route::get('/formLaporan', [UserController::class, 'formLaporan'])->name('formLaporan');
 Route::get('/laporanPublik', [UserController::class, 'laporanPublik'])->name('laporanPublik');
 Route::get('/detailLaporan/{id}', [UserController::class, 'detailLaporan'])
