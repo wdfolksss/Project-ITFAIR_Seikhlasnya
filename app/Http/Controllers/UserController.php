@@ -64,4 +64,17 @@ class UserController extends Controller
     {
         return view('admin.login');
     }
+
+    public function statusLaporan($id)
+    {
+    $report = Report::with([
+        'category',
+        'status',
+        'timelines.status'
+    ])->findOrFail($id);
+
+    return view('homeuser.detailLaporan', compact('report'));
+    }
+
+    
 }

@@ -6,6 +6,7 @@ use App\Models\Report;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Status;
+use App\Models\ReportTimeline;
 
 class LaporanController extends Controller
 {
@@ -29,7 +30,16 @@ class LaporanController extends Controller
         // STATUS DEFAULT (PENDING = 1)
         $validated['status_id'] = 1;
 
-        Report::create($validated);
+        // Simpan laporan
+        $report = Report::create($validated);
+
+        // Simpan timeline pertama
+        ReportTimeline::create([
+            'report_id' => $report->id,
+            'status_id' => $report->status_id,
+            'title' => 'Laporan dibuat',
+            'description' => 'Laporan berhasil dikirim oleh masyarakat.',
+        ]);
 
         return redirect()->route('homeuser')
             ->with('success', 'Laporan berhasil dikirim!');
@@ -100,10 +110,16 @@ public function index(Request $request)
 
     public function detailLaporan(Report $report)
     {
-        $report->load(['category', 'status']);
+    $report->load([
+        'category',
+        'status',
+        'timelines.status'
+    ]);
 
-        return view('homeuser.detailLaporan', compact('report'));
+    return view('homeuser.detailLaporan', compact('report'));
     }
+
+    
 
 }
 

@@ -30,4 +30,9 @@ use Illuminate\Database\Eloquent\Model;
     {
         return $this->belongsTo(Status::class);
     }
+
+    public function timelines()
+    {
+    return $this->hasMany(ReportTimeline::class)->latest();
+    }
 }
