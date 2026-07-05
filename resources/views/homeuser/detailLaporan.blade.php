@@ -28,11 +28,11 @@
                     <span>Detail Laporan</span>
                 </div>
 
-                {{-- <a href="{{ route('laporanPublik') }}"
+                <a href="{{ route('laporanPublik') }}"
                     class="mt-4 inline-flex items-center gap-2 text-sm font-medium text-blue-600 hover:underline">
                     <i class="fa-solid fa-arrow-left"></i>
                     Kembali ke Daftar Laporan
-                </a> --}}
+                </a>
             </div>
 
             <div class="grid grid-cols-1 gap-6 lg:grid-cols-3">
@@ -54,14 +54,6 @@
                                 class="border-b-2 border-blue-600 px-5 py-3 text-sm font-semibold text-blue-600">
                                 Detail Laporan
                             </button>
-
-                            <button class="px-5 py-3 text-sm font-medium text-gray-500">
-                                Dokumentasi
-                            </button>
-
-                            <button class="px-5 py-3 text-sm font-medium text-gray-500">
-                                Tanggapan
-                            </button>
                         </div>
 
                         <div class="divide-y divide-gray-200 text-sm">
@@ -71,9 +63,6 @@
                                     <p class="text-gray-600">
                                         {{ $report->address }}
                                     </p>
-                                    <a href="#" class="text-xs font-medium text-blue-600 hover:underline">
-                                        Lihat di Peta
-                                    </a>
                                 </div>
                             </div>
 
@@ -208,7 +197,7 @@
                             <p>{{ $report->address }}</p>
                             <p class="mt-1 text-xs text-gray-500">Jawa Barat 43351</p>
 
-                            <a href="#" class="mt-2 inline-block text-xs font-semibold text-blue-600 hover:underline">
+                            <a href="https://www.google.com/maps?q={{$report->latitude}},{{$report->longitude}}" class="mt-2 inline-block text-xs font-semibold text-blue-600 hover:underline">
                                 Buka di Google Maps
                             </a>
                         </div>

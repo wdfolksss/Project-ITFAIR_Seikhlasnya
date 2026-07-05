@@ -151,7 +151,7 @@
 
       <!-- Dekstop Navbar  -->
       <nav class="navbar-menu hidden sm:flex">
-            <ul class="flex items-center gap-10 font-medium">
+            <ul class="flex items-center gap-8 font-medium">
                 <li><a href="{{ route('homeuser') }}"
               class="nav-link relative text-black text-md font-medium transition duration-300 hover:text-[#081f85] after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-[#081f85] after:transition-all hover:after:w-full {{ request()->routeIs('homeuser') ? 'active' : '' }}">
               Beranda</a>
@@ -168,8 +168,8 @@
               class="nav-link relative text-black text-md font-medium transition duration-300 hover:text-[#081f85] after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-[#081f85] after:transition-all hover:after:w-full">
              Tentang Kami</a>
           </li>
-          <button id="themeToggle" class="w-10 h-10 rounded-full border flex items-center justify-center hover:bg-gray-100">
-          <i id="themeIcon" class="fa-solid fa-moon"></i>
+          <button id="themeToggle" class="w-10 h-10 rounded-full border border-gray-300 dark:border-slate-700 flex items-center justify-center text-gray-800 dark:text-yellow-400 hover:bg-gray-100 dark:hover:bg-slate-800">
+              <i id="themeIcon" class="fa-solid fa-moon"></i>
           </button>
         </ul>
       </nav>
