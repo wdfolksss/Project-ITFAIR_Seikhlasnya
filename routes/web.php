@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [UserController::class, 'homeuser'])->name('home');
 Route::get('/homeuser', [UserController::class, 'homeuser'])->name('homeuser');
+Route::get('/tentangkami', [UserController::class, 'tentang'])->name('tentangkami');
 Route::get('/formLaporan', [UserController::class, 'formLaporan'])->name('formLaporan');
 Route::get('/laporanPublik', [UserController::class, 'laporanPublik'])->name('laporanPublik');
 Route::get('/detailLaporan/{id}', [UserController::class, 'detailLaporan'])
@@ -16,3 +17,4 @@ Route::get('/adminLogin', [AuthController::class, 'showLoginForm'])->name('login
 Route::post('/login', [AuthController::class, 'login'])->name('login.post');
 Route::post('/laporan/store', [LaporanController::class, 'store'])->name('laporan.store');
 Route::get('/laporanPublik', [LaporanController::class, 'index'])->name('laporanPublik');
+Route::view('/ai-priority', 'homeuser.ai-priority')->name('ai.priority');

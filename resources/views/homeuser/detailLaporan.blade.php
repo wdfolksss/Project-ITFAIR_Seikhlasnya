@@ -220,47 +220,43 @@
                         </h2>
 
                         <div class="space-y-5">
-                            <div class="flex gap-3">
-                                <span class="mt-1 h-3 w-3 shrink-0 rounded-full bg-green-600"></span>
 
-                                <div>
-                                    <h3 class="text-sm font-bold text-gray-900">Diverifikasi</h3>
-                                    <p class="text-xs text-gray-500">
-                                        Laporan telah diverifikasi oleh admin.
-                                    </p>
-                                    <p class="mt-1 text-xs text-gray-400">
-                                        12 Mei 2025, 11:15 WIB
-                                    </p>
+                            @foreach ($report->timelines as $timeline)
+
+                                @php
+                                    $status = strtolower($timeline->status->name);
+
+                                    $color = match ($status) {
+                                        'pending' => 'bg-purple-600',
+                                        'diverifikasi' => 'bg-blue-600',
+                                        'diproses' => 'bg-orange-500',
+                                        'selesai' => 'bg-green-600',
+                                        default => 'bg-gray-400',
+                                    };
+                                @endphp
+
+                                <div class="flex gap-3">
+
+                                    <span class="mt-1 h-3 w-3 shrink-0 rounded-full {{ $color }}"></span>
+
+                                    <div>
+                                        <h3 class="text-sm font-bold text-gray-900">
+                                            {{ $timeline->status->name }}
+                                        </h3>
+
+                                        <p class="text-xs text-gray-500">
+                                            {{ $timeline->description }}
+                                        </p>
+
+                                        <p class="mt-1 text-xs text-gray-400">
+                                            {{ $timeline->created_at->format('d M Y, H:i') }} WIB
+                                        </p>
+                                    </div>
+
                                 </div>
-                            </div>
 
-                            <div class="flex gap-3">
-                                <span class="mt-1 h-3 w-3 shrink-0 rounded-full bg-orange-500"></span>
+                            @endforeach
 
-                                <div>
-                                    <h3 class="text-sm font-bold text-gray-900">Dalam Proses</h3>
-                                    <p class="text-xs text-gray-500">
-                                        Laporan sedang ditindaklanjuti oleh pihak terkait.
-                                    </p>
-                                    <p class="mt-1 text-xs text-gray-400">
-                                        15 Mei 2025, 09:20 WIB
-                                    </p>
-                                </div>
-                            </div>
-
-                            <div class="flex gap-3">
-                                <span class="mt-1 h-3 w-3 shrink-0 rounded-full bg-gray-300"></span>
-
-                                <div>
-                                    <h3 class="text-sm font-bold text-gray-900">Menunggu Penyelesaian</h3>
-                                    <p class="text-xs text-gray-500">
-                                        Proses perbaikan sedang menunggu jadwal lapangan.
-                                    </p>
-                                    <p class="mt-1 text-xs text-gray-400">
-                                        18 Mei 2025, 14:45 WIB
-                                    </p>
-                                </div>
-                            </div>
                         </div>
                     </div>
 

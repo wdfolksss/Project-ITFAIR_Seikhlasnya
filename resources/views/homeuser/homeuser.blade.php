@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <title>Home User</title>
+    <title>Beranda  |   Kelawar</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
@@ -37,6 +37,7 @@
     </div>
 </div>
 @endif
+
     {{-- section 1 --}}
     <section
         class="relative min-h-[360px] sm:min-h-[420px] lg:min-h-[40rem] py-[2rem] px-[1rem] sm:py-[2rem] sm:px-[1rem] md:py-[2rem] xl:py-[10rem] flex items-center bg-cover bg-center"
@@ -63,10 +64,8 @@
 
                  <!-- BUTTON -->
             <div class="mt-8 flex flex-col gap-3 sm:flex-row">
-
                 <a href="{{ route('formLaporan') }}"
                     class="inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-6 py-3 text-sm font-semibold text-white transition hover:bg-blue-700">
-
                     <i class="fa-solid fa-paper-plane"></i>
                     Laporkan Sekarang
                 </a>
@@ -89,11 +88,10 @@
         <div class="rounded-xl bg-white p-4 shadow-md">
             <div class="mb-4 flex items-center justify-between">
                 <h2 class="text-sm font-bold text-gray-900">Ringkasan Laporan</h2>
-                {{-- <a href="#" class="text-xs font-medium text-blue-600">Lihat Semua Statistik ›</a> --}}
             </div>
-
-            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-
+            
+            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
+                
                 <!-- Total Laporan -->
                 <div class="flex items-center gap-4 rounded-md border border-gray-200 p-4">
                     <div class="flex h-12 w-12 items-center justify-center rounded-md bg-red-100">
@@ -104,6 +102,28 @@
                         <p class="text-xs text-gray-500">Total Laporan</p>
                     </div>
                 </div>
+                
+                <!-- Belum Diverifikasi -->
+                <div class="flex items-center gap-4 rounded-md border border-gray-200 p-4">
+                    <div class="flex h-12 w-12 items-center justify-center rounded-md bg-purple-100">
+                        <i class="fa-solid fa-user-check text-xl text-purple-700"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold text-gray-900">{{ $pendingReports }}</h3>
+                        <p class="text-xs text-gray-500">Belum Diverifikasi</p>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-4 rounded-lg border border-gray-200 p-4">
+                        <span class="flex h-11 w-11 items-center justify-center rounded-lg bg-blue-600 text-white">
+                            <i class="fa-solid fa-circle-check"></i>
+                        </span>
+
+                        <div>
+                            <h3 class="text-2xl font-bold text-gray-900">{{ $verifiedReports }}</h3>
+                            <p class="text-xs text-gray-500">Diverifikasi</p>
+                        </div>
+                    </div>
 
                 <!-- Dalam Proses -->
                 <div class="flex items-center gap-4 rounded-md border border-gray-200 p-4">
@@ -126,30 +146,12 @@
                         <p class="text-xs text-gray-500">Selesai</p>
                     </div>
                 </div>
-
-                <!-- Belum Diverifikasi -->
-                <div class="flex items-center gap-4 rounded-md border border-gray-200 p-4">
-                    <div class="flex h-12 w-12 items-center justify-center rounded-md bg-purple-100">
-                        <i class="fa-solid fa-user-check text-xl text-purple-700"></i>
-                    </div>
-                    <div>
-                        <h3 class="text-2xl font-bold text-gray-900">{{ $pendingReports }}</h3>
-                        <p class="text-xs text-gray-500">Belum Diverifikasi</p>
-                    </div>
-                </div>
-
             </div>
         </div>
 
         <div class="grid grid-cols-1 gap-4 lg:grid-cols-3">
-
             <div class="rounded-xl bg-white p-4 shadow-md lg:col-span-2">
                 <div class="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                    <div>
-                        <h2 class="text-lg font-bold text-gray-900">Peta Infrastruktur</h2>
-                        <p class="text-xs text-gray-500">Klik pada marker untuk melihat detail laporan</p>
-                    </div>
-
                     <div class="flex flex-wrap gap-4 text-[10px] text-gray-700">
                         <span class="flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-red-600"></span>Kerusakan Berat</span>
                         <span class="flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-yellow-400"></span>Kerusakan Sedang</span>
@@ -169,7 +171,7 @@
             <div class="rounded-xl bg-white p-4 shadow-md">
                 <div class="mb-4 flex items-center justify-between">
                     <h2 class="text-lg font-bold text-gray-900">Prioritas Tertinggi (AI)</h2>
-                    <a href="#" class="text-xs font-medium text-blue-600">Lihat Semua</a>
+                    <a href="" class="text-xs font-medium text-blue-600">Lihat Semua</a>
                 </div>
 
                 <div class="space-y-4">

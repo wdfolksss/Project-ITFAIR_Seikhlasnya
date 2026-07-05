@@ -138,8 +138,8 @@
   <header class="w-full p-4 sticky top-0 z-50 bg-white/80 backdrop-blur-md font-montserrat">
     <div class="container mx-auto flex items-center justify-between px-[10px] sm:px-[10px] md:px-[30px] lg:px-[30px] xl:px-[12px] relative">
       <div class="flex items-center space-x-3">
-        <img src="img/bridge.svg" alt="Logo" class="w-[38px] h-[38px] sm:w-[30px] sm:h-[35px] md:w-[45px] md:h-[50px] lg:w-[63px] lg:h-[58px] xl:w-[63px] xl:h-[48px] object-contain">
-        <span class="text-[15px] sm:text-[15px] md:text-[18px] lg:text-[25px] xl:text-[25px] text-[#212124] font-montserrat font-semibold">Kelawar</span>
+        <img src="{{ asset('img/bridge.svg') }}" alt="Logo" class="w-[38px] h-[38px] sm:w-[30px] sm:h-[35px] md:w-[45px] md:h-[50px] lg:w-[63px] lg:h-[58px] xl:w-[63px] xl:h-[48px] object-contain">
+        <span class="text-[15px] sm:text-[15px] md:text-[18px] lg:text-[20px] xl:text-[20px] text-[#212124] font-montserrat font-semibold">Kelawar</span>
       </div>
 
       <!-- Dekstop Navbar  -->
@@ -157,8 +157,8 @@
               class="nav-link relative text-black text-md font-medium transition duration-300 hover:text-[#081f85] after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-[#081f85] after:transition-all hover:after:w-full {{ request()->routeIs('laporanPublik') ? 'active' : '' }}">
               Laporan Publik</a>
           </li>
-          <li><a href="#tentangKami"
-              class="nav-link relative text-black text-md font-medium transition duration-300 hover:text-[#081f85] after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-[#081f85] after:transition-all hover:after:w-full">
+          <li><a href="{{ route('tentangkami') }}"
+              class="nav-link relative text-black text-md font-medium transition duration-300 hover:text-[#081f85] after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-[#081f85] after:transition-all hover:after:w-full {{ request()->routeIs('tentangkami') ? 'active' : '' }}">
              Tentang Kami</a>
           </li>
         </ul>
@@ -186,7 +186,7 @@
               </div>
             </a>
           </li>
-          <li><a href="#tentangKami" class="block px-5 py-2 text-[#070707] text-sm leading-normal hover:font-semibold hover:text-black duration-300">
+          <li><a href="{{ route('tentangkami') }}" class="block px-5 py-2 text-[#070707] text-sm leading-normal hover:font-semibold hover:text-black duration-300">
             Tentang Kami
               <div class="w-full h-[0.5px] bg-[#000000]">
               </div>

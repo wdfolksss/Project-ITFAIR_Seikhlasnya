@@ -6,6 +6,7 @@ use App\Models\Report;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Status;
+use App\Models\ReportTimeline;
 
 class LaporanController extends Controller
 {
@@ -29,7 +30,16 @@ class LaporanController extends Controller
         // STATUS DEFAULT (PENDING = 1)
         $validated['status_id'] = 1;
 
-        Report::create($validated);
+        // Simpan laporan
+        $report = Report::create($validated);
+
+        // Simpan timeline pertama
+        ReportTimeline::create([
+            'report_id' => $report->id,
+            'status_id' => $report->status_id,
+            'title' => 'Laporan dibuat',
+            'description' => 'Laporan berhasil dikirim oleh masyarakat.',
+        ]);
 
         return redirect()->route('homeuser')
             ->with('success', 'Laporan berhasil dikirim!');
@@ -65,14 +75,26 @@ public function index(Request $request)
         ->latest()
         ->get();
 
-    // Tambahkan ini
+    
     $categories = Category::all();
     $statuses = Status::all();
 
     $totalReports = Report::count();
-    $doneReports = Report::where('status_id', 2)->count();
-    $pendingReports = Report::where('status_id', 1)->count();
-    $processReports = Report::where('status_id', 3)->count();
+    $doneReports = Report::whereHas('status', function ($q) {
+        $q->where('name', 'Selesai');
+    })->count();
+
+    $processReports = Report::whereHas('status', function ($q) {
+        $q->where('name', 'Diproses');
+    })->count();
+
+    $pendingReports = Report::whereHas('status', function ($q) {
+        $q->where('name', 'Pending');
+    })->count();
+
+    $verifiedReports = Report::whereHas('status', function ($q) {
+        $q->where('name', 'Diverifikasi');
+    })->count();
 
     return view('homeuser.laporanPublik', compact(
         'laporan',
@@ -81,16 +103,23 @@ public function index(Request $request)
         'totalReports',
         'doneReports',
         'pendingReports',
-        'processReports'
+        'processReports',
+        'verifiedReports'
     ));
 }
 
     public function detailLaporan(Report $report)
     {
-        $report->load(['category', 'status']);
+    $report->load([
+        'category',
+        'status',
+        'timelines.status'
+    ]);
 
-        return view('homeuser.detailLaporan', compact('report'));
+    return view('homeuser.detailLaporan', compact('report'));
     }
+
+    
 
 }
 

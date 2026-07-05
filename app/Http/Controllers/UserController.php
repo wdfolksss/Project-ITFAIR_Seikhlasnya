@@ -30,11 +30,16 @@ class UserController extends Controller
             $query->where('name', 'Pending');
         })->count();
 
+        $verifiedReports = Report::whereHas('status', function ($query) {
+            $query->where('name', 'Diverifikasi');
+        })->count();
+
         return view('homeuser.homeUser', compact(
             'totalReports',
             'processReports',
             'doneReports',
-            'pendingReports'
+            'pendingReports',
+            'verifiedReports'
         ));
     }
 
@@ -59,4 +64,32 @@ class UserController extends Controller
     {
         return view('admin.login');
     }
+
+    public function statusLaporan($id)
+    {
+    $report = Report::with([
+        'category',
+        'status',
+        'timelines.status'
+    ])->findOrFail($id);
+
+    return view('homeuser.detailLaporan', compact('report'));
+    }
+
+    public function tentang()
+    {
+        return view('homeuser.tentangkami');
+    }
+
+    public function aiPriority()
+    {
+        return view('homeuser.ai-priority');
+    }
+
+    // public function aiPriority()
+    // {
+    //     $roads = Report::all();
+
+    //     return view('homeuser.ai-priority', compact('roads'));
+    // }
 }
