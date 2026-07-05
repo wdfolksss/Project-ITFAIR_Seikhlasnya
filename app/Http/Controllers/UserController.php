@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Report;
 
+
 class UserController extends Controller
 {
     public function navbar()
@@ -47,10 +48,13 @@ class UserController extends Controller
         return view('homeuser.laporanPublik');
     }
 
-    public function detailLaporan()
+    public function detailLaporan($id)
     {
-        return view('homeuser.detailLaporan');
+    $report = Report::with(['category', 'status'])->findOrFail($id);
+
+    return view('homeuser.detailLaporan', compact('report'));
     }
+
     public function showLogin()
     {
         return view('admin.login');

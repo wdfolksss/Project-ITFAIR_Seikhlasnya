@@ -22,9 +22,17 @@ class ReportResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'title';
 
+    
+
     public static function form(Schema $schema): Schema
     {
         return ReportForm::configure($schema);
+        return $form
+        ->schema([
+            FileUpload::make('image')
+                ->disk('public')
+                ->directory('reports'),
+        ]);
     }
 
     public static function table(Table $table): Table
@@ -47,4 +55,5 @@ class ReportResource extends Resource
             'edit' => EditReport::route('/{record}/edit'),
         ];
     }
+
 }

@@ -7,7 +7,7 @@ use App\Models\Status;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Model;
 
-    class report extends Model {
+    class Report extends Model {
         protected $fillable = [
         'reporter_name',
         'contact',

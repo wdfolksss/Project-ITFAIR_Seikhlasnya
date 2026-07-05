@@ -2,6 +2,7 @@
 
 namespace App\Filament\Widgets;
 
+use App\Models\Status;
 use Filament\Widgets\ChartWidget;
 
 class StatusChart extends ChartWidget
@@ -10,18 +11,16 @@ class StatusChart extends ChartWidget
 
     protected function getData(): array
     {
+        $statuses = Status::withCount('reports')->get();
+
         return [
             'datasets' => [
                 [
-                    'data' => [32, 74, 128, 14],
+                    'data' => $statuses->pluck('reports_count')->toArray(),
                 ],
             ],
-            'labels' => [
-                'Verifikasi',
-                'Diproses',
-                'Selesai',
-                'Ditolak',
-            ],
+
+            'labels' => $statuses->pluck('name')->toArray(),
         ];
     }
 

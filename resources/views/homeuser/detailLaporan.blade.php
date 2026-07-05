@@ -40,11 +40,11 @@
                 <div class="space-y-5 lg:col-span-2">
                     <div>
                         <h1 class="text-2xl font-bold text-gray-900 sm:text-3xl">
-                            Jalan Rusak di Cibadak
+                           {{ $report->category->name }}
                         </h1>
 
                         <p class="mt-2 text-sm text-gray-500">
-                            Aspal jalan berlubang dan bergelombang di beberapa titik.
+                            {{ $report->description }}
                         </p>
                     </div>
 
@@ -69,7 +69,7 @@
                                 <p class="font-semibold text-gray-900">Lokasi</p>
                                 <div>
                                     <p class="text-gray-600">
-                                        Jalan Raya Cibadak, Kecamatan Cibadak, Kabupaten Sukabumi, Jawa Barat
+                                        {{ $report->address }}
                                     </p>
                                     <a href="#" class="text-xs font-medium text-blue-600 hover:underline">
                                         Lihat di Peta
@@ -80,16 +80,20 @@
                             <div class="grid grid-cols-1 gap-2 px-5 py-4 sm:grid-cols-[160px_1fr]">
                                 <p class="font-semibold text-gray-900">Kategori</p>
                                 <p class="text-gray-600">
-                                    <i class="fa-solid fa-road mr-2 text-blue-600"></i>
-                                    Jalan
+                                    {{ $report->category->name }}
                                 </p>
                             </div>
 
                             <div class="grid grid-cols-1 gap-2 px-5 py-4 sm:grid-cols-[160px_1fr]">
                                 <p class="font-semibold text-gray-900">Prioritas</p>
                                 <p>
-                                    <span class="rounded-full bg-red-100 px-3 py-1 text-xs font-semibold text-red-600">
-                                        Prioritas Tinggi
+                                    <span
+                                        class="rounded-full px-3 py-1 text-xs font-semibold
+                                        {{ $report->severity == 'ringan' ? 'bg-green-100 text-green-600' : '' }}
+                                        {{ $report->severity == 'sedang' ? 'bg-yellow-100 text-yellow-600' : '' }}
+                                        {{ $report->severity == 'berat' ? 'bg-red-100 text-red-600' : '' }}">
+                                        
+                                        Prioritas {{ ucfirst($report->severity) }}
                                     </span>
                                 </p>
                             </div>
@@ -113,7 +117,7 @@
                                 <p class="font-semibold text-gray-900">Tanggal Laporan</p>
                                 <p class="text-gray-600">
                                     <i class="fa-regular fa-calendar mr-2 text-gray-500"></i>
-                                    12 Mei 2025, 10:30 WIB
+                                    {{ $report->created_at->format('d M Y, H:i') }}
                                 </p>
                             </div>
 
@@ -121,33 +125,37 @@
                                 <p class="font-semibold text-gray-900">Terakhir Update</p>
                                 <p class="text-gray-600">
                                     <i class="fa-regular fa-calendar-check mr-2 text-gray-500"></i>
-                                    18 Mei 2025, 14:45 WIB
+                                    {{ $report->updated_at->format('d M Y, H:i') }}
                                 </p>
                             </div>
 
                             <div class="grid grid-cols-1 gap-2 px-5 py-4 sm:grid-cols-[160px_1fr]">
                                 <p class="font-semibold text-gray-900">Deskripsi</p>
                                 <p class="leading-relaxed text-gray-600">
-                                    Aspal jalan di beberapa titik mengalami kerusakan berupa lubang yang cukup dalam
-                                    dan bergelombang. Kondisi ini membahayakan pengguna jalan, terutama saat hujan
-                                    karena tergenang air.
+                                    {{ $report->description }}
                                 </p>
                             </div>
                         </div>
                     </div>
 
                     <div class="rounded-xl border border-gray-200 bg-white p-5 shadow-md">
-                        <h2 class="mb-4 text-sm font-bold text-gray-900">Dokumentasi Laporan</h2>
 
-                        <div class="grid grid-cols-2 gap-4 sm:grid-cols-4">
-                            <div class="h-32 rounded-lg bg-gray-200"></div>
-                            <div class="h-32 rounded-lg bg-gray-200"></div>
-                            <div class="h-32 rounded-lg bg-gray-200"></div>
+                        <h2 class="mb-4 text-sm font-bold text-gray-900">
+                            Dokumentasi Laporan
+                        </h2>
 
-                            <div class="flex h-32 items-center justify-center rounded-lg bg-gray-300 text-2xl font-bold text-gray-900">
-                                +2
-                            </div>
-                        </div>
+                        @if ($report->image)
+                            <img
+                                src="{{ asset('storage/' . $report->image) }}"
+                                class="w-full object-cover rounded-lg border"
+                                alt="Dokumentasi Laporan"
+                            >
+                        @else
+                            <p class="text-sm text-gray-400">
+                                Belum ada dokumentasi
+                            </p>
+                        @endif
+
                     </div>
 
                     <div class="rounded-xl border border-gray-200 bg-white p-5 shadow-md">
@@ -197,7 +205,7 @@
                         </div>
 
                         <div class="mt-4 text-sm text-gray-600">
-                            <p>Jalan Raya Cibadak, Cibadak, Sukabumi</p>
+                            <p>{{ $report->address }}</p>
                             <p class="mt-1 text-xs text-gray-500">Jawa Barat 43351</p>
 
                             <a href="#" class="mt-2 inline-block text-xs font-semibold text-blue-600 hover:underline">
@@ -265,7 +273,7 @@
                             Bantu kami memantau infrastruktur di sekitar Anda.
                         </p>
 
-                        <a href="{{ route('detailLaporan') }}"
+                        <a href="{{ route('formLaporan') }}"
                             class="mt-4 inline-flex w-full items-center justify-center rounded-lg bg-blue-600 px-4 py-3 text-sm font-semibold text-white hover:bg-blue-700">
                             Buat Laporan Baru
                         </a>
@@ -281,16 +289,21 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
     <script>
-        const detailMap = L.map('detailMap').setView([-6.9175, 106.9270], 15);
+        const lat = {{ $report->latitude }};
+        const lng = {{ $report->longitude }};
+
+        const detailMap = L.map('detailMap').setView([lat, lng], 16);
 
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; OpenStreetMap'
         }).addTo(detailMap);
 
-        L.marker([-6.9175, 106.9270])
+        L.marker([lat, lng])
             .addTo(detailMap)
-            .bindPopup('Jalan Rusak di Cibadak')
+            .bindPopup("Lokasi Laporan")
             .openPopup();
+
+        setTimeout(() => detailMap.invalidateSize(), 300);
     </script>
 
 </body>
