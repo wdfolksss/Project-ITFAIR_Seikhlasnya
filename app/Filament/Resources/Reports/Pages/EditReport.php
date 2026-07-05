@@ -20,23 +20,38 @@ class EditReport extends EditRecord
 
     protected function afterSave(): void
     {
-        // Cek apakah status berubah
-        if (! $this->record->wasChanged('status_id')) {
+        $statusChanged = $this->record->wasChanged('status_id');
+        $responseChanged = $this->record->wasChanged('admin_response');
+
+        if (! $statusChanged && ! $responseChanged) {
             return;
         }
 
         $messages = [
             'Pending' => 'Laporan sedang menunggu verifikasi.',
             'Diverifikasi' => 'Laporan telah diverifikasi oleh admin.',
-            'Diproses' => 'Laporan sedang diproses oleh pihak terkait.',
+            'Diproses' => 'Laporan sedang diproses oleh admin.',
             'Selesai' => 'Penanganan laporan telah selesai.',
         ];
 
+        if ($responseChanged && ! $statusChanged) {
+            ReportTimeline::create([
+                'report_id' => $this->record->id,
+                'status_id' => $this->record->status_id,
+                'title' => 'Admin menanggapi laporan',
+                'description' => 'Admin memberikan tanggapan terhadap laporan masyarakat.',
+                'admin_response' => $this->record->admin_response,
+            ]);
+
+            return;
+        }
+
         ReportTimeline::create([
-            'report_id'   => $this->record->id,
-            'status_id'   => $this->record->status_id,
-            'title'       => $this->record->status->name,
-            'description' => $messages[$this->record->status->name] ?? 'Status laporan diperbarui.',
+            'report_id' => $this->record->id,
+            'status_id' => $this->record->status_id,
+            'title' => $this->record->status->name,
+            'description' => $messages[$this->record->status->name] ?? 'Laporan diperbarui oleh admin.',
+            'admin_response' => $this->record->admin_response,
         ]);
     }
 }

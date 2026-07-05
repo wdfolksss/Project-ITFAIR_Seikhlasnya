@@ -18,6 +18,7 @@ use Illuminate\Database\Eloquent\Model;
         'latitude',
         'longitude',
         'description',
+        'admin_response',
         'image',
         'status_id',
         'hash',

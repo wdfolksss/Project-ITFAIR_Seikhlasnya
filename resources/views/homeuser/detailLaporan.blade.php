@@ -149,37 +149,68 @@
 
                     <div class="rounded-xl border border-gray-200 bg-white p-5 shadow-md">
                         <h2 class="mb-4 text-sm font-bold text-gray-900">
-                            Tanggapan dari Pihak Terkait
+                            Tanggapan Admin
                         </h2>
 
-                        <div class="rounded-lg bg-gray-100 p-4">
+                        @php
+                            $response = $report->timelines
+                                ->filter(fn ($timeline) => !empty($timeline->admin_response))
+                                ->sortByDesc('created_at')
+                                ->first();
+
+                            $adminResponse = $response?->admin_response ?? $report->admin_response;
+                            $responseDate = $response?->created_at ?? $report->updated_at;
+                        @endphp
+
+                        @if($adminResponse)
+
+                        <div class="rounded-lg bg-blue-50 border border-blue-200 p-4">
                             <div class="flex items-start gap-4">
-                                <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-orange-500 text-white">
-                                    <i class="fa-solid fa-building"></i>
+
+                                <span class="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-600 text-white">
+                                    <i class="fa-solid fa-user-shield"></i>
                                 </span>
 
                                 <div>
-                                    <div class="flex flex-wrap items-center gap-2">
-                                        <h3 class="text-sm font-bold text-gray-900">
-                                            Dinas Pekerjaan Umum Kabupaten Sukabumi
+
+                                    <div class="flex items-center gap-2">
+                                        <h3 class="font-bold text-gray-900">
+                                            Administrator Kelawar
                                         </h3>
 
-                                        <span class="rounded-full bg-blue-100 px-3 py-1 text-xs font-semibold text-blue-600">
-                                            Pihak Terkait
+                                        <span class="rounded-full bg-green-100 px-3 py-1 text-xs font-semibold text-green-700">
+                                            Terverifikasi
                                         </span>
                                     </div>
 
                                     <p class="mt-1 text-xs text-gray-500">
-                                        15 Mei 2025, 09:20 WIB
+                                        {{ $responseDate->translatedFormat('d F Y • H:i') }} WIB
                                     </p>
 
-                                    <p class="mt-2 text-sm leading-relaxed text-gray-600">
-                                        Terima kasih atas laporannya, kami sudah menjadwalkan tim untuk melakukan
-                                        survei lokasi dan segera melakukan koordinasi untuk perbaikan.
+                                    <p class="mt-3 leading-relaxed text-gray-700">
+                                        {{ $adminResponse }}
                                     </p>
+
                                 </div>
+
                             </div>
                         </div>
+
+                        @else
+
+                        <div class="rounded-lg border border-dashed border-gray-300 bg-gray-50 p-5 text-center">
+                            <i class="fa-regular fa-comment-dots text-3xl text-gray-400"></i>
+
+                            <h3 class="mt-3 font-semibold text-gray-700">
+                                Belum ada tanggapan dari admin
+                            </h3>
+
+                            <p class="mt-1 text-sm text-gray-500">
+                                Tanggapan akan muncul setelah laporan ditinjau oleh administrator.
+                            </p>
+                        </div>
+
+                        @endif
                     </div>
                 </div>
 
@@ -230,7 +261,7 @@
 
                                     <div>
                                         <h3 class="text-sm font-bold text-gray-900">
-                                            {{ $timeline->status->name }}
+                                            {{ $timeline->title ?? $timeline->status->name }}
                                         </h3>
 
                                         <p class="text-xs text-gray-500">
@@ -284,9 +315,27 @@
         }).addTo(detailMap);
 
         L.marker([lat, lng])
-            .addTo(detailMap)
-            .bindPopup("Lokasi Laporan")
-            .openPopup();
+        .addTo(detailMap)
+        .bindPopup(`
+            <div style="text-align:center">
+                <b>Lokasi Laporan</b><br><br>
+
+                <a href="https://www.google.com/maps?q=${lat},${lng}"
+                target="_blank"
+                style="
+                        display:inline-block;
+                        padding:8px 12px;
+                        background:#2563eb;
+                        color:white;
+                        text-decoration:none;
+                        border-radius:8px;
+                        font-size:13px;
+                ">
+                Buka di Google Maps
+                </a>
+            </div>
+        `)
+        .openPopup();
 
         setTimeout(() => detailMap.invalidateSize(), 300);
     </script>

@@ -55,5 +55,6 @@ class ReportResource extends Resource
             'edit' => EditReport::route('/{record}/edit'),
         ];
     }
+    
 
 }

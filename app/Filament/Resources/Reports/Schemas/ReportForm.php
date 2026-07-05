@@ -76,6 +76,11 @@ class ReportForm
                     ->label('Status')
                     ->relationship('status', 'name')
                     ->required(),
+                Textarea::make('admin_response')
+                    ->label('Tanggapan Admin')
+                    ->rows(4)
+                    ->columnSpanFull()
+                    ->dehydrated(true),
             ]);
     }
 }

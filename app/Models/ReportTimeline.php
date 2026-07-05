@@ -11,6 +11,7 @@ class ReportTimeline extends Model
         'status_id',
         'title',
         'description',
+        'admin_response'
     ];
 
     public function report()
