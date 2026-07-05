@@ -15,6 +15,7 @@ class CategorySeeder extends Seeder
     {
         Category::firstOrCreate(['name' => 'Jalan Rusak']);
         Category::firstOrCreate(['name' => 'Drainase']);
-        Category::firstOrCreate(['name' => 'Trotoar']);
+        Category::firstOrCreate(['name' => 'Jembatan']);
+        Category::firstOrCreate(['name' => 'Lampu Jalan']);
     }
 }

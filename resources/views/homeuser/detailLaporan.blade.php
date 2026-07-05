@@ -28,11 +28,11 @@
                     <span>Detail Laporan</span>
                 </div>
 
-                <a href="{{ route('laporanPublik') }}"
+                {{--  <a href="{{ route('laporanPublik') }}"
                     class="mt-4 inline-flex items-center gap-2 text-sm font-medium text-blue-600 hover:underline">
                     <i class="fa-solid fa-arrow-left"></i>
                     Kembali ke Daftar Laporan
-                </a>
+                </a> --}}
             </div>
 
             <div class="grid grid-cols-1 gap-6 lg:grid-cols-3">
@@ -74,7 +74,7 @@
                             </div>
 
                             <div class="grid grid-cols-1 gap-2 px-5 py-4 sm:grid-cols-[160px_1fr]">
-                                <p class="font-semibold text-gray-900">Prioritas</p>
+                                <p class="font-semibold text-gray-900">Tingkat Kerusakan</p>
                                 <p>
                                     <span
                                         class="rounded-full px-3 py-1 text-xs font-semibold
@@ -82,7 +82,7 @@
                                         {{ $report->severity == 'sedang' ? 'bg-yellow-100 text-yellow-600' : '' }}
                                         {{ $report->severity == 'berat' ? 'bg-red-100 text-red-600' : '' }}">
                                         
-                                        Prioritas {{ ucfirst($report->severity) }}
+                                        {{ ucfirst($report->severity) }}
                                     </span>
                                 </p>
                             </div>
@@ -194,8 +194,8 @@
                         </div>
 
                         <div class="mt-4 text-sm text-gray-600">
-                            <p>{{ $report->address }}</p>
-                            <p class="mt-1 text-xs text-gray-500">Jawa Barat 43351</p>
+                            <p class="text-base font-bold text-slate-800">{{ $report->nama_daerah }}</p>
+                            <p class="text-sm text-gray-500">Jawa Barat {{ $report->kode_pos }}</p>
 
                             <a href="https://www.google.com/maps?q={{$report->latitude}},{{$report->longitude}}" class="mt-2 inline-block text-xs font-semibold text-blue-600 hover:underline">
                                 Buka di Google Maps

@@ -13,7 +13,7 @@ class StatusSeeder extends Seeder
      */
     public function run(): void
     {
-        foreach (['Pending', 'Diverifikasi', 'Diproses', 'Selesai', 'Ditolak'] as $status) {
+        foreach (['Pending', 'Diverifikasi', 'Diproses', 'Selesai'] as $status) {
         Status::firstOrCreate([
             'name' => $status,
             ]);

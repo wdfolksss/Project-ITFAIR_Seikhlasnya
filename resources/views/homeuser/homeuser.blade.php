@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <title>Beranda  |   Kelawar</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -46,7 +48,7 @@
             <div class="max-w-[55rem] pb-[4rem]">
                 <span
                     class="inline-flex px-3 py-1 rounded-full bg-green-600 text-white text-[10px] sm:text-xs font-semibold">
-                    SUKABUMI SMART CITY
+                    Dari Warga, Untuk Sukabumi
                 </span>
 
                 <h1 class="mt-4 text-2xl sm:text-4xl lg:text-5xl font-Plus Jakarta Sans font-bold text-white leading-tight">
@@ -177,6 +179,7 @@
                     </button>
                 </div>
             </div>
+            
 
             <div class="rounded-xl bg-white p-4 shadow-md">
                 <div class="mb-4 flex items-center justify-between">
@@ -185,30 +188,67 @@
                 </div>
 
                 <div class="space-y-4">
-                    @foreach ([
-                        ['1', 'Jalan Raya Cibadak', 'Cibadak, Sukabumi', '127 laporan • Risiko Tinggi', '90%', 'bg-red-600'],
-                        ['2', 'Jalan Cisaat', 'Cisaat, Sukabumi', '94 laporan • Risiko Tinggi', '90%', 'bg-orange-500'],
-                        ['3', 'Jalan ParungKuda', 'Parungkuda, Sukabumi', '72 laporan • Risiko Sedang', '90%', 'bg-yellow-500'],
-                        ['4', 'Jalan Sukaraja', 'Sukaraja, Sukabumi', '56 laporan • Risiko Sedang', '90%', 'bg-green-600'],
-                        ['5', 'Jalan Warudoyong', 'Warudoyong, Sukabumi', '42 laporan • Risiko Rendah', '90%', 'bg-blue-600']
-                    ] as $item)
+
+                    @forelse($aiPriorities as $index => $item)
+
+                        @php
+                            if (str_contains($item['priority'], 'Tinggi')) {
+                                $badge = 'Risiko Tinggi';
+                                $color = 'bg-red-600';
+                            } elseif (str_contains($item['priority'], 'Sedang')) {
+                                $badge = 'Risiko Sedang';
+                                $color = 'bg-yellow-500';
+                            } else {
+                                $badge = 'Risiko Rendah';
+                                $color = 'bg-green-600';
+                            }
+                        @endphp
+
                         <div class="flex items-center justify-between gap-3">
                             <div class="flex items-start gap-3">
                                 <span class="flex h-7 w-7 items-center justify-center rounded-full bg-gray-200 text-xs font-bold text-gray-700">
-                                    {{ $item[0] }}
+                                    {{ $index + 1 }}
                                 </span>
+
                                 <div>
-                                    <h3 class="text-sm font-bold text-gray-900">{{ $item[1] }}</h3>
-                                    <p class="text-xs text-gray-500">{{ $item[2] }}</p>
-                                    <p class="text-xs text-gray-500">{{ $item[3] }}</p>
+                                    <h3 class="text-sm font-bold text-gray-900">
+                                        {{ $item['address'] }}
+                                    </h3>
+
+                                    <p class="text-xs text-gray-500">
+                                        {{ $item['address'] }}
+                                    </p>
+
+                                    <p class="text-xs text-gray-500">
+                                        {{ $item['report_count'] }} laporan • {{ $badge }}
+                                    </p>
                                 </div>
                             </div>
 
-                            <span class="{{ $item[5] }} rounded-md px-4 py-1 text-xs font-bold text-white">
-                                {{ $item[4] }}
+                            <span class="{{ $color }} rounded-md px-4 py-1 text-xs font-bold text-white">
+                                {{ number_format($item['priority_score'], 1) }}
                             </span>
                         </div>
-                    @endforeach
+
+                    @empty
+
+                        <div class="flex flex-col items-center justify-center rounded-xl border border-dashed border-gray-300 py-10 text-center">
+                            <svg class="mb-3 h-10 w-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                    d="M9 17v-6h13M9 5l-7 7 7 7"/>
+                            </svg>
+
+                            <p class="text-sm font-semibold text-gray-600">
+                                Belum ada data laporan
+                            </p>
+
+                            <p class="mt-1 text-xs text-gray-400">
+                                AI akan menampilkan wilayah prioritas setelah terdapat laporan yang masuk.
+                            </p>
+                        </div>
+
+                    @endforelse
+
                 </div>
             </div>
         </div>
@@ -222,7 +262,7 @@
             <!-- LEFT -->
             <div>
                 <span class="rounded-full bg-blue-600 px-4 py-1 text-xs font-semibold">
-                    Blockchain Transparency
+                    Blockchain Transparansi
                 </span>
 
                 <h2 class="mt-4 text-2xl font-bold sm:text-3xl">
@@ -307,6 +347,90 @@
     </div>
 </section>
 
+<section class="bg-white px-5 py-8 sm:px-8 lg:px-12">
+    <div class="mx-auto max-w-7xl rounded-2xl border border-gray-200 bg-white p-6 shadow-md">
+
+        <div class="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+                <div class="flex items-center gap-2">
+                    <span class="flex h-8 w-8 items-center justify-center rounded-full bg-blue-600 text-white">
+                        <i class="fa-solid fa-cube"></i>
+                    </span>
+
+                    <h2 class="text-xl font-bold text-gray-900">
+                        Blockchain Transparansi
+                    </h2>
+                </div>
+
+                <p class="mt-2 text-sm text-gray-500">
+                    Setiap aktivitas laporan dicatat sebagai block menggunakan hash SHA-256.
+                </p>
+            </div>
+
+            <div class="flex items-center gap-3">
+                @if($blockchain['valid'])
+                    <span class="rounded-full bg-green-100 px-4 py-2 text-xs font-bold text-green-700">
+                        <i class="fa-solid fa-circle-check mr-1"></i>
+                        Blockchain Valid
+                    </span>
+                @else
+                    <span class="rounded-full bg-red-100 px-4 py-2 text-xs font-bold text-red-700">
+                        <i class="fa-solid fa-triangle-exclamation mr-1"></i>
+                        Perlu Dicek
+                    </span>
+                @endif
+
+                <span class="rounded-lg border border-blue-200 px-4 py-2 text-xs font-semibold text-blue-600">
+                    Total Block: {{ $totalBlock }}
+                </span>
+            </div>
+        </div>
+
+        <div class="relative">
+            <div class="absolute left-0 right-0 top-4 hidden h-[2px] bg-blue-200 lg:block"></div>
+
+            <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-5">
+                @forelse($latestBlocks as $block)
+                    <div class="relative rounded-xl border border-gray-200 bg-white p-4 shadow-sm">
+                        <span class="absolute -top-2 left-1/2 hidden h-4 w-4 -translate-x-1/2 rounded-full border-2 border-white bg-blue-500 lg:block"></span>
+
+                        <p class="text-sm font-bold text-blue-600">
+                            Block #{{ $block->id }}
+                        </p>
+
+                        <h3 class="mt-3 min-h-[42px] text-sm font-bold text-gray-900">
+                            {{ $block->title ?? 'Aktivitas laporan tercatat' }}
+                        </h3>
+
+                        <p class="mt-2 text-xs text-gray-500">
+                            <i class="fa-regular fa-calendar mr-1"></i>
+                            {{ $block->created_at->format('d M Y, H:i') }} WIB
+                        </p>
+
+                        <p class="mt-2 text-xs text-gray-500">
+                            Oleh:
+                            {{ $block->actor ?? 'Sistem' }}
+                        </p>
+
+                        <div class="mt-4 border-t border-gray-100 pt-3">
+                            <p class="text-xs text-gray-500">Hash</p>
+
+                            <p class="mt-1 rounded-lg bg-gray-100 px-3 py-2 font-mono text-[11px] text-gray-700">
+                                {{ \Illuminate\Support\Str::limit($block->hash, 24) }}
+                            </p>
+                        </div>
+                    </div>
+                @empty
+                    <div class="col-span-full rounded-xl border border-dashed border-gray-300 p-6 text-center text-sm text-gray-500">
+                        Belum ada aktivitas blockchain.
+                    </div>
+                @endforelse
+            </div>
+        </div>
+
+    </div>
+</section>
+
 <section class="bg-white px-5 py-6 sm:px-8 lg:px-12">
     <div class="mx-auto grid max-w-7xl grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
 
@@ -367,16 +491,91 @@
     @include('footer')
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
 <script>
-    const map = L.map('map').setView([-6.9175, 106.9296], 11);
+    const map = L.map('map').setView([-6.9277, 106.9299], 12);
 
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; OpenStreetMap'
     }).addTo(map);
 
-    L.marker([-6.9175, 106.9296])
-        .addTo(map)
-        .bindPopup('Laporan Jalan Rusak');
+    const reports = @json($mapReports);
+
+    const markerCluster = L.markerClusterGroup({
+        showCoverageOnHover: false,
+        maxClusterRadius: 45,
+        spiderfyOnMaxZoom: true,
+    });
+
+    function getMarkerColor(report) {
+        const status = report.status?.name?.toLowerCase();
+
+        if (status === 'selesai') {
+            return '#2563eb'; // biru = teratasi
+        }
+
+        if (report.severity === 'berat') {
+            return '#dc2626'; // merah
+        }
+
+        if (report.severity === 'sedang') {
+            return '#eab308'; // kuning
+        }
+
+        return '#16a34a'; // hijau
+    }
+
+    reports.forEach(report => {
+        if (!report.latitude || !report.longitude) return;
+
+        const color = getMarkerColor(report);
+
+        const icon = L.divIcon({
+            className: '',
+            html: `
+                <div style="
+                    width: 30px;
+                    height: 30px;
+                    border-radius: 9999px;
+                    background: ${color};
+                    border: 3px solid white;
+                    box-shadow: 0 4px 10px rgba(0,0,0,.35);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: white;
+                    font-size: 13px;
+                    font-weight: 800;
+                ">
+                    !
+                </div>
+            `,
+            iconSize: [30, 30],
+            iconAnchor: [15, 15],
+            popupAnchor: [0, -12],
+        });
+
+        const marker = L.marker([report.latitude, report.longitude], { icon })
+            .bindPopup(`
+                <div style="min-width:190px">
+                    <b>${report.category?.name ?? 'Laporan Infrastruktur'}</b><br>
+                    <small>${report.address ?? '-'}</small><br><br>
+                    <b>Kerusakan:</b> ${report.severity ?? '-'}<br>
+                    <b>Status:</b> ${report.status?.name ?? '-'}<br><br>
+                    <a href="/detailLaporan/${report.id}" style="color:#2563eb;font-weight:700;">
+                        Lihat Detail
+                    </a>
+                </div>
+            `);
+
+        markerCluster.addLayer(marker);
+    });
+
+    map.addLayer(markerCluster);
+
+    setTimeout(() => {
+        map.invalidateSize();
+    }, 300);
 </script>
 </body>
 </html>

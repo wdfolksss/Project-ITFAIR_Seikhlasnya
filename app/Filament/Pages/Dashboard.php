@@ -6,6 +6,7 @@ use Filament\Pages\Page;
 use App\Filament\Widgets\DashboardStats;
 use App\Filament\Widgets\CategoryChart;
 use App\Filament\Widgets\StatusChart;
+use App\Filament\Widgets\AiPriorityWidget;
 
 class Dashboard extends Page
 {
@@ -23,6 +24,8 @@ class Dashboard extends Page
         return [
             CategoryChart::class,
             StatusChart::class,
+            AiPriorityWidget::class,
+            
         ];
     }
 }

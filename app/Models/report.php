@@ -14,11 +14,14 @@ use Illuminate\Database\Eloquent\Model;
         'category_id',
         'severity',
         'address',
+        'district',
         'latitude',
         'longitude',
         'description',
         'image',
         'status_id',
+        'hash',
+        'previous_hash',
     ];
 
     public function category(): BelongsTo
@@ -34,5 +37,16 @@ use Illuminate\Database\Eloquent\Model;
     public function timelines()
     {
     return $this->hasMany(ReportTimeline::class)->latest();
+    }
+
+    public function getNamaDaerahAttribute()
+    {
+        return explode(',', $this->address)[0];
+    }
+
+    public function getKodePosAttribute()
+    {
+        preg_match('/\b\d{5}\b/', $this->address, $matches);
+        return $matches[0] ?? '';
     }
 }

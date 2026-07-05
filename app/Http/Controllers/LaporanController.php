@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Status;
 use App\Models\ReportTimeline;
+use App\Services\BlockchainService;
 
 class LaporanController extends Controller
 {
@@ -18,6 +19,7 @@ class LaporanController extends Controller
             'category_id' => 'required|exists:categories,id',
             'severity' => 'required|in:ringan,sedang,berat',
             'address' => 'required|string',
+            'district' => 'nullable|string|max:255',
             'latitude' => 'required|numeric',
             'longitude' => 'required|numeric',
             'description' => 'required|string',
@@ -32,6 +34,13 @@ class LaporanController extends Controller
 
         // Simpan laporan
         $report = Report::create($validated);
+
+        $block = app(\App\Services\BlockchainService::class)->createBlock($report);
+
+        $report->updateQuietly([
+            'hash' => $block['hash'],
+            'previous_hash' => $block['previous_hash'],
+        ]);
 
         // Simpan timeline pertama
         ReportTimeline::create([
@@ -96,6 +105,11 @@ public function index(Request $request)
         $q->where('name', 'Diverifikasi');
     })->count();
 
+    $mapReports = Report::with(['category', 'status'])
+        ->whereNotNull('latitude')
+        ->whereNotNull('longitude')
+        ->get();
+
     return view('homeuser.laporanPublik', compact(
         'laporan',
         'categories',
@@ -104,7 +118,10 @@ public function index(Request $request)
         'doneReports',
         'pendingReports',
         'processReports',
-        'verifiedReports'
+        'verifiedReports',
+
+        //map
+        'mapReports',
     ));
 }
 

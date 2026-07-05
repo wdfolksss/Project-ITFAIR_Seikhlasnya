@@ -20,12 +20,12 @@ class DashboardStats extends BaseWidget
 
             Stat::make(
                 'Sedang Diproses',
-                Report::where('status_id', 3)->count()
+                Report::where('status_id', 2)->count()
             ),
 
             Stat::make(
                 'Selesai',
-                Report::where('status_id', 2)->count()
+                Report::where('status_id', 3)->count()
             ),
         ];
     }

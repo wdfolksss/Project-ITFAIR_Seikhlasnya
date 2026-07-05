@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Storage;
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css">
 </head>
 
 <body class="bg-white text-gray-900">
@@ -181,21 +183,23 @@ use Illuminate\Support\Facades\Storage;
                                     <h3 class="font-bold text-gray-900"> 
                                         {{ $item->category->name ?? 'Kategori' }}
                                     </h3>
-                                    <p class="mt-1 text-sm text-gray-500">
-                                        {{ $item->description }}
-                                    </p>
+                                    <div class="mt-3 space-y-2 text-xs text-gray-500">
 
-                                    <div class="mt-3 flex gap-4 text-xs text-gray-500">
-                                        <span>
-                                        <i class="fa-solid fa-location-dot"></i>
-                                        {{ $item->address }}
-                                        </span>
-
-                                        <span>
-                                        <i class="fa-regular fa-calendar"></i>
-                                        {{ $item->created_at->format('d M Y') }}
+                                    <div class="flex items-start gap-2">
+                                        <span class="leading-5">
+                                            {{ $item->address }}
                                         </span>
                                     </div>
+
+                                    <div class="flex items-center gap-2">
+                                        <span>
+                                            {{ $item->created_at->translatedFormat('d F Y') }}
+                                            •
+                                            {{ $item->created_at->format('H:i') }} WIB
+                                        </span>
+                                    </div>
+
+                                </div>
                                 </div>
                             <div>
                                 <span class="rounded-full bg-green-100 px-3 py-1 text-xs text-green-700">
@@ -208,6 +212,8 @@ use Illuminate\Support\Facades\Storage;
                                 </div>
                             </div>
                             @endforeach
+
+                            
                             {{-- <div class="grid grid-cols-1 gap-4 rounded-lg border border-gray-200 p-4 md:grid-cols-[150px_1fr_auto] md:items-center">
                                 <div class="h-28 rounded-lg bg-gray-200"></div>
 
@@ -246,7 +252,7 @@ use Illuminate\Support\Facades\Storage;
                         <h2 class="mb-4 text-sm font-bold">Peta Sebaran Laporan</h2>
 
                         <div class="relative z-0 h-72 overflow-hidden rounded-lg bg-gray-200">
-                            <div id="mapPublik" class="h-full w-full"></div>
+                            <div id="map" class="h-full w-full"></div>
                         </div>
 
                         <button class="mt-4 w-full rounded-lg bg-white px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-50">
@@ -278,51 +284,92 @@ use Illuminate\Support\Facades\Storage;
     @include('footer')
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
 
     <script>
-    const mapPublik = L.map('mapPublik').setView([-6.9277, 106.9299], 12);
+    const map = L.map('map').setView([-6.9277, 106.9299], 12);
 
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; OpenStreetMap'
-    }).addTo(mapPublik);
+    }).addTo(map);
 
-    const laporanMarkers = @json($laporan);
+    const reports = @json($mapReports);
 
-    function getColor(status) {
-    if (status == "selesai") return "#22c55e";
-    if (status == "diproses") return "#f59e0b";
-    return "#ef4444"; // pending
+    const markerCluster = L.markerClusterGroup({
+        showCoverageOnHover: false,
+        maxClusterRadius: 45,
+        spiderfyOnMaxZoom: true,
+    });
+
+    function getMarkerColor(report) {
+        const status = report.status?.name?.toLowerCase();
+
+        if (status === 'selesai') {
+            return '#2563eb'; // biru = teratasi
+        }
+
+        if (report.severity === 'berat') {
+            return '#dc2626'; // merah
+        }
+
+        if (report.severity === 'sedang') {
+            return '#eab308'; // kuning
+        }
+
+        return '#16a34a'; // hijau
     }
 
-    laporanMarkers.forEach(item => {
-    if (item.latitude && item.longitude) {
+    reports.forEach(report => {
+        if (!report.latitude || !report.longitude) return;
 
-        const status = item.status?.name ?? "pending";
-        const color = getColor(status);
+        const color = getMarkerColor(report);
 
         const icon = L.divIcon({
-            className: "",
+            className: '',
             html: `
-                <div style="text-align:center">
-                    <i class="fa-solid fa-location-dot"
-                        style="font-size:28px;color:${color};
-                        text-shadow:0 2px 6px rgba(0,0,0,0.4);"></i>
+                <div style="
+                    width: 30px;
+                    height: 30px;
+                    border-radius: 9999px;
+                    background: ${color};
+                    border: 3px solid white;
+                    box-shadow: 0 4px 10px rgba(0,0,0,.35);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: white;
+                    font-size: 13px;
+                    font-weight: 800;
+                ">
+                    !
                 </div>
             `,
-            iconSize: [28, 28],
-            iconAnchor: [14, 28]
+            iconSize: [30, 30],
+            iconAnchor: [15, 15],
+            popupAnchor: [0, -12],
         });
 
-        L.marker([item.latitude, item.longitude], { icon })
-            .addTo(mapPublik)
+        const marker = L.marker([report.latitude, report.longitude], { icon })
             .bindPopup(`
-                <b>${item.reporter_name}</b><br>
-                ${item.description}
+                <div style="min-width:190px">
+                    <b>${report.category?.name ?? 'Laporan Infrastruktur'}</b><br>
+                    <small>${report.address ?? '-'}</small><br><br>
+                    <b>Kerusakan:</b> ${report.severity ?? '-'}<br>
+                    <b>Status:</b> ${report.status?.name ?? '-'}<br><br>
+                    <a href="/detailLaporan/${report.id}" style="color:#2563eb;font-weight:700;">
+                        Lihat Detail
+                    </a>
+                </div>
             `);
-    }
-});
 
-    setTimeout(() => mapPublik.invalidateSize(), 300);
+        markerCluster.addLayer(marker);
+    });
+
+    map.addLayer(markerCluster);
+
+    setTimeout(() => {
+        map.invalidateSize();
+    }, 300);
 </script>
 
 </body>
