@@ -20,19 +20,16 @@ class ReportResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
-    protected static ?string $recordTitleAttribute = 'title';
+    protected static ?string $pluralModelLabel = 'Laporan';
+    protected static ?string $navigationLabel = 'Laporan Masyarakat';
+    protected static string|\UnitEnum|null $navigationGroup = 'Manajemen Laporan';
+    protected static ?int $navigationSort = 1;
 
     
 
     public static function form(Schema $schema): Schema
     {
         return ReportForm::configure($schema);
-        return $form
-        ->schema([
-            FileUpload::make('image')
-                ->disk('public')
-                ->directory('reports'),
-        ]);
     }
 
     public static function table(Table $table): Table
@@ -55,6 +52,7 @@ class ReportResource extends Resource
             'edit' => EditReport::route('/{record}/edit'),
         ];
     }
+    
     
 
 }

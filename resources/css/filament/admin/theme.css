@@ -1,22 +1,6 @@
-@import '../../../../vendor/filament/support/resources/css/theme.css';
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css");
 
-/* --- Tempel kode kustom putih bersih di bawah ini --- */
-.fi-layout {
-    background-color: #f8fafc !important;
-}
+@import '../../../../vendor/filament/filament/resources/css/theme.css';
 
-.fi-sidebar {
-    background-color: #ffffff !important;
-    border-right: 1px solid #e2e8f0 !important;
-}
-
-.fi-sidebar-item-active a {
-    background-color: #eff6ff !important;
-    color: #2563eb !important;
-    border-radius: 0.5rem !important;
-}
-
-.fi-wi-widget {
-    border-radius: 0.75rem !important;
-    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05) !important;
-}
+@source '../../../../app/Filament/**/*';
+@source '../../../../resources/views/filament/**/*';

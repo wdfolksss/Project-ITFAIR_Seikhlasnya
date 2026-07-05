@@ -2,14 +2,15 @@
 
 namespace App\Filament\Resources\Reports\Schemas;
 
-use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\Select;
+use Filament\Schemas\Schema;
+use Filament\Schemas\Components\Section;
+use Filament\Schemas\Components\Grid;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
-use Filament\Schemas\Schema;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Placeholder;
 use Illuminate\Support\HtmlString;
-
 
 class ReportForm
 {
@@ -17,70 +18,76 @@ class ReportForm
     {
         return $schema
             ->components([
-                TextInput::make('reporter_name')
-                    ->label('Nama Pelapor')
-                    ->required(),
-                TextInput::make('contact')
-                    ->label('Kontak')
-                    ->required(),
-                Select::make('category_id')
-                    ->label('Kategori')
-                    ->relationship('category', 'name')
-                    ->required(),
-                Textarea::make('address')
-                    ->label('Alamat')
-                    ->required()
-                    ->columnSpanFull(),
-                TextInput::make('latitude')
-                    ->required()
-                    ->numeric(),
-                TextInput::make('longitude')
-                    ->required()
-                    ->numeric(),
-                Textarea::make('description')
-                    ->label('Deskripsi')
-                    ->required()
-                    ->columnSpanFull(),
-                Placeholder::make('map')
-                    ->label('Lokasi Laporan')
-                    ->content(function ($record) {
-                        
-                        if (! $record?->latitude || ! $record?->longitude) {
-                            return 'Lokasi tidak tersedia';
-                        }
-                        
-                        return new HtmlString("
-                        <iframe
-                        width='100%'
-                        height='400'
-                        style='border:0;border-radius:12px'
-                        loading='lazy'
-                        allowfullscreen
-                        src='https://maps.google.com/maps?q={$record->latitude},{$record->longitude}&z=15&output=embed'>
-                        </iframe>
-                        ");
-                    })
-                    ->columnSpanFull(),
-                FileUpload::make('image')
-                    ->label('Foto Laporan')
-                    ->image()
-                    ->disk('public')
-                    ->directory('reports')
-                    ->required()
-                    ->columnSpanFull(),
-                Select::make('severity')
-                    ->label('Prioritas')
-                    ->options(['ringan' => 'Ringan', 'sedang' => 'Sedang', 'berat' => 'Berat'])
-                    ->required(),
-                Select::make('status_id')
-                    ->label('Status')
-                    ->relationship('status', 'name')
-                    ->required(),
-                Textarea::make('admin_response')
-                    ->label('Tanggapan Admin')
-                    ->rows(4)
-                    ->columnSpanFull()
-                    ->dehydrated(true),
+
+                Section::make('Data Laporan Masyarakat')
+                    ->description('Informasi utama laporan yang dikirim oleh masyarakat.')
+                    ->schema([
+                        Grid::make(2)
+                            ->schema([
+                                TextInput::make('reporter_name')
+                                    ->label('Nama Pelapor')
+                                    ->disabled(),
+
+                                TextInput::make('contact')
+                                    ->label('No. HP / Email')
+                                    ->disabled(),
+
+                                Select::make('category_id')
+                                    ->label('Kategori Kerusakan')
+                                    ->relationship('category', 'name')
+                                    ->required(),
+
+                                Select::make('severity')
+                                    ->label('Tingkat Kerusakan')
+                                    ->options([
+                                        'ringan' => 'Ringan',
+                                        'sedang' => 'Sedang',
+                                        'berat' => 'Berat',
+                                    ])
+                                    ->required(),
+
+                                TextInput::make('latitude')
+                                    ->label('Latitude')
+                                    ->disabled(),
+
+                                TextInput::make('longitude')
+                                    ->label('Longitude')
+                                    ->disabled(),
+                            ]),
+
+                        Textarea::make('address')
+                            ->label('Alamat Detail')
+                            ->rows(2)
+                            ->columnSpanFull(),
+
+                        Textarea::make('description')
+                            ->label('Deskripsi / Detail Lokasi')
+                            ->rows(4)
+                            ->columnSpanFull(),
+
+                        FileUpload::make('image')
+                            ->label('Dokumentasi Laporan')
+                            ->image()
+                            ->disk('public')
+                            ->directory('reports')
+                            ->columnSpanFull(),
+                    ]),
+
+                Section::make('Penanganan Admin')
+                    ->description('Kelola status dan berikan tanggapan kepada masyarakat.')
+                    ->schema([
+                        Select::make('status_id')
+                            ->label('Status Laporan')
+                            ->relationship('status', 'name')
+                            ->required(),
+
+                        Textarea::make('admin_response')
+                            ->label('Tanggapan Admin')
+                            ->placeholder('Contoh: Terima kasih sudah melapor. Laporan akan segera kami tindaklanjuti.')
+                            ->rows(4)
+                            ->columnSpanFull(),
+                    ]),
+
             ]);
     }
 }

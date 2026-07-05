@@ -119,9 +119,9 @@
                 </div>
 
                 <div class="flex items-center gap-4 rounded-lg border border-gray-200 p-4">
-                        <span class="flex h-11 w-11 items-center justify-center rounded-lg bg-blue-600 text-white">
+                        <div class="flex h-11 w-11 items-center justify-center rounded-lg bg-blue-600 text-white">
                             <i class="fa-solid fa-circle-check"></i>
-                        </span>
+                        </div>
 
                         <div>
                             <h3 class="text-2xl font-bold text-gray-900">{{ $verifiedReports }}</h3>
