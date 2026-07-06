@@ -2,7 +2,7 @@
 
 ## Deskripsi
 
-Kelawar (Keluhan Laporan Warga) adalah platform transparansi anggaran dan pelaporan infrastruktur yang memungkinkan masyarakat memantau proyek pembangunan serta melaporkan kerusakan jalan dan fasilitas umum secara langsung.
+Kelawar (Keluhan Laporan Warga) adalah platform pelaporan infrastruktur yang memungkinkan masyarakat memantau proyek pembangunan serta melaporkan kerusakan jalan dan fasilitas umum secara langsung.
 
 ## Fitur Utama
 
@@ -54,6 +54,19 @@ php artisan key:generate
 php artisan serve
 npm run dev
 ```
+
+## Demo
+Aplikasi dapat dijalankan secara lokal melalui repository ini.
+
+## Cara Menjalankan
+1. composer install
+2. npm install
+3. cp .env.example .env
+4. php artisan key:generate
+5. php artisan migrate --seed
+6. php artisan storage:link
+7. npm run dev
+8. php artisan serve
 
 ## Tim Pengembang
 
