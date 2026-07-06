@@ -215,29 +215,6 @@
 
         </div>
 
-        {{-- SISTEM --}}
-        <div class="grid grid-cols-1 gap-5 md:grid-cols-4">
-            <div class="rounded-2xl border bg-white p-5 shadow-sm">
-                <p class="text-sm text-gray-500">Blockchain</p>
-                <h3 class="mt-1 font-bold text-green-600">● Aktif</h3>
-            </div>
-
-            <div class="rounded-2xl border bg-white p-5 shadow-sm">
-                <p class="text-sm text-gray-500">AI Clustering</p>
-                <h3 class="mt-1 font-bold text-green-600">● Aktif</h3>
-            </div>
-
-            <div class="rounded-2xl border bg-white p-5 shadow-sm">
-                <p class="text-sm text-gray-500">Total Aktivitas</p>
-                <h3 class="mt-1 text-2xl font-bold">{{ $totalReports }}</h3>
-            </div>
-
-            <div class="rounded-2xl border bg-white p-5 shadow-sm">
-                <p class="text-sm text-gray-500">Pembaruan Terakhir</p>
-                <h3 class="mt-1 font-bold text-blue-600">Baru saja</h3>
-            </div>
-        </div>
-
     </div>
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
